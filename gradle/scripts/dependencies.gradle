@@ -81,5 +81,5 @@ dependencies {
     //modImplementation("maven.modrinth:kubejs:2001.6.4-build.138+forge")
     //modImplementation("maven.modrinth:rhino:2001.2.2-build.18+forge")
     //modImplementation("maven.modrinth:architectury-api:9.2.14+forge")
-    // modImplementation("curse.maven:gcyr-922713:5077849")
+    //modImplementation("argent_matter:gcyr:1.20.1-0.1.3")
 }

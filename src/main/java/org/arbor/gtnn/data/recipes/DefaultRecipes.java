@@ -38,33 +38,30 @@ public class DefaultRecipes {
                 .outputItems(GTNNBlocks.ITNT)
                 .circuitMeta(1)
                 .duration(dur(4)).EUt(VA[HV]).save(provider);
-        addBOOMRecipes("heavy_plate_t1", GTNNItems.HEAVY_INGOT_T1, GTNNItems.HEAVY_PLATE_T1, VA[LV], dur(15), 1, provider);
-        addBOOMRecipes("heavy_plate_t2", GTNNItems.HEAVY_INGOT_T2, GTNNItems.HEAVY_PLATE_T2, VA[LV], dur(15), 2, provider);
-        addBOOMRecipes("heavy_plate_t3", GTNNItems.HEAVY_INGOT_T3, GTNNItems.HEAVY_PLATE_T3, VA[LV], dur(15), 3, provider);
-        addBOOMRecipes("heavy_plate_t4", GTNNItems.HEAVY_INGOT_T4, GTNNItems.HEAVY_PLATE_T4, VA[LV], dur(15), 4, provider);
+        addBOOMRecipes("heavy_plate_t1", GTNNItems.HEAVY_INGOT_T1, GTNNItems.HEAVY_PLATE_T1, dur(15), 1, provider);
+        addBOOMRecipes("heavy_plate_t2", GTNNItems.HEAVY_INGOT_T2, GTNNItems.HEAVY_PLATE_T2, dur(15), 2, provider);
+        addBOOMRecipes("heavy_plate_t3", GTNNItems.HEAVY_INGOT_T3, GTNNItems.HEAVY_PLATE_T3, dur(15), 3, provider);
+        addBOOMRecipes("heavy_plate_t4", GTNNItems.HEAVY_INGOT_T4, GTNNItems.HEAVY_PLATE_T4, dur(15), 4, provider);
 
     }
 
-    protected static void addBOOMRecipes(String name, Supplier<? extends Item> input, Supplier<? extends Item> output, int eu, int time, int level, Consumer<FinishedRecipe> provider) {
+    protected static void addBOOMRecipes(String name, Supplier<? extends Item> input, Supplier<? extends Item> output, int time, int level, Consumer<FinishedRecipe> provider) {
         IMPLOSION_RECIPES.recipeBuilder(name)
                 .inputItems(input)
-                .inputItems(Items.AIR)
                 .inputItems(new ItemStack(Items.TNT, level * 8))
                 .outputItems(output)
-                .duration(time).EUt(eu).save(provider);
+                .duration(time).save(provider);
         IMPLOSION_RECIPES.recipeBuilder(name + "_2")
                 .inputItems(input)
-                .inputItems(Items.AIR)
                 .inputItems(GTNNBlocks.ITNT.asStack(level * 2))
                 .outputItems(output)
-                .duration(time).EUt(eu).save(provider);
+                .duration(time).save(provider);
         if (!GTNNIntegration.isSupplementariesLoaded()) return;
         IMPLOSION_RECIPES.recipeBuilder(name + "_3")
                 .inputItems(input)
-                .inputItems(Items.AIR)
                 .inputItems(new ItemStack(ModRegistry.BOMB_ITEM.get(), level * 4))
                 .outputItems(output)
-                .duration(time).EUt(eu).save(provider);
+                .duration(time).save(provider);
     }
 
     public static class Misc {

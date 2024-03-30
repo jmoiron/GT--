@@ -29,9 +29,9 @@ public class SelfRecipes {
     }
 
     private static void materialRecipes(Consumer<FinishedRecipe> provider) {
-        DefaultRecipes.addBOOMRecipes("enriched_uranium_nugget", GTNNItems.EncapsulatedUranium, GTNNItems.EnrichedUraniumNugget, VA[LV], dur(1), 1, provider);
-        DefaultRecipes.addBOOMRecipes("enriched_thorium_nugget", GTNNItems.EncapsulatedThorium, GTNNItems.EnrichedThoriumNugget, VA[LV], dur(1), 1, provider);
-        DefaultRecipes.addBOOMRecipes("enriched_plutonium_nugget", GTNNItems.EncapsulatedPlutonium, GTNNItems.EnrichedPlutoniumNugget, VA[LV], dur(1), 1, provider);
+        DefaultRecipes.addBOOMRecipes("enriched_uranium_nugget", GTNNItems.EncapsulatedUranium, GTNNItems.EnrichedUraniumNugget, dur(1), 1, provider);
+        DefaultRecipes.addBOOMRecipes("enriched_thorium_nugget", GTNNItems.EncapsulatedThorium, GTNNItems.EnrichedThoriumNugget, dur(1), 1, provider);
+        DefaultRecipes.addBOOMRecipes("enriched_plutonium_nugget", GTNNItems.EncapsulatedPlutonium, GTNNItems.EnrichedPlutoniumNugget, dur(1), 1, provider);
         GTNNRecipeTypes.PRECISION_ASSEMBLY_RECIPES.recipeBuilder("quark_core")
                 .inputItems(CustomTags.IV_CIRCUITS, 2)
                 .inputItems(lens, Diamond, 8)
