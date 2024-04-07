@@ -1,4 +1,4 @@
-package org.arbor.gtnn.emi;
+package org.arbor.gtnn.emi.recipe;
 
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
@@ -26,6 +26,7 @@ import java.util.List;
 
 import static com.gregtechceu.gtceu.api.GTValues.*;
 
+@Deprecated(forRemoval = true, since = "1.1.0")
 public class NGTEmiRecipe extends ModularEmiRecipe<WidgetGroup> {
     final GTRecipeTypeEmiCategory category;
     final GTRecipe recipe;

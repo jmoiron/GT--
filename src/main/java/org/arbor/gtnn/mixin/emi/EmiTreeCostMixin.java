@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.HashSet;
 import java.util.Set;
 
+@Deprecated(forRemoval = true, since = "1.1.0")
 @Mixin(TreeCost.class)
 public abstract class EmiTreeCostMixin {
     @Unique

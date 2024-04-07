@@ -1,4 +1,4 @@
-package org.arbor.gtnn.emi;
+package org.arbor.gtnn.emi.api;
 
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;

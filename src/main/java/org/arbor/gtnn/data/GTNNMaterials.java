@@ -129,6 +129,8 @@ public class GTNNMaterials extends Material {
     public static Material OverheatedBromineSulfateSolution;
     public static Material WetBromine;
     public static Material DebrominatedWater;
+    public static Material NeutroniumMixture;
+
     protected GTNNMaterials(ResourceLocation resourceLocation) {
         super(resourceLocation);
     }

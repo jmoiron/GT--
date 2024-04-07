@@ -190,5 +190,9 @@ public class SecondMaterials {
                 .fluid()
                 .color(0x215825).iconSet(METALLIC)
                 .buildAndRegister().setFormula("Nq?Ke?Nd?");
+        NeutroniumMixture = Builder("neutronium_mixture")
+                .dust()
+                .color(0xFFFFFF).secondaryColor(0x000000).iconSet(METALLIC)
+                .buildAndRegister().setFormula("?Nt?");
     }
 }

@@ -1,4 +1,4 @@
-package org.arbor.gtnn.emi;
+package org.arbor.gtnn.emi.recipe;
 
 import com.lowdragmc.lowdraglib.gui.modular.ModularUIContainer;
 import com.lowdragmc.lowdraglib.gui.widget.SlotWidget;
@@ -10,6 +10,7 @@ import net.minecraft.world.inventory.Slot;
 
 import java.util.List;
 
+@Deprecated(forRemoval = true, since = "1.1.0")
 public class NGTEmiRecipeHandler implements StandardRecipeHandler<AbstractContainerMenu> {
     @Override
     public List<Slot> getInputSources(AbstractContainerMenu handler) {

@@ -1,6 +1,8 @@
 package org.arbor.gtnn.data.recipes;
 
+import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper;
 import com.gregtechceu.gtceu.api.data.chemical.material.stack.UnificationEntry;
+import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
 import com.gregtechceu.gtceu.common.data.GTItems;
 import com.gregtechceu.gtceu.common.data.GTMachines;
@@ -16,8 +18,7 @@ import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.*;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 import static com.gregtechceu.gtceu.common.data.GTRecipeTypes.*;
 import static org.arbor.gtnn.data.GTNNMachines.NEUTRON_ACCELERATOR;
-import static org.arbor.gtnn.data.GTNNMaterials.NaquadahBasedLiquidFuel;
-import static org.arbor.gtnn.data.GTNNMaterials.Thorium232;
+import static org.arbor.gtnn.data.GTNNMaterials.*;
 import static org.arbor.gtnn.data.GTNNRecipes.dur;
 import static org.arbor.gtnn.data.GTNNRecipes.setNA;
 
@@ -128,7 +129,7 @@ public class SelfRecipes {
                 .EUt(VHA[LuV]).duration(dur(10)).save(provider);
         MIXER_RECIPES.recipeBuilder("plutonium_based_liquid_fuel")
                 .inputItems(GTNNItems.EnrichedPlutonium)
-                .inputItems(dust, Neutronium, 8)
+                .inputItems(dust, NeutroniumMixture, 8)
                 .inputItems(dust, Caesium, 16)
                 .inputItems(dust, Naquadah, 2)
                 .outputFluids(GTNNMaterials.PlutoniumBasedLiquidFuel.getFluid(1000))
@@ -253,7 +254,7 @@ public class SelfRecipes {
                 .chancedOutput(dust, Neodymium, 4, 4000, 0)
                 .chancedOutput(dust, Europium, 4, 2000, 0)
                 .outputFluids(Xenon.getFluid(18))
-                .EUt(VA[EV]).duration(dur(30));
+                .EUt(VA[EV]).duration(dur(30)).save(provider);
         GTNNRecipeTypes.CHEMICAL_PLANT_RECIPES.recipeBuilder(Thorium232.getName())
                 .inputItems(dust, Thorium, 16)
                 .inputItems(dust, Borax, 12)
@@ -308,6 +309,14 @@ public class SelfRecipes {
                 .outputItems(frameGt, GTNNMaterials.RadiationProtection)
                 .circuitMeta(24)
                 .EUt(VA[EV]).duration(dur(16)).save(provider);
+        MIXER_RECIPES.recipeBuilder("neutronium_mixture")
+                .inputItems(dust, NeutroniumMixture)
+                .inputFluids(Helium.getFluid(FluidStorageKeys.PLASMA, 144))
+                .outputItems(dust, Neutronium)
+                .circuitMeta(1)
+                .EUt(VA[ZPM]).duration(dur(11.25)).save(provider);
+        VanillaRecipeHelper.addShapelessRecipe(provider, "centrifuged_ore_to_dust_neutronium",
+                ChemicalHelper.get(dust, NeutroniumMixture), 'h', ChemicalHelper.get(crushedRefined, Neutronium));
     }
 
     private static void machineRecipes(Consumer<FinishedRecipe> provider) {

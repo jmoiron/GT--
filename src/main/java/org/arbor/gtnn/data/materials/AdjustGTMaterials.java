@@ -1,12 +1,15 @@
 package org.arbor.gtnn.data.materials;
 
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags;
+import com.gregtechceu.gtceu.api.data.chemical.material.properties.BlastProperty;
+import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
 
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 import static org.arbor.gtnn.data.GTNNMaterials.*;
 
 public class AdjustGTMaterials {
     public static void init() {
+        Neutronium.setProperty(PropertyKey.BLAST, new BlastProperty(9000, BlastProperty.GasTier.HIGHEST, 491_250, 144 * 20));
         NaquadahEnriched.addFlags(MaterialFlags.GENERATE_BOLT_SCREW);
         Brass.addFlags(MaterialFlags.GENERATE_DENSE);
         Aluminium.addFlags(MaterialFlags.GENERATE_DENSE);

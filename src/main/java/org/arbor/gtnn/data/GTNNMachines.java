@@ -186,7 +186,7 @@ public class GTNNMachines {
                 if (controller instanceof ChemicalPlantMachine chemicalPlantMachine && controller.isFormed()) {
                     components.add(Component.translatable("gtnn.multiblock.chemical_plant.heating_coil", chemicalPlantMachine.getCoilTier() * 50));
                     components.add(Component.translatable("gtnn.multiblock.chemical_plant.parallel_level", chemicalPlantMachine.getPipeTier() * 2));
-                    components.add(Component.translatable("gtnn.multiblock.chemical_plant.tier", VNF[chemicalPlantMachine.getPlantCasingTier()]));
+                    components.add(Component.translatable("gtnn.multiblock.chemical_plant.tier", VNF[chemicalPlantMachine.getMachineCasingTier() + 1]));
                 }
             })
             .register();

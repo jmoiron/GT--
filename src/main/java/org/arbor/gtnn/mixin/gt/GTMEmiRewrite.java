@@ -8,7 +8,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.arbor.gtnn.GTNN;
-import org.arbor.gtnn.emi.NGTEmiRecipe;
+import org.arbor.gtnn.emi.recipe.NGTEmiRecipe;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import static com.gregtechceu.gtceu.integration.emi.recipe.GTRecipeTypeEmiCategory.CATEGORIES;
 
+@Deprecated(forRemoval = true, since = "1.1.0")
 @Mixin(value = GTRecipeTypeEmiCategory.class, remap = false)
 public class GTMEmiRewrite {
     @Inject(method = "registerDisplays", at = @At("HEAD"), cancellable = true)

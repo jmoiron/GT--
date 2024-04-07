@@ -1,4 +1,4 @@
-package org.arbor.gtnn.emi;
+package org.arbor.gtnn.emi.recipe;
 
 import com.gregtechceu.gtceu.api.GTValues;
 import com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability;
@@ -29,6 +29,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Deprecated(forRemoval = true, since = "1.1.0")
 public class NGTRecipeWidget extends WidgetGroup {
     public final GTRecipe recipe;
     @Getter

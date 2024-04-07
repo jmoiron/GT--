@@ -1,4 +1,4 @@
-package org.arbor.gtnn.emi;
+package org.arbor.gtnn.emi.api;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
