@@ -8,6 +8,9 @@ dependencies {
 
     forge forge.minecraftForge
 
+    // kotlin
+    implementation "thedarkcolour:kotlinforforge:4.3.0"
+
     // lombok
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
@@ -76,13 +79,5 @@ dependencies {
     modImplementation("curse.maven:cc-tweaked-282001:5118388")
     forgeRuntimeLibrary("cc.tweaked:cobalt:0.9.1")
     modImplementation("curse.maven:selene-499980:5146536")
-
-    modImplementation("maven.modrinth:lazurite:1.0.4+mc1.20.1")
-    modImplementation("maven.modrinth:forgified-fabric-api:0.92.0+1.11.5+1.20.1")
     modImplementation("maven.modrinth:embeddium:0.3.12+mc1.20.1")
-
-    compileOnly "dev.su5ed.sinytra.fabric-api:fabric-api:0.92.0+1.11.5+1.20.1"
-    modRuntimeOnly("dev.su5ed.sinytra.fabric-api:fabric-api:0.92.0+1.11.5+1.20.1")
-    implementation(annotationProcessor("com.github.bawnorton.mixinsquared:mixinsquared-common:0.1.2-beta.5"))
-    implementation(include("com.github.bawnorton.mixinsquared:mixinsquared-forge:0.1.2-beta.5"))
 }

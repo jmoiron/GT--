@@ -77,4 +77,9 @@ repositories {
     maven {
         url "https://maven.su5ed.dev/releases"
     }
+    maven {
+        name = 'Kotlin for Forge'
+        url = 'https://thedarkcolour.github.io/KotlinForForge/'
+        content { includeGroup "thedarkcolour" }
+    }
 }

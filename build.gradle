@@ -6,10 +6,13 @@ plugins {
     // alias libs.plugins.vineFlower // VineFlower, a better decompiler
     alias libs.plugins.machete // automatic jar compressing on build
     alias libs.plugins.shadow
+    // Adds the Kotlin Gradle plugin
+    alias libs.plugins.kotlin.jvm
+    // OPTIONAL Kotlin Serialization plugin
+    alias libs.plugins.kotlin.plugin
 }
 
 apply plugin: "dev.architectury.loom"
-// apply plugin: "io.github.juuxel.loom-vineflower"
 apply plugin: "java"
 apply plugin: "architectury-plugin"
 apply plugin: "maven-publish"
@@ -38,7 +41,7 @@ apply from: "$rootDir/gradle/scripts/resources.gradle"
 apply from: "$rootDir/gradle/scripts/jars.gradle"
 apply from: "$rootDir/gradle/scripts/publishing.gradle"
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.encoding = "UTF-8"
 }
 
