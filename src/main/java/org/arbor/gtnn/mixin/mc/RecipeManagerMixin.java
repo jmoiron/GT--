@@ -25,7 +25,7 @@ public abstract class RecipeManagerMixin {
     private Map<RecipeType<?>, Map<ResourceLocation, Recipe<?>>> recipes;
 
     @Inject(method = "apply*", at = @At(value = "TAIL"))
-    private void gtceu$cloneVanillaRecipes(Map<ResourceLocation, JsonElement> map, ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfo ci) {
+    private void adjustRecipe(Map<ResourceLocation, JsonElement> map, ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfo ci) {
         for (RecipeType<?> recipeType : ForgeRegistries.RECIPE_TYPES) {
             // GT recipes
             if (recipeType instanceof GTRecipeType) {

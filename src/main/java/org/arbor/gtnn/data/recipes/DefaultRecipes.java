@@ -42,7 +42,6 @@ public class DefaultRecipes {
         addBOOMRecipes("heavy_plate_t2", GTNNItems.HEAVY_INGOT_T2, GTNNItems.HEAVY_PLATE_T2, dur(15), 2, provider);
         addBOOMRecipes("heavy_plate_t3", GTNNItems.HEAVY_INGOT_T3, GTNNItems.HEAVY_PLATE_T3, dur(15), 3, provider);
         addBOOMRecipes("heavy_plate_t4", GTNNItems.HEAVY_INGOT_T4, GTNNItems.HEAVY_PLATE_T4, dur(15), 4, provider);
-
     }
 
     protected static void addBOOMRecipes(String name, Supplier<? extends Item> input, Supplier<? extends Item> output, int time, int level, Consumer<FinishedRecipe> provider) {

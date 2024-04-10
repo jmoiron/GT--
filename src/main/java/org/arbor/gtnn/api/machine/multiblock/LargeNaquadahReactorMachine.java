@@ -93,7 +93,7 @@ public class LargeNaquadahReactorMachine extends WorkableElectricMultiblockMachi
             var io = tank.getHandlerIO();
             if (io == IO.IN || io == IO.BOTH) {
                 for (int i = 0; i < tank.getTanks(); i++) {
-                    final FluidStack fluid = tank.storages[i].getFluid();
+                    final FluidStack fluid = tank.getStorages()[i].getFluid();
                     checkLockFluid(largeNaquadahReactorMachine, fluid);
                     active(largeNaquadahReactorMachine, fluid, duration);
                     if (cool(fluid, duration)) largeNaquadahReactorMachine.hasCool = true;

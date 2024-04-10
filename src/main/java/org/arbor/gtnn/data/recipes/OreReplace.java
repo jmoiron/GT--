@@ -7,6 +7,7 @@ import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.ingredient.SizedIngredient;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import org.arbor.gtnn.GTNN;
 import org.arbor.gtnn.api.recipe.RecipeReplacer;
 
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
@@ -25,11 +26,15 @@ public final class OreReplace implements RecipeReplacer {
     }
 
     public static void init(Recipe<?> recipe) {
-        replace(recipe, Platinum, PlatinumMetal);
-        replace(recipe, Palladium, PalladiumMetal);
-        replace(recipe, Naquadah, NaquadahOxideMixture);
-        replace(recipe, NaquadahEnriched, EnrichedNaquadahOxideMixture);
-        replace(recipe, Naquadria, NaquadriaOxideMixture);
+        if (GTNN.getServerConfig().enableHarderPlatinumLine) {
+            replace(recipe, Platinum, PlatinumMetal);
+            replace(recipe, Palladium, PalladiumMetal);
+        }
+        if (GTNN.getServerConfig().enableHarderNaquadahLine) {
+            replace(recipe, Naquadah, NaquadahOxideMixture);
+            replace(recipe, NaquadahEnriched, EnrichedNaquadahOxideMixture);
+            replace(recipe, Naquadria, NaquadriaOxideMixture);
+        }
         replace(recipe, Neutronium, NeutroniumMixture);
     }
 

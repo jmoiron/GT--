@@ -7,12 +7,8 @@
   "plugin": "org.arbor.gtnn.mixin.GTNNMixinPlugin",
   "mixins": [
     "create.CreateFanMixin",
-    "emi.EmiRecipeHandlerMixin",
-    "emi.EmiTreeCostMixin",
     "emi.FluidEmiStackMixin",
-    "gt.Ae2PatternTerminalHandlerMixin",
     "gt.FluidStorageMixin",
-    "gt.GTMEmiRewrite",
     "gt.GTOreMixin",
     "gt.GTRecipeTypeMixin",
     "gt.MaterialBuilderMixin",
@@ -26,8 +22,7 @@
     "client.ShimmerMixin",
     "client.ToastKiller",
     "client.ToastKiller$ToastInstance",
-    "emi.AEmiApi",
-    "emi.ARecipeScreen"
+    "emi.AEmiApi"
   ],
   "injectors": {
     "defaultRequire": 1

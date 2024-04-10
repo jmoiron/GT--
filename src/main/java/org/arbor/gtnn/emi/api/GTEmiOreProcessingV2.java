@@ -18,6 +18,7 @@ import com.gregtechceu.gtceu.integration.emi.recipe.GTRecipeTypeEmiCategory;
 import com.gregtechceu.gtceu.utils.FormattingUtil;
 import com.gregtechceu.gtceu.utils.GTUtil;
 import com.lowdragmc.lowdraglib.side.fluid.FluidHelper;
+import com.mojang.datafixers.util.Pair;
 import dev.emi.emi.api.EmiApi;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiRecipe;
@@ -36,7 +37,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluids;
-import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.text.DecimalFormat;
@@ -286,8 +286,8 @@ public class GTEmiOreProcessingV2 implements EmiRecipe {
         }
         //bath BP
         Pair<Material, Integer> washedIn = oreProperty.getWashedIn();
-        if (washedIn.getLeft() != null) {
-            bathFluid = EmiStack.of(washedIn.getLeft().getFluid(), washedIn.getRight() * FluidHelper.getBucket() / 1000);
+        if (washedIn.getFirst() != null) {
+            bathFluid = EmiStack.of(washedIn.getFirst().getFluid(), washedIn.getSecond() * FluidHelper.getBucket() / 1000);
             inputs.add(getBathFluid());
             byProduct3 = EmiStack.of(ChemicalHelper.get(TagPrefix.dust, bpMaterial3)).copy().setChance(0.7f);
             outputs.add(getByProduct3());
