@@ -19,11 +19,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-import static dev.arbor.gtnn.GTNNRegistries.getREGISTRATE;
+import static dev.arbor.gtnn.GTNNRegistries.REGISTRATE;
 
 public class GTNNCasingBlocks {
     static {
-        getREGISTRATE().creativeModeTab(() -> GTNNCreativeModeTabs.MAIN_TAB);
+        REGISTRATE.creativeModeTab(() -> GTNNCreativeModeTabs.MAIN_TAB);
     }
 
     public static final BlockEntry<Block> PROCESS_MACHINE_CASING = createCasingBlock(
@@ -43,7 +43,7 @@ public class GTNNCasingBlocks {
             String name, String displayName,
             BiFunction<BlockBehaviour.Properties, IRenderer, ? extends RendererBlock> blockSupplier,
             ResourceLocation texture, NonNullSupplier<? extends Block> properties) {
-        return getREGISTRATE().block(name, p -> (Block) blockSupplier.apply(p,
+        return REGISTRATE.block(name, p -> (Block) blockSupplier.apply(p,
                         Platform.isClient() ? new TextureOverrideRenderer(new ResourceLocation("block/cube_all"),
                                 Map.of("all", texture)) : null))
                 .initialProperties(properties)

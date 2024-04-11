@@ -16,6 +16,8 @@ apply plugin: "dev.architectury.loom"
 apply plugin: "java"
 apply plugin: "architectury-plugin"
 apply plugin: "maven-publish"
+apply plugin: "org.jetbrains.kotlin.jvm"
+apply plugin: "org.jetbrains.kotlin.plugin.serialization"
 
 architectury {
     compileOnly()

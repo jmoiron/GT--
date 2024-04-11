@@ -22,7 +22,6 @@ import thedarkcolour.kotlinforforge.forge.MOD_BUS
 import java.util.*
 
 // Code Source: https://github.com/SlimeKnights/Mantle
-@SuppressWarnings("all")
 @OnlyIn(Dist.CLIENT)
 class ExtraHeartRenderHandler {
   companion object {
@@ -64,7 +63,7 @@ class ExtraHeartRenderHandler {
   @SubscribeEvent(priority = EventPriority.LOW, receiveCanceled = true)
   fun renderHealthBar(event: RenderGuiOverlayEvent.Pre) {
     val guiGraphics = event.guiGraphics
-    if (event.isCanceled || !ConfigHandler.INSTANCE.Client.extraHeartRenderer || event.overlay != VanillaGuiOverlay.PLAYER_HEALTH.type()) {
+    if (event.isCanceled || !GTNN.getClientConfig().extraHeartRenderer || event.overlay != VanillaGuiOverlay.PLAYER_HEALTH.type()) {
       return
     }
     val gui = mc.gui

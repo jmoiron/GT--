@@ -1,5 +1,6 @@
 package dev.arbor.gtnn.data;
 
+import dev.arbor.gtnn.GTNN;
 import dev.arbor.gtnn.GTNNIntegration;
 import dev.arbor.gtnn.api.recipe.NeutronActivatorCondition;
 import dev.arbor.gtnn.api.recipe.PlantCasingCondition;
@@ -17,8 +18,8 @@ public class GTNNRecipes {
         NaquadahReactor.init(provider);
         RocketFuel.init(provider);
         BrineChain.init(provider);
-        if (ConfigHandler.INSTANCE.Server.enableHarderPlatinumLine) PlatinumLine.init(provider);
-        if (ConfigHandler.INSTANCE.Server.enableHarderNaquadahLine) NaquadahLine.init(provider);
+        if (GTNN.INSTANCE.getServerConfig().enableHarderPlatinumLine) PlatinumLine.init(provider);
+        if (GTNN.INSTANCE.getServerConfig().enableHarderNaquadahLine) NaquadahLine.init(provider);
         if (GTNNIntegration.INSTANCE.isAdAstraLoaded()) AdAstraRecipes.init(provider);
     }
 

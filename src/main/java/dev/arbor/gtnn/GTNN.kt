@@ -5,30 +5,24 @@ import com.gregtechceu.gtceu.utils.FormattingUtil
 import dev.arbor.gtnn.config.ConfigHandler
 import dev.arbor.gtnn.init.CommonProxy
 import net.minecraft.resources.ResourceLocation
-import net.minecraftforge.fml.common.Mod
+import net.minecraftforge.eventbus.api.IEventBus
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
-import thedarkcolour.kotlinforforge.forge.MOD_BUS
 
-@Mod(GTNN.MODID)
 object GTNN {
     const val MODID = "gtnn"
 
-    @JvmStatic
+    @JvmField
     val LOGGER: Logger = LogManager.getLogger(MODID)
 
-    init {
-        MOD_BUS.register(this)
-        MOD_BUS.addGenericListener(MachineDefinition::class.java, GTNNRegistries::registerMachine)
+    fun init() {
         CommonProxy.init()
     }
 
-    @JvmStatic
     fun getClientConfig(): ConfigHandler.ClientConfigs {
         return ConfigHandler.INSTANCE.Client
     }
 
-    @JvmStatic
     fun getServerConfig(): ConfigHandler.ServerConfigs {
         return ConfigHandler.INSTANCE.Server
     }
@@ -36,6 +30,16 @@ object GTNN {
     @JvmStatic
     fun id(path: String): ResourceLocation {
         return ResourceLocation(MODID, FormattingUtil.toLowerCaseUnder(path))
+    }
+
+    @JvmStatic
+    fun genericListener(modBus: IEventBus) {
+        modBus.addGenericListener(MachineDefinition::class.java, GTNNRegistries::registerMachine)
+    }
+    @JvmStatic
+    fun register(modBus: IEventBus) {
+        modBus.addListener(GTNNRegistries::registerMaterials)
+        modBus.addListener(GTNNRegistries::registerMaterialRegistryEvent)
     }
 }
 

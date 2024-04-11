@@ -42,7 +42,7 @@ public class LangHandler {
             try {
                 INSTANCE.enLangProvider.add("material.gtceu." + material.getName(), en);
             } catch (NullPointerException e) {
-                GTNN.getLOGGER().error("Failed to translate material(EN)", e);
+                GTNN.LOGGER.error("Failed to translate material(EN)", e);
             }
         }
         if (INSTANCE.cnLangProvider != null) INSTANCE.cnLangProvider.translateMaterial(material, cn);
@@ -56,7 +56,7 @@ public class LangHandler {
         try {
             provider.add("material.gtceu." + material.getName(), FormattingUtil.toEnglishName(material.getName()));
         } catch (NullPointerException e) {
-            GTNN.getLOGGER().error("Failed to translate material(EN)", e);
+            GTNN.LOGGER.error("Failed to translate material(EN)", e);
         }
     }
 

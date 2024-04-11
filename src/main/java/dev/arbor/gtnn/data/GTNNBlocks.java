@@ -7,11 +7,11 @@ import dev.arbor.gtnn.GTNN;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
-import static dev.arbor.gtnn.GTNNRegistries.getREGISTRATE;
+import static dev.arbor.gtnn.GTNNRegistries.REGISTRATE;
 
 @SuppressWarnings("unused")
 public class GTNNBlocks {
-    public static final BlockEntry<Block> ITNT = getREGISTRATE().block("itnt", Block::new)
+    public static final BlockEntry<Block> ITNT = REGISTRATE.block("itnt", Block::new)
             .initialProperties(() -> Blocks.TNT)
             .lang("ITNT")
             .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), prov.models().getExistingFile(GTNN.id("block/itnt"))))
@@ -21,7 +21,7 @@ public class GTNNBlocks {
             .register();
 
     static {
-        getREGISTRATE().creativeModeTab(() -> GTNNCreativeModeTabs.MAIN_TAB);
+        REGISTRATE.creativeModeTab(() -> GTNNCreativeModeTabs.MAIN_TAB);
     }
 
     public static void init() {

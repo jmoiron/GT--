@@ -9,6 +9,7 @@ import com.gregtechceu.gtceu.api.data.chemical.material.properties.OreProperty;
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey;
 import com.gregtechceu.gtceu.api.fluids.FluidBuilder;
 import com.gregtechceu.gtceu.api.fluids.store.FluidStorageKeys;
+import dev.arbor.gtnn.GTNN;
 import dev.arbor.gtnn.GTNNIntegration;
 import dev.arbor.gtnn.api.recipe.GTNNBuilder;
 import dev.arbor.gtnn.config.ConfigHandler;
@@ -140,8 +141,8 @@ public class GTNNMaterials extends Material {
         FirstMaterials.init();
         SecondMaterials.init();
         BrineChain.init();
-        if (ConfigHandler.INSTANCE.Server.enableHarderPlatinumLine) PlatinumLineMaterials.init();
-        if (ConfigHandler.INSTANCE.Server.enableHarderNaquadahLine) NaquadahMaterials.init();
+        if (GTNN.INSTANCE.getServerConfig().enableHarderPlatinumLine) PlatinumLineMaterials.init();
+        if (GTNN.INSTANCE.getServerConfig().enableHarderNaquadahLine) NaquadahMaterials.init();
         if (GTNNIntegration.INSTANCE.isAdAstraLoaded()) AdAstraMaterials.init();
         if (GTNNIntegration.INSTANCE.isBotaniaLoaded()) BotaniaMaterials.init();
         if (GTNNIntegration.INSTANCE.isCreateLoaded()) CreateMaterials.init();

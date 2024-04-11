@@ -15,7 +15,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraftforge.fml.loading.FMLLoader;
 import org.jetbrains.annotations.NotNull;
 
-import static dev.arbor.gtnn.GTNNRegistries.getREGISTRATE;
+import static dev.arbor.gtnn.GTNNRegistries.REGISTRATE;
 
 public class GTNNItems {
     public static final ItemEntry<Item> RADIOACTIVE_WASTE = createItem("radioactive_waste", Item::new)
@@ -135,7 +135,7 @@ public class GTNNItems {
             .register();
 
     static {
-        getREGISTRATE().creativeModeTab(() -> GTNNCreativeModeTabs.MAIN_TAB);
+        REGISTRATE.creativeModeTab(() -> GTNNCreativeModeTabs.MAIN_TAB);
     }
 
     public static ItemEntry<ComponentItem> COMPUTER;
@@ -159,6 +159,6 @@ public class GTNNItems {
     }
 
     private static <T extends Item> @NotNull ItemBuilder<T, Registrate> createItem(String name, NonNullFunction<Item.Properties, T> factory) {
-        return GTNNRegistries.getREGISTRATE().item(name, factory);
+        return GTNNRegistries.REGISTRATE.item(name, factory);
     }
 }

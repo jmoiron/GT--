@@ -11,47 +11,47 @@ import dev.arbor.gtnn.data.GTNNMaterials
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.packs.FilePackResources
 import net.minecraft.server.packs.PackResources
-import net.minecraftforge.eventbus.api.SubscribeEvent
-import net.minecraftforge.fml.common.Mod
 import org.apache.commons.io.FileUtils
 import java.io.File
 import java.io.IOException
 
-@Mod.EventBusSubscriber(modid = GTNN.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-class GTNNRegistries {
-    companion object {
-        lateinit var MATERIAL_REGISTRY: MaterialRegistry
+object GTNNRegistries {
+    private lateinit var MATERIAL_REGISTRY: MaterialRegistry
 
-        @JvmStatic
-        val REGISTRATE = GTRegistrate.create(GTNN.MODID)
-        fun registerMachine(@Suppress("UNUSED_PARAMETER") event: GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition>) {
-            GTNNMachines.init()
-        }
+    @JvmField
+    val REGISTRATE = GTRegistrate.create(GTNN.MODID)
 
-        fun getAllPackResources(): List<PackResources> {
-            val packResources = ArrayList<PackResources>()
-            if (GTNNIntegration.isAdAstraLoaded()) {
-                val inputStream = GTNNRegistries::class.java.getResourceAsStream("/data/gtnn/ad_astra.zip")!!
-                try {
-                    val tempFile = File.createTempFile("temp", ".tmp")
-                    FileUtils.copyInputStreamToFile(inputStream, tempFile)
-                    inputStream.close()
-                    packResources.add(FilePackResources(tempFile.getName(), tempFile, false))
-                } catch (e: IOException) {
-                    GTNN.LOGGER.error("ad_astra.zip wrong!", e)
-                }
-            }
-            return packResources
-        }
+    @JvmStatic
+    fun registerMachine(@Suppress("UNUSED_PARAMETER") event: GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition>) {
+        GTNNMachines.init()
+        GTNN.LOGGER.info("register GTNN Machines")
     }
 
-    @SubscribeEvent
+    @JvmStatic
     fun registerMaterialRegistryEvent(@Suppress("UNUSED_PARAMETER") event: MaterialRegistryEvent) {
         MATERIAL_REGISTRY = GTCEuAPI.materialManager.createRegistry(GTNN.MODID)
+        GTNN.LOGGER.info("register GTNN Materials")
     }
 
-    @SubscribeEvent
+    @JvmStatic
     fun registerMaterials(@Suppress("UNUSED_PARAMETER") event: MaterialEvent) {
         GTNNMaterials.init()
+    }
+
+    @JvmStatic
+    fun getAllPackResources(): List<PackResources> {
+        val packResources = ArrayList<PackResources>()
+        if (GTNNIntegration.isAdAstraLoaded()) {
+            val inputStream = GTNNRegistries::class.java.getResourceAsStream("/data/gtnn/ad_astra.zip")!!
+            try {
+                val tempFile = File.createTempFile("temp", ".tmp")
+                FileUtils.copyInputStreamToFile(inputStream, tempFile)
+                inputStream.close()
+                packResources.add(FilePackResources(tempFile.getName(), tempFile, false))
+            } catch (e: IOException) {
+                GTNN.LOGGER.error("ad_astra.zip wrong!", e)
+            }
+        }
+        return packResources
     }
 }

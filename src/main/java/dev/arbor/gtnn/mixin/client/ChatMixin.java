@@ -97,14 +97,14 @@ public class ChatMixin {
             value = "STORE"
     ))
     private GuiMessageTag removeMessageIndicator(GuiMessageTag messageIndicator) {
-        if (!GTNN.getClientConfig().addChatAnimation) return messageIndicator;
+        if (!GTNN.INSTANCE.getClientConfig().addChatAnimation) return messageIndicator;
         // Don't allow the chat indicator bar to be rendered
         return null;
     }
 
     @Inject(method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;ILnet/minecraft/client/GuiMessageTag;Z)V", at = @At("TAIL"))
     private void addMessage(Component message, MessageSignature signature, int ticks, GuiMessageTag indicator, boolean refresh, CallbackInfo ci) {
-        if (GTNN.getClientConfig().addChatAnimation) {
+        if (GTNN.INSTANCE.getClientConfig().addChatAnimation) {
             arborCore$messageTimestamps.add(0, System.currentTimeMillis());
             while (this.arborCore$messageTimestamps.size() > this.trimmedMessages.size()) {
                 this.arborCore$messageTimestamps.remove(this.arborCore$messageTimestamps.size() - 1);

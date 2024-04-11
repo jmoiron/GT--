@@ -50,14 +50,14 @@ import static com.gregtechceu.gtceu.api.pattern.Predicates.abilities;
 import static com.gregtechceu.gtceu.api.pattern.Predicates.autoAbilities;
 import static com.gregtechceu.gtceu.api.pattern.util.RelativeDirection.*;
 import static com.gregtechceu.gtceu.utils.FormattingUtil.toEnglishName;
-import static dev.arbor.gtnn.GTNNRegistries.getREGISTRATE;
+import static dev.arbor.gtnn.GTNNRegistries.REGISTRATE;
 
 @SuppressWarnings("unused")
 public class GTNNMachines {
     public static final int[] ULV2UV = GTValues.tiersBetween(0, 8);
     public static final int[] MV2ZPM = GTValues.tiersBetween(2, 7);
     public static final int[] EV2UV = GTValues.tiersBetween(4, 8);
-    public static final MachineDefinition HIGH_SPEED_PIPE_BLOCK = getREGISTRATE().machine("high_speed_pipe_block", HighSpeedPipeBlock::new)
+    public static final MachineDefinition HIGH_SPEED_PIPE_BLOCK = REGISTRATE.machine("high_speed_pipe_block", HighSpeedPipeBlock::new)
             .renderer(() -> new BlockMachineRenderer(GTNN.id("block/machine/part/high_speed_pipe_block")))
             .rotationState(RotationState.Y_AXIS)
             .register();
@@ -79,7 +79,7 @@ public class GTNNMachines {
                     .compassNode("neutron_accelerator")
                     .register(),
             ULV2UV);
-    public final static MachineDefinition NEUTRON_SENSOR = getREGISTRATE().machine("neutron_sensor", NeutronSensorMachine::new)
+    public final static MachineDefinition NEUTRON_SENSOR = REGISTRATE.machine("neutron_sensor", NeutronSensorMachine::new)
             .langValue("Neutron Sensor")
             .tier(GTValues.IV)
             .rotationState(RotationState.ALL)
@@ -88,7 +88,7 @@ public class GTNNMachines {
             .tooltips(Component.translatable("block.gtnn.neutron_sensor.tooltip1"))
             .tooltips(Component.translatable("block.gtnn.neutron_sensor.tooltip2"))
             .register();
-    public static final MultiblockMachineDefinition CHEMICAL_PLANT = getREGISTRATE().multiblock("exxonmobil_chemical_plant", ChemicalPlantMachine::new)
+    public static final MultiblockMachineDefinition CHEMICAL_PLANT = REGISTRATE.multiblock("exxonmobil_chemical_plant", ChemicalPlantMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)
             .tooltips(Component.translatable("gtnn.multiblock.chemical_plant.tooltip1"))
             .tooltips(Component.translatable("gtnn.multiblock.chemical_plant.tooltip2"))
@@ -185,7 +185,7 @@ public class GTNNMachines {
     public static final MachineDefinition[] Rocket_Engine = registerGTNNGeneratorMachines(
             "rocket_engine", GTNNRecipeTypes.ROCKET_ENGINE_RECIPES, GTNNGeneratorMachine::parallel,
             GTMachines.genericGeneratorTankSizeFunction, EV, IV, LuV);
-    public static final MultiblockMachineDefinition NEUTRON_ACTIVATOR = getREGISTRATE().multiblock("neutron_activator", NeutronActivatorMachine::new)
+    public static final MultiblockMachineDefinition NEUTRON_ACTIVATOR = REGISTRATE.multiblock("neutron_activator", NeutronActivatorMachine::new)
              .rotationState(RotationState.NON_Y_AXIS)
              .tooltips(Component.translatable("gtnn.multiblock.neutron_activator.tooltip1"))
              .tooltips(Component.translatable("gtnn.multiblock.neutron_activator.tooltip2"))
@@ -218,7 +218,7 @@ public class GTNNMachines {
                      GTCEu.id("block/casings/solid/machine_casing_clean_stainless_steel"),
                      GTNN.id("block/multiblock/neutron_activator"), false)
              .register();
-    public static final MultiblockMachineDefinition LargeNaquadahReactor = getREGISTRATE().multiblock("large_naquadah_reactor", LargeNaquadahReactorMachine::new)
+    public static final MultiblockMachineDefinition LargeNaquadahReactor = REGISTRATE.multiblock("large_naquadah_reactor", LargeNaquadahReactorMachine::new)
             .rotationState(RotationState.NON_Y_AXIS)
             .tooltips(Component.translatable("gtnn.multiblock.large_naquadah_reactor.tooltip1"))
             .tooltips(Component.translatable("gtnn.multiblock.large_naquadah_reactor.tooltip2"))
@@ -263,7 +263,7 @@ public class GTNNMachines {
             .register();
 
     static {
-        getREGISTRATE().creativeModeTab(() -> GTNNCreativeModeTabs.MAIN_TAB);
+        REGISTRATE.creativeModeTab(() -> GTNNCreativeModeTabs.MAIN_TAB);
     }
 
     public static MachineDefinition[] registerTieredMachines(String name,
@@ -272,7 +272,7 @@ public class GTNNMachines {
                                                              int... tiers) {
         MachineDefinition[] definitions = new MachineDefinition[GTValues.TIER_COUNT];
         for (int tier : tiers) {
-            var register = getREGISTRATE().machine(GTValues.VN[tier].toLowerCase(Locale.ROOT) + "_" + name, holder -> factory.apply(holder, tier))
+            var register = REGISTRATE.machine(GTValues.VN[tier].toLowerCase(Locale.ROOT) + "_" + name, holder -> factory.apply(holder, tier))
                     .tier(tier);
             definitions[tier] = builder.apply(tier, register);
         }

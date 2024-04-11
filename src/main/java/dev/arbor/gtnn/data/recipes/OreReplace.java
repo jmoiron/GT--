@@ -26,11 +26,11 @@ public final class OreReplace implements RecipeReplacer {
     }
 
     public static void init(Recipe<?> recipe) {
-        if (GTNN.getServerConfig().enableHarderPlatinumLine) {
+        if (GTNN.INSTANCE.getServerConfig().enableHarderPlatinumLine) {
             replace(recipe, Platinum, PlatinumMetal);
             replace(recipe, Palladium, PalladiumMetal);
         }
-        if (GTNN.getServerConfig().enableHarderNaquadahLine) {
+        if (GTNN.INSTANCE.getServerConfig().enableHarderNaquadahLine) {
             replace(recipe, Naquadah, NaquadahOxideMixture);
             replace(recipe, NaquadahEnriched, EnrichedNaquadahOxideMixture);
             replace(recipe, Naquadria, NaquadriaOxideMixture);

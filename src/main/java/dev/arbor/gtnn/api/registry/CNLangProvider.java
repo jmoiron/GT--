@@ -44,7 +44,7 @@ public class CNLangProvider extends LanguageProvider implements RegistrateProvid
         try {
             add("material.gtceu." + material.getName(), name);
         } catch (NullPointerException e) {
-            GTNN.getLOGGER().error("Failed to translate material(CN)", e);
+            GTNN.LOGGER.error("Failed to translate material(CN)", e);
         }
     }
 }
