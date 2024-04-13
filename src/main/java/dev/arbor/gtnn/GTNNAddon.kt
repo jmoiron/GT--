@@ -37,11 +37,11 @@ class GTNNAddon : IGTAddon {
         GTNNElement.init()
     }
 
-    override fun addRecipes(provider: Consumer<FinishedRecipe>?) {
+    override fun addRecipes(provider: Consumer<FinishedRecipe>) {
         GTNNRecipes.init(provider)
     }
 
-    override fun removeRecipes(consumer: Consumer<ResourceLocation>?) {
+    override fun removeRecipes(consumer: Consumer<ResourceLocation>) {
         DefaultRecipes.Misc.removeRecipes(consumer)
         if (GTNNIntegration.isAdAstraLoaded()) AdAstraRecipes.remove(consumer)
     }

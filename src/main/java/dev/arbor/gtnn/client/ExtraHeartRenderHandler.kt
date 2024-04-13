@@ -109,7 +109,7 @@ class ExtraHeartRenderHandler {
     val healthLast = this.lastPlayerHealth
 
     val attrMaxHealth = player.getAttribute(Attributes.MAX_HEALTH)
-    var healthMax = attrMaxHealth?.getValue()?.toFloat() ?: 0f
+    var healthMax = attrMaxHealth?. getValue()?.toFloat() ?: 0f
     var absorb = Mth.ceil(player.absorptionAmount)
 
     // CHANGE: simulate 10 heart max if there's more, so vanilla only renders one row max

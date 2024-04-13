@@ -40,7 +40,7 @@ class GTPPMachineRenderer(baseCasing: ResourceLocation, workableModel: ResourceL
     private fun render(side: Direction?, modelFacing: Direction?, quads: MutableList<BakedQuad>, machine: MetaMachine, modelState: ModelState) {
         var casing: BlockEntry<Block>? = null
         if (side != null && modelFacing != null && machine is IGTPPMachine) {
-            quads.add(FaceQuad.bakeFace(modelFacing, ModelFactory.getBlockSprite(PlantCasingBlock.getByTier(machine.getTier()).resourceLocation), modelState))
+            quads.add(FaceQuad.bakeFace(modelFacing, ModelFactory.getBlockSprite(PlantCasingBlock.getByTier(machine.getTier()).getResourceLocation()), modelState))
             casing = PlantCasingBlock.getByTier(machine.getTier()).getPlantCasing(machine.getTier())
         }
         machine.self().definition.appearance = Supplier { casing?.defaultState }

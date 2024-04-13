@@ -7,7 +7,7 @@ import dev.toma.configuration.config.Configurable;
 import dev.toma.configuration.config.format.ConfigFormats;
 
 @Config(id = GTNN.MODID)
-public class ConfigHandler {
+public final class ConfigHandler {
     public static ConfigHandler INSTANCE = Configuration.registerConfig(ConfigHandler.class, ConfigFormats.json()).getConfigInstance();
     @Configurable
     public ClientConfigs Client = new ClientConfigs();

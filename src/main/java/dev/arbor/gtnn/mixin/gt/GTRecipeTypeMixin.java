@@ -11,6 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class GTRecipeTypeMixin {
     @Inject(method = "init", at = @At("HEAD"), remap = false)
     private static void init(CallbackInfo ci){
-        GTNNRecipeTypes.init();
+        GTNNRecipeTypes.INSTANCE.init();
     }
 }
