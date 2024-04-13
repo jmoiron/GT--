@@ -26,7 +26,6 @@ object GTNNRecipes {
         return (seconds * 20.0).toInt()
     }
 
-
     fun setNA(max: Int, min: Int): NeutronActivatorCondition {
         return NeutronActivatorCondition(max, min)
     }

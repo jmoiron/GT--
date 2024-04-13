@@ -16,7 +16,16 @@ import net.minecraftforge.api.distmarker.OnlyIn
 class BlockMachineRenderer(modelLocation: ResourceLocation) : MachineRenderer(modelLocation), IPartRenderer {
 
     @OnlyIn(Dist.CLIENT)
-    override fun renderMachine(quads: MutableList<BakedQuad>?, definition: MachineDefinition?, machine: MetaMachine?, frontFacing: Direction?, side: Direction?, rand: RandomSource?, modelFacing: Direction?, modelState: ModelState?) {
+    override fun renderMachine(
+        quads: MutableList<BakedQuad>?,
+        definition: MachineDefinition?,
+        machine: MetaMachine?,
+        frontFacing: Direction?,
+        side: Direction?,
+        rand: RandomSource?,
+        modelFacing: Direction?,
+        modelState: ModelState?
+    ) {
         this.renderBaseModel(quads, definition, machine, frontFacing, side, rand)
     }
 }

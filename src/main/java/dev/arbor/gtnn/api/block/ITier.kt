@@ -1,4 +1,4 @@
-package dev.arbor.gtnn.api.block;
+package dev.arbor.gtnn.api.block
 
 interface ITier {
     /**

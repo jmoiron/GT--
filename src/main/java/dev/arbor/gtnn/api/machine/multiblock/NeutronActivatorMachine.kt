@@ -191,16 +191,13 @@ class NeutronActivatorMachine(holder: IMachineBlockEntity, vararg args: Any) : W
         super.addDisplayText(textList)
         if (isFormed()) {
             textList.add(
-                Component.translatable(recipeType.registryName.toLanguageKey())
-                    .setStyle(
-                        Style.EMPTY.withColor(ChatFormatting.AQUA)
-                            .withHoverEvent(
-                                HoverEvent(
-                                    HoverEvent.Action.SHOW_TEXT,
-                                    Component.translatable("gtceu.gui.machinemode.title")
-                                )
-                            )
+                Component.translatable(recipeType.registryName.toLanguageKey()).setStyle(
+                    Style.EMPTY.withColor(ChatFormatting.AQUA).withHoverEvent(
+                        HoverEvent(
+                            HoverEvent.Action.SHOW_TEXT, Component.translatable("gtceu.gui.machinemode.title")
+                        )
                     )
+                )
             )
             if (!isWorkingEnabled) {
                 textList.add(Component.translatable("gtceu.multiblock.work_paused"))
@@ -220,8 +217,7 @@ class NeutronActivatorMachine(holder: IMachineBlockEntity, vararg args: Any) : W
             textList.add(Component.translatable("gtnn.multiblock.neutronactivator.ev", processNumber(eV)))
             textList.add(
                 Component.translatable(
-                    "gtnn.multiblock.neutronactivator.height",
-                    FormattingUtil.formatNumbers(height)
+                    "gtnn.multiblock.neutronactivator.height", FormattingUtil.formatNumbers(height)
                 )
             )
             textList.add(
@@ -251,10 +247,8 @@ class NeutronActivatorMachine(holder: IMachineBlockEntity, vararg args: Any) : W
         val container = WidgetGroup(4, 4, 170, 129)
         container.addWidget(
             DraggableScrollableWidgetGroup(4, 4, 162, 121).setBackground(screenTexture)
-                .addWidget(LabelWidget(4, 5, self().blockState.block.getDescriptionId()))
-                .addWidget(
-                    ComponentPanelWidget(4, 17, this::addDisplayText)
-                        .setMaxWidthLimit(150)
+                .addWidget(LabelWidget(4, 5, self().blockState.block.getDescriptionId())).addWidget(
+                    ComponentPanelWidget(4, 17, this::addDisplayText).setMaxWidthLimit(150)
                         .clickHandler(this::handleDisplayClick)
                 )
         )
@@ -272,7 +266,8 @@ class NeutronActivatorMachine(holder: IMachineBlockEntity, vararg args: Any) : W
     }
 
     override fun getSubTabs(): List<IFancyUIProvider> {
-        return getParts().filter{e -> e !is HighSpeedPipeBlock }.filter(IFancyUIProvider::class.java::isInstance).map(IFancyUIProvider::class.java::cast)
+        return getParts().filter { e -> e !is HighSpeedPipeBlock }.filter(IFancyUIProvider::class.java::isInstance)
+            .map(IFancyUIProvider::class.java::cast)
     }
 
     override fun attachTooltips(tooltipsPanel: TooltipsPanel) {

@@ -7,375 +7,324 @@ import com.tterrag.registrate.builders.ItemBuilder
 import com.tterrag.registrate.util.entry.ItemEntry
 import com.tterrag.registrate.util.nullness.NonNullConsumer
 import com.tterrag.registrate.util.nullness.NonNullFunction
-import dev.arbor.gtnn.GTNNIntegration.isCCTweakedLoaded
-import dev.arbor.gtnn.GTNNRegistries
+import dev.arbor.gtnn.GTNNRegistries.REGISTRATE
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Rarity
-import net.minecraftforge.fml.loading.FMLLoader
 
 object GTNNItems {
-    val RADIOACTIVE_WASTE: ItemEntry<Item> = createItem<Item>("radioactive_waste"
+    @Suppress("UNUSED")
+    val oops = REGISTRATE.creativeModeTab { GTNNCreativeModeTabs.MAIN_TAB }
+
+    val RADIOACTIVE_WASTE: ItemEntry<Item> = createItem<Item>(
+        "radioactive_waste"
     ) { properties: Item.Properties ->
         Item(
             properties
         )
-    }
-        .lang("Radioactive Waste")
-        .properties { p: Item.Properties ->
-            p.rarity(
-                Rarity.UNCOMMON
-            )
-        }
-        .register()
-    var HEAVY_INGOT_T1: ItemEntry<ComponentItem> = createItem(
+    }.lang("Radioactive Waste").properties { p: Item.Properties ->
+        p.rarity(
+            Rarity.UNCOMMON
+        )
+    }.register()
+    val HEAVY_INGOT_T1: ItemEntry<ComponentItem> = createItem(
         "heavy_ingot_t1"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Heavy Alloy Ingot T1")
-        .properties { p: Item.Properties ->
-            p.rarity(
-                Rarity.UNCOMMON
-            )
-        }
-        .onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
-            text.add(
-                Component.translatable("item.gtnn.heavy_ingot_t1.tooltip")
-            )
-        }))
-        .register()
-    var HEAVY_INGOT_T2: ItemEntry<ComponentItem> = createItem(
+    }.lang("Heavy Alloy Ingot T1").properties { p: Item.Properties ->
+        p.rarity(
+            Rarity.UNCOMMON
+        )
+    }.onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
+        text.add(
+            Component.translatable("item.gtnn.heavy_ingot_t1.tooltip")
+        )
+    })).register()
+    val HEAVY_INGOT_T2: ItemEntry<ComponentItem> = createItem(
         "heavy_ingot_t2"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Heavy Alloy Ingot T2")
-        .properties { p: Item.Properties ->
-            p.rarity(
-                Rarity.UNCOMMON
-            )
-        }
-        .onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
-            text.add(
-                Component.translatable("item.gtnn.heavy_ingot_t2.tooltip")
-            )
-        }))
-        .register()
-    var HEAVY_INGOT_T3: ItemEntry<ComponentItem> = createItem(
+    }.lang("Heavy Alloy Ingot T2").properties { p: Item.Properties ->
+        p.rarity(
+            Rarity.UNCOMMON
+        )
+    }.onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
+        text.add(
+            Component.translatable("item.gtnn.heavy_ingot_t2.tooltip")
+        )
+    })).register()
+    val HEAVY_INGOT_T3: ItemEntry<ComponentItem> = createItem(
         "heavy_ingot_t3"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Heavy Alloy Ingot T3")
-        .properties { p: Item.Properties ->
-            p.rarity(
-                Rarity.UNCOMMON
-            )
-        }
-        .onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
-            text.add(
-                Component.translatable("item.gtnn.heavy_ingot_t3.tooltip")
-            )
-        }))
-        .register()
-    var HEAVY_INGOT_T4: ItemEntry<ComponentItem> = createItem(
+    }.lang("Heavy Alloy Ingot T3").properties { p: Item.Properties ->
+        p.rarity(
+            Rarity.UNCOMMON
+        )
+    }.onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
+        text.add(
+            Component.translatable("item.gtnn.heavy_ingot_t3.tooltip")
+        )
+    })).register()
+    val HEAVY_INGOT_T4: ItemEntry<ComponentItem> = createItem(
         "heavy_ingot_t4"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Heavy Alloy Ingot T4")
-        .properties { p: Item.Properties ->
-            p.rarity(
-                Rarity.UNCOMMON
-            )
-        }
-        .onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
-            text.add(
-                Component.translatable("item.gtnn.heavy_ingot_t4.tooltip")
-            )
-        }))
-        .register()
-    var HEAVY_PLATE_T1: ItemEntry<ComponentItem> = createItem(
+    }.lang("Heavy Alloy Ingot T4").properties { p: Item.Properties ->
+        p.rarity(
+            Rarity.UNCOMMON
+        )
+    }.onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
+        text.add(
+            Component.translatable("item.gtnn.heavy_ingot_t4.tooltip")
+        )
+    })).register()
+    val HEAVY_PLATE_T1: ItemEntry<ComponentItem> = createItem(
         "heavy_plate_t1"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Heavy Alloy Plate T1")
-        .properties { p: Item.Properties ->
-            p.rarity(
-                Rarity.UNCOMMON
-            )
-        }
-        .onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
-            text.add(
-                Component.translatable("item.gtnn.heavy_plate_t1.tooltip")
-            )
-        }))
-        .register()
-    var HEAVY_PLATE_T2: ItemEntry<ComponentItem> = createItem(
+    }.lang("Heavy Alloy Plate T1").properties { p: Item.Properties ->
+        p.rarity(
+            Rarity.UNCOMMON
+        )
+    }.onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
+        text.add(
+            Component.translatable("item.gtnn.heavy_plate_t1.tooltip")
+        )
+    })).register()
+    val HEAVY_PLATE_T2: ItemEntry<ComponentItem> = createItem(
         "heavy_plate_t2"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Heavy Alloy Plate T2")
-        .properties { p: Item.Properties ->
-            p.rarity(
-                Rarity.UNCOMMON
-            )
-        }
-        .onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
-            text.add(
-                Component.translatable("item.gtnn.heavy_plate_t2.tooltip")
-            )
-        }))
-        .register()
-    var HEAVY_PLATE_T3: ItemEntry<ComponentItem> = createItem(
+    }.lang("Heavy Alloy Plate T2").properties { p: Item.Properties ->
+        p.rarity(
+            Rarity.UNCOMMON
+        )
+    }.onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
+        text.add(
+            Component.translatable("item.gtnn.heavy_plate_t2.tooltip")
+        )
+    })).register()
+    val HEAVY_PLATE_T3: ItemEntry<ComponentItem> = createItem(
         "heavy_plate_t3"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Heavy Alloy Plate T3")
-        .properties { p: Item.Properties ->
-            p.rarity(
-                Rarity.UNCOMMON
-            )
-        }
-        .onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
-            text.add(
-                Component.translatable("item.gtnn.heavy_plate_t3.tooltip")
-            )
-        }))
-        .register()
-    var HEAVY_PLATE_T4: ItemEntry<ComponentItem> = createItem(
+    }.lang("Heavy Alloy Plate T3").properties { p: Item.Properties ->
+        p.rarity(
+            Rarity.UNCOMMON
+        )
+    }.onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
+        text.add(
+            Component.translatable("item.gtnn.heavy_plate_t3.tooltip")
+        )
+    })).register()
+    val HEAVY_PLATE_T4: ItemEntry<ComponentItem> = createItem(
         "heavy_plate_t4"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Heavy Alloy Plate T4")
-        .properties { p: Item.Properties ->
-            p.rarity(
-                Rarity.UNCOMMON
-            )
-        }
-        .onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
-            text.add(
-                Component.translatable("item.gtnn.heavy_plate_t4.tooltip")
-            )
-        }))
-        .register()
-    var CHIP_T1: ItemEntry<ComponentItem> = createItem(
+    }.lang("Heavy Alloy Plate T4").properties { p: Item.Properties ->
+        p.rarity(
+            Rarity.UNCOMMON
+        )
+    }.onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
+        text.add(
+            Component.translatable("item.gtnn.heavy_plate_t4.tooltip")
+        )
+    })).register()
+    val CHIP_T1: ItemEntry<ComponentItem> = createItem(
         "t1_chip"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Chip T1")
-        .properties { p: Item.Properties ->
-            p.rarity(
-                Rarity.UNCOMMON
-            )
-        }
-        .onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
-            text.add(
-                Component.translatable("item.gtnn.chip_t1.tooltip")
-            )
-        }))
-        .register()
-    var CHIP_T2: ItemEntry<ComponentItem> = createItem(
+    }.lang("Chip T1").properties { p: Item.Properties ->
+        p.rarity(
+            Rarity.UNCOMMON
+        )
+    }.onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
+        text.add(
+            Component.translatable("item.gtnn.chip_t1.tooltip")
+        )
+    })).register()
+    val CHIP_T2: ItemEntry<ComponentItem> = createItem(
         "t2_chip"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Chip T2")
-        .properties { p: Item.Properties ->
-            p.rarity(
-                Rarity.UNCOMMON
-            )
-        }
-        .onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
-            text.add(
-                Component.translatable("item.gtnn.chip_t2.tooltip")
-            )
-        }))
-        .register()
-    var CHIP_T3: ItemEntry<ComponentItem> = createItem(
+    }.lang("Chip T2").properties { p: Item.Properties ->
+        p.rarity(
+            Rarity.UNCOMMON
+        )
+    }.onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
+        text.add(
+            Component.translatable("item.gtnn.chip_t2.tooltip")
+        )
+    })).register()
+    val CHIP_T3: ItemEntry<ComponentItem> = createItem(
         "t3_chip"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Chip T3")
-        .properties { p: Item.Properties ->
-            p.rarity(
-                Rarity.EPIC
-            )
-        }
-        .onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
-            text.add(
-                Component.translatable("item.gtnn.chip_t3.tooltip")
-            )
-        }))
-        .register()
-    var CHIP_T4: ItemEntry<ComponentItem> = createItem(
+    }.lang("Chip T3").properties { p: Item.Properties ->
+        p.rarity(
+            Rarity.EPIC
+        )
+    }.onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
+        text.add(
+            Component.translatable("item.gtnn.chip_t3.tooltip")
+        )
+    })).register()
+    val CHIP_T4: ItemEntry<ComponentItem> = createItem(
         "t4_chip"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Chip T4")
-        .properties { p: Item.Properties ->
-            p.rarity(
-                Rarity.EPIC
-            )
-        }
-        .onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
-            text.add(
-                Component.translatable("item.gtnn.chip_t4.tooltip")
-            )
-        }))
-        .register()
-    var INVERTER: ItemEntry<ComponentItem> = createItem(
+    }.lang("Chip T4").properties { p: Item.Properties ->
+        p.rarity(
+            Rarity.EPIC
+        )
+    }.onRegister(attach(TooltipBehavior { text: MutableList<Component?> ->
+        text.add(
+            Component.translatable("item.gtnn.chip_t4.tooltip")
+        )
+    })).register()
+    val INVERTER: ItemEntry<ComponentItem> = createItem(
         "inverter"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Inverter")
-        .register()
-    var EncapsulatedUranium: ItemEntry<ComponentItem> = createItem(
+    }.lang("Inverter").register()
+    val EncapsulatedUranium: ItemEntry<ComponentItem> = createItem(
         "encapsulated_uranium"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Encapsulated Uranium")
-        .register()
-    var EnrichedUraniumNugget: ItemEntry<ComponentItem> = createItem(
+    }.lang("Encapsulated Uranium").register()
+    val EnrichedUraniumNugget: ItemEntry<ComponentItem> = createItem(
         "enriched_uranium_nugget"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Enriched Uranium Nugget")
-        .register()
-    var EnrichedUranium: ItemEntry<ComponentItem> = createItem(
+    }.lang("Enriched Uranium Nugget").register()
+    val EnrichedUranium: ItemEntry<ComponentItem> = createItem(
         "enriched_uranium"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Enriched Uranium")
-        .register()
-    var EncapsulatedThorium: ItemEntry<ComponentItem> = createItem(
+    }.lang("Enriched Uranium").register()
+    val EncapsulatedThorium: ItemEntry<ComponentItem> = createItem(
         "encapsulated_thorium"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Encapsulated Thorium")
-        .register()
-    var EnrichedThoriumNugget: ItemEntry<ComponentItem> = createItem(
+    }.lang("Encapsulated Thorium").register()
+    val EnrichedThoriumNugget: ItemEntry<ComponentItem> = createItem(
         "enriched_thorium_nugget"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Enriched Thorium Nugget")
-        .register()
-    var EnrichedThorium: ItemEntry<ComponentItem> = createItem(
+    }.lang("Enriched Thorium Nugget").register()
+    val EnrichedThorium: ItemEntry<ComponentItem> = createItem(
         "enriched_thorium"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Enriched Thorium")
-        .register()
-    var EncapsulatedPlutonium: ItemEntry<ComponentItem> = createItem(
+    }.lang("Enriched Thorium").register()
+    val EncapsulatedPlutonium: ItemEntry<ComponentItem> = createItem(
         "encapsulated_plutonium"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Encapsulated Plutonium")
-        .register()
-    var EnrichedPlutoniumNugget: ItemEntry<ComponentItem> = createItem(
+    }.lang("Encapsulated Plutonium").register()
+    val EnrichedPlutoniumNugget: ItemEntry<ComponentItem> = createItem(
         "enriched_plutonium_nugget"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Enriched Plutonium Nugget")
-        .register()
-    var EnrichedPlutonium: ItemEntry<ComponentItem> = createItem(
+    }.lang("Enriched Plutonium Nugget").register()
+    val EnrichedPlutonium: ItemEntry<ComponentItem> = createItem(
         "enriched_plutonium"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Enriched Plutonium")
-        .register()
-    var NeutronSource: ItemEntry<ComponentItem> = createItem(
+    }.lang("Enriched Plutonium").register()
+    val NeutronSource: ItemEntry<ComponentItem> = createItem(
         "neutron_source"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Neutron Source")
-        .register()
-    var QuarkCore: ItemEntry<ComponentItem> = createItem(
+    }.lang("Neutron Source").register()
+    val QuarkCore: ItemEntry<ComponentItem> = createItem(
         "quark_core"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Quark Core")
-        .register()
-    var PlateRadiationProtection: ItemEntry<ComponentItem> = createItem(
+    }.lang("Quark Core").register()
+    val PlateRadiationProtection: ItemEntry<ComponentItem> = createItem(
         "plate_radiation_protection"
     ) { properties: Item.Properties ->
         ComponentItem.create(
             properties
         )
-    }
-        .lang("Radiation Protection Plate")
-        .register()
+    }.lang("Radiation Protection Plate").register()
 
-    var COMPUTER: ItemEntry<ComponentItem>? = null
-    var COMPUTER_ADVANCED: ItemEntry<ComponentItem>? = null
+    val COMPUTER: ItemEntry<ComponentItem> by lazy {
+        createItem(
+            "computer_circuit"
+        ) { properties: Item.Properties ->
+            ComponentItem.create(
+                properties
+            )
+        }.lang("Computer Chip").properties { p: Item.Properties ->
+            p.rarity(
+                Rarity.UNCOMMON
+            )
+        }.register()
+    }
+    val COMPUTER_ADVANCED: ItemEntry<ComponentItem> by lazy {
+        createItem(
+            "computer_advanced_circuit"
+        ) { properties: Item.Properties ->
+            ComponentItem.create(
+                properties
+            )
+        }.lang("Advanced Computer Chip").properties { p: Item.Properties ->
+            p.rarity(
+                Rarity.RARE
+            )
+        }.register()
+    }
 
     private fun attach(components: TooltipBehavior): NonNullConsumer<in ComponentItem> {
         return NonNullConsumer { item: ComponentItem ->
@@ -386,44 +335,11 @@ object GTNNItems {
     }
 
     fun init() {
-        GTNNRegistries.REGISTRATE.creativeModeTab { GTNNCreativeModeTabs.MAIN_TAB }
-
-        if (!isCCTweakedLoaded() || !FMLLoader.isProduction()) {
-            COMPUTER = createItem(
-                "computer_circuit"
-            ) { properties: Item.Properties ->
-                ComponentItem.create(
-                    properties
-                )
-            }
-                .lang("Computer Chip")
-                .properties { p: Item.Properties ->
-                    p.rarity(
-                        Rarity.UNCOMMON
-                    )
-                }
-                .register()
-            COMPUTER_ADVANCED = createItem(
-                "computer_advanced_circuit"
-            ) { properties: Item.Properties ->
-                ComponentItem.create(
-                    properties
-                )
-            }
-                .lang("Advanced Computer Chip")
-                .properties { p: Item.Properties ->
-                    p.rarity(
-                        Rarity.RARE
-                    )
-                }
-                .register()
-        }
     }
 
     private fun <T : Item?> createItem(
-        name: String,
-        factory: NonNullFunction<Item.Properties, T>
+        name: String, factory: NonNullFunction<Item.Properties, T>
     ): ItemBuilder<T, Registrate> {
-        return GTNNRegistries.REGISTRATE.item(name, factory)
+        return REGISTRATE.item(name, factory)
     }
 }

@@ -25,32 +25,36 @@ import javax.annotation.ParametersAreNonnullByDefault
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-class LargeNaquadahReactorMachine(holder: IMachineBlockEntity): WorkableElectricMultiblockMachine(holder), IExplosionMachine {
+class LargeNaquadahReactorMachine(holder: IMachineBlockEntity) : WorkableElectricMultiblockMachine(holder),
+    IExplosionMachine {
     private val activeFluid: Map<Fluid, Int> = mapOf(
-            GTMaterials.Caesium.getFluid() to 2,
-            GTMaterials.Uranium235.getFluid() to 3,
-            GTMaterials.Naquadah.getFluid() to 4
+        GTMaterials.Caesium.getFluid() to 2,
+        GTMaterials.Uranium235.getFluid() to 3,
+        GTMaterials.Naquadah.getFluid() to 4
     )
     private val activeFluidCost: Map<Fluid, Int> = mapOf(
-            GTMaterials.Caesium.getFluid() to 180,
-            GTMaterials.Uranium235.getFluid() to 180,
-            GTMaterials.Naquadah.getFluid() to 20
+        GTMaterials.Caesium.getFluid() to 180,
+        GTMaterials.Uranium235.getFluid() to 180,
+        GTMaterials.Naquadah.getFluid() to 20
     )
     private val fuelFluids: List<Fluid> = listOf(
-            GTNNMaterials.ThoriumBasedLiquidFuelExcited.getFluid(),
-            GTNNMaterials.UraniumBasedLiquidFuelExcited.getFluid(),
-            GTNNMaterials.PlutoniumBasedLiquidFuelExcited.getFluid()
+        GTNNMaterials.ThoriumBasedLiquidFuelExcited.getFluid(),
+        GTNNMaterials.UraniumBasedLiquidFuelExcited.getFluid(),
+        GTNNMaterials.PlutoniumBasedLiquidFuelExcited.getFluid()
     )
     private var hatchPartMachines: Set<FluidHatchPartMachine>? = null
+
     @Persisted
     private var hasAir = false
+
     @Persisted
     private var hasCool = false
+
     @Persisted
     private var activeFluidPower = 1
     private var lockFluid: Fluid? = null
 
-    private fun checkHatch(largeNaquadahReactorMachine: LargeNaquadahReactorMachine , duration: Int) {
+    private fun checkHatch(largeNaquadahReactorMachine: LargeNaquadahReactorMachine, duration: Int) {
         largeNaquadahReactorMachine.hasCool = false
         largeNaquadahReactorMachine.hasAir = false
         largeNaquadahReactorMachine.activeFluidPower = 1

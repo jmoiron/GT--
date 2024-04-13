@@ -47,84 +47,69 @@ object GTNNMachines {
     //////////////////////////////////////
     //**********    Block     **********//
     //////////////////////////////////////
-    @JvmField
     val HIGH_SPEED_PIPE_BLOCK: MachineDefinition = REGISTRATE.machine("high_speed_pipe_block", ::HighSpeedPipeBlock)
         .renderer { BlockMachineRenderer(GTNN.id("block/machine/part/high_speed_pipe_block")) }
-        .rotationState(RotationState.Y_AXIS)
-        .register()
+        .rotationState(RotationState.Y_AXIS).register()
 
     //////////////////////////////////////
     //**********     Part     **********//
     //////////////////////////////////////
-    @JvmField
     val NEUTRON_ACCELERATOR: Array<MachineDefinition?> = MachineReg.registerTieredMachines(
-        "neutron_accelerator",
-        ::NeutronAcceleratorMachine,
-        { tier, builder ->
-            builder
-                .langValue(VNF[tier] + "Neutron Accelerator")
-                .rotationState(RotationState.ALL)
+        "neutron_accelerator", ::NeutronAcceleratorMachine, { tier, builder ->
+            builder.langValue(VNF[tier] + "Neutron Accelerator").rotationState(RotationState.ALL)
                 .abilities(APartAbility.NEUTRON_ACCELERATOR)
                 .tooltips(Component.translatable("gtnn.machine.neutron_accelerator.tooltip1"))
                 .tooltips(Component.translatable("gtnn.machine.neutron_accelerator.tooltip2", V[tier]))
                 .tooltips(Component.translatable("gtnn.machine.neutron_accelerator.tooltip3", V[tier] * 8 / 10))
                 .tooltips(Component.translatable("gtnn.machine.neutron_accelerator.tooltip4"))
-                .overlayTieredHullRenderer("neutron_accelerator")
-                .compassNode("neutron_accelerator")
-                .register()
-        },
-        ULV2UV
+                .overlayTieredHullRenderer("neutron_accelerator").compassNode("neutron_accelerator").register()
+        }, ULV2UV
     )
 
-    @JvmField
-    val NEUTRON_SENSOR: MachineDefinition = REGISTRATE.machine("neutron_sensor", ::NeutronSensorMachine)
-        .langValue("Neutron Sensor")
-        .tier(IV)
-        .rotationState(RotationState.ALL)
-        .abilities(APartAbility.NEUTRON_SENSOR)
-        .overlayTieredHullRenderer("neutron_sensor")
-        .tooltips(Component.translatable("block.gtnn.neutron_sensor.tooltip1"))
-        .tooltips(Component.translatable("block.gtnn.neutron_sensor.tooltip2"))
-        .register()
+    val NEUTRON_SENSOR: MachineDefinition =
+        REGISTRATE.machine("neutron_sensor", ::NeutronSensorMachine).langValue("Neutron Sensor").tier(IV)
+            .rotationState(RotationState.ALL).abilities(APartAbility.NEUTRON_SENSOR)
+            .overlayTieredHullRenderer("neutron_sensor")
+            .tooltips(Component.translatable("block.gtnn.neutron_sensor.tooltip1"))
+            .tooltips(Component.translatable("block.gtnn.neutron_sensor.tooltip2")).register()
 
     //////////////////////////////////////
     //**********   Machine    **********//
     //////////////////////////////////////
 
-    @JvmField
-    val DEHYDRATOR: Array<MachineDefinition?> =
-        MachineReg.registerSimpleMachines(
-            "dehydrator",
-            GTNNRecipeTypes.DEHYDRATOR_RECIPES,
-            GTMachines.defaultTankSizeFunction,
-            MV2ZPM
-        )
 
-    @JvmField
+    val DEHYDRATOR: Array<MachineDefinition?> = MachineReg.registerSimpleMachines(
+        "dehydrator", GTNNRecipeTypes.DEHYDRATOR_RECIPES, GTMachines.defaultTankSizeFunction, MV2ZPM
+    )
+
+
     val NAQUADAH_REACTOR: Array<MachineDefinition?> = MachineReg.registerGTNNGeneratorMachines(
-        "naquadah_reactor", GTNNRecipeTypes.NAQUADAH_REACTOR_RECIPES, GTNNGeneratorMachine::nonParallel,
-        GTMachines.genericGeneratorTankSizeFunction, EV2UV
+        "naquadah_reactor",
+        GTNNRecipeTypes.NAQUADAH_REACTOR_RECIPES,
+        GTNNGeneratorMachine::nonParallel,
+        GTMachines.genericGeneratorTankSizeFunction,
+        EV2UV
     )
 
-    @JvmField
+
     val Rocket_Engine: Array<MachineDefinition?> = MachineReg.registerGTNNGeneratorMachines(
-        "rocket_engine", GTNNRecipeTypes.ROCKET_ENGINE_RECIPES, GTNNGeneratorMachine::parallel,
-        GTMachines.genericGeneratorTankSizeFunction, intArrayOf(EV, IV, LuV)
+        "rocket_engine",
+        GTNNRecipeTypes.ROCKET_ENGINE_RECIPES,
+        GTNNGeneratorMachine::parallel,
+        GTMachines.genericGeneratorTankSizeFunction,
+        intArrayOf(EV, IV, LuV)
     )
 
-    @JvmField
+
     val CHEMICAL_PLANT: MultiblockMachineDefinition = REGISTRATE.multiblock(
         "exxonmobil_chemical_plant"
-    ) { ChemicalPlantMachine(it) }
-        .rotationState(RotationState.NON_Y_AXIS)
+    ) { ChemicalPlantMachine(it) }.rotationState(RotationState.NON_Y_AXIS)
         .tooltips(Component.translatable("gtnn.multiblock.chemical_plant.tooltip1"))
         .tooltips(Component.translatable("gtnn.multiblock.chemical_plant.tooltip2"))
         .tooltips(Component.translatable("gtnn.multiblock.chemical_plant.tooltip3"))
         .tooltips(Component.translatable("gtnn.multiblock.chemical_plant.tooltip4"))
-        .recipeTypes(GTNNRecipeTypes.CHEMICAL_PLANT_RECIPES)
-        .recipeModifier(ChemicalPlantMachine::chemicalPlantRecipe)
-        .appearanceBlock(GTBlocks.CASING_BRONZE_BRICKS)
-        .pattern { definition ->
+        .recipeTypes(GTNNRecipeTypes.CHEMICAL_PLANT_RECIPES).recipeModifier(ChemicalPlantMachine::chemicalPlantRecipe)
+        .appearanceBlock(GTBlocks.CASING_BRONZE_BRICKS).pattern { definition ->
             FactoryBlockPattern.start()
                 .aisle("VVVVVVV", "A#####A", "A#####A", "A#####A", "A#####A", "A#####A", "AAAAAAA")
                 .aisle("VBBBBBV", "#BBBBB#", "#######", "#######", "#######", "#BBBBB#", "AAAAAAA")
@@ -133,25 +118,15 @@ object GTNNMachines {
                 .aisle("VBBBBBV", "#BCCCB#", "##DDD##", "##CCC##", "##DDD##", "#BCCCB#", "AAAAAAA")
                 .aisle("VBBBBBV", "#BBBBB#", "#######", "#######", "#######", "#BBBBB#", "AAAAAAA")
                 .aisle("AVVSVVA", "A#####A", "A#####A", "A#####A", "A#####A", "A#####A", "AAAAAAA")
-                .where("S", controller(blocks(definition.get())))
-                .where(
-                    "V", APredicates.plantCasings()
-                        .or(autoAbilities(*definition.recipeTypes))
-                        .or(autoAbilities(true, false, false))
-                        .or(abilities(PartAbility.INPUT_ENERGY))
-                        .or(abilities(PartAbility.IMPORT_ITEMS))
-                        .or(abilities(PartAbility.EXPORT_ITEMS))
-                        .or(abilities(PartAbility.IMPORT_FLUIDS))
-                        .or(abilities(PartAbility.EXPORT_FLUIDS))
-                )
-                .where("A", APredicates.plantCasings())
-                .where("D", APredicates.pipeBlock())
-                .where("C", heatingCoils())
-                .where("B", APredicates.machineCasing())
-                .where("#", air())
-                .build()
-        }
-        .shapeInfos { definition ->
+                .where("S", controller(blocks(definition.get()))).where(
+                    "V",
+                    APredicates.plantCasings().or(autoAbilities(*definition.recipeTypes))
+                        .or(autoAbilities(true, false, false)).or(abilities(PartAbility.INPUT_ENERGY))
+                        .or(abilities(PartAbility.IMPORT_ITEMS)).or(abilities(PartAbility.EXPORT_ITEMS))
+                        .or(abilities(PartAbility.IMPORT_FLUIDS)).or(abilities(PartAbility.EXPORT_FLUIDS))
+                ).where("A", APredicates.plantCasings()).where("D", APredicates.pipeBlock()).where("C", heatingCoils())
+                .where("B", APredicates.machineCasing()).where("#", air()).build()
+        }.shapeInfos { definition ->
             val shapeInfo = mutableListOf<MultiblockShapeInfo>()
             val builder = MultiblockShapeInfo.builder()
                 .aisle("AAOSJAA", "A#####A", "A#####A", "A#####A", "A#####A", "A#####A", "AAAAAAA")
@@ -161,8 +136,7 @@ object GTNNMachines {
                 .aisle("ABBBBBA", "#BCCCB#", "##DDD##", "##CCC##", "##DDD##", "#BCCCB#", "AAAAAAA")
                 .aisle("ABBBBBA", "#BBBBB#", "#######", "#######", "#######", "#BBBBB#", "AAAAAAA")
                 .aisle("AAAAAAA", "A#####A", "A#####A", "A#####A", "A#####A", "A#####A", "AAAAAAA")
-                .where('S', definition, Direction.NORTH)
-                .where('#', Blocks.AIR.defaultBlockState())
+                .where('S', definition, Direction.NORTH).where('#', Blocks.AIR.defaultBlockState())
                 .where('J', GTMachines.MAINTENANCE_HATCH, Direction.NORTH)
             val shapeBlock = hashMapOf<Int, BlockState>()
             for (casing in PlantCasingBlock.values()) {
@@ -192,38 +166,33 @@ object GTNNMachines {
                 shapeInfo.add(builder.shallowCopy().build())
             }
             return@shapeInfos shapeInfo
-        }
-        .renderer {
+        }.renderer {
             GTPPMachineRenderer(
                 GTCEu.id("block/casings/solid/machine_casing_bronze_plated_bricks"),
-                GTNN.id("block/multiblock/chemical_plant"), false
+                GTNN.id("block/multiblock/chemical_plant"),
+                false
             )
-        }
-        .additionalDisplay { controller, components ->
+        }.additionalDisplay { controller, components ->
             if (controller is ChemicalPlantMachine && controller.isFormed()) {
                 components.add(
                     Component.translatable(
-                        "gtnn.multiblock.chemical_plant.heating_coil",
-                        controller.coilTier * 50
+                        "gtnn.multiblock.chemical_plant.heating_coil", controller.coilTier * 50
                     )
                 )
                 components.add(
                     Component.translatable(
-                        "gtnn.multiblock.chemical_plant.parallel_level",
-                        controller.getPipeTier() * 2
+                        "gtnn.multiblock.chemical_plant.parallel_level", controller.getPipeTier() * 2
                     )
                 )
                 components.add(
                     Component.translatable(
-                        "gtnn.multiblock.chemical_plant.tier",
-                        VNF[controller.getMachineCasingTier() + 1]
+                        "gtnn.multiblock.chemical_plant.tier", VNF[controller.getMachineCasingTier() + 1]
                     )
                 )
             }
-        }
-        .register()
+        }.register()
 
-    @JvmField
+
     val NEUTRON_ACTIVATOR: MultiblockMachineDefinition =
         REGISTRATE.multiblock("neutron_activator") { NeutronActivatorMachine(it) }
             .rotationState(RotationState.NON_Y_AXIS)
@@ -232,41 +201,32 @@ object GTNNMachines {
             .tooltips(Component.translatable("gtnn.multiblock.neutron_activator.tooltip3"))
             .tooltips(Component.translatable("gtnn.multiblock.neutron_activator.tooltip4"))
             .tooltips(Component.translatable("gtnn.multiblock.neutron_activator.tooltip5"))
-            .recipeTypes(GTNNRecipeTypes.NEUTRON_ACTIVATOR_RECIPES)
-            .appearanceBlock(GTBlocks.CASING_STAINLESS_CLEAN)
+            .recipeTypes(GTNNRecipeTypes.NEUTRON_ACTIVATOR_RECIPES).appearanceBlock(GTBlocks.CASING_STAINLESS_CLEAN)
             .pattern { definition ->
                 FactoryBlockPattern.start(RelativeDirection.RIGHT, RelativeDirection.BACK, RelativeDirection.UP)
                     .aisle("AASAA", "ABBBA", "ABBBA", "ABBBA", "AAAAA")
                     .aisle("C###C", "#DDD#", "#DED#", "#DDD#", "C###C").setRepeatable(4, 34)
-                    .aisle("VVVVV", "VBBBV", "VBBBV", "VBBBV", "VVVVV")
-                    .where("S", controller(blocks(definition.get())))
+                    .aisle("VVVVV", "VBBBV", "VBBBV", "VBBBV", "VVVVV").where("S", controller(blocks(definition.get())))
                     .where(
-                        "V", blocks(GTBlocks.CASING_STAINLESS_CLEAN.get())
-                            .or(abilities(PartAbility.IMPORT_FLUIDS))
+                        "V",
+                        blocks(GTBlocks.CASING_STAINLESS_CLEAN.get()).or(abilities(PartAbility.IMPORT_FLUIDS))
                             .or(abilities(PartAbility.IMPORT_ITEMS))
-                    )
-                    .where(
-                        "A", blocks(GTBlocks.CASING_STAINLESS_CLEAN.get())
-                            .or(abilities(PartAbility.EXPORT_FLUIDS))
-                            .or(abilities(PartAbility.EXPORT_ITEMS))
-                            .or(abilities(APartAbility.NEUTRON_ACCELERATOR))
-                            .or(abilities(APartAbility.NEUTRON_SENSOR))
-                            .or(autoAbilities(true, false, false))
-                    )
-                    .where("B", blocks(GTNNCasingBlocks.PROCESS_MACHINE_CASING.get()))
+                    ).where(
+                        "A",
+                        blocks(GTBlocks.CASING_STAINLESS_CLEAN.get()).or(abilities(PartAbility.EXPORT_FLUIDS))
+                            .or(abilities(PartAbility.EXPORT_ITEMS)).or(abilities(APartAbility.NEUTRON_ACCELERATOR))
+                            .or(abilities(APartAbility.NEUTRON_SENSOR)).or(autoAbilities(true, false, false))
+                    ).where("B", blocks(GTNNCasingBlocks.PROCESS_MACHINE_CASING.get()))
                     .where("C", blocks(ChemicalHelper.getBlock(TagPrefix.frameGt, GTMaterials.Steel)))
                     .where("D", blocks(GTBlocks.CASING_LAMINATED_GLASS.get()))
-                    .where("E", blocks(HIGH_SPEED_PIPE_BLOCK.get()))
-                    .where("#", air())
-                    .build()
-            }
-            .workableCasingRenderer(
+                    .where("E", blocks(HIGH_SPEED_PIPE_BLOCK.get())).where("#", air()).build()
+            }.workableCasingRenderer(
                 GTCEu.id("block/casings/solid/machine_casing_clean_stainless_steel"),
-                GTNN.id("block/multiblock/neutron_activator"), false
-            )
-            .register()
+                GTNN.id("block/multiblock/neutron_activator"),
+                false
+            ).register()
 
-    @JvmField
+
     val LargeNaquadahReactor: MultiblockMachineDefinition =
         REGISTRATE.multiblock("large_naquadah_reactor") { LargeNaquadahReactorMachine(it) }
             .rotationState(RotationState.NON_Y_AXIS)
@@ -281,8 +241,7 @@ object GTNNMachines {
             .tooltips(Component.translatable("gtnn.multiblock.large_naquadah_reactor.tooltip9"))
             .recipeTypes(GTNNRecipeTypes.LARGE_NAQUADAH_REACTOR_RECIPES)
             .recipeModifier(LargeNaquadahReactorMachine::modifyRecipe)
-            .appearanceBlock(GTNNCasingBlocks.RADIATION_PROOF_MACHINE_CASING)
-            .pattern { definition ->
+            .appearanceBlock(GTNNCasingBlocks.RADIATION_PROOF_MACHINE_CASING).pattern { definition ->
                 FactoryBlockPattern.start()
                     .aisle("AAAAAAA", "VBBBBBV", "VVVVVVV", "B#####B", "B#####B", "B#####B", "B#####B", "VVVVVVV")
                     .aisle("AAAAAAA", "B#####B", "V#####V", "#######", "#######", "#######", "#######", "VVVVVVV")
@@ -292,35 +251,30 @@ object GTNNMachines {
                     .aisle("AAAAAAA", "B#####B", "V#####V", "#######", "#######", "#######", "#######", "VVVVVVV")
                     .aisle("AAASAAA", "VBBBBBV", "VVVVVVV", "B#####B", "B#####B", "B#####B", "B#####B", "VVVVVVV")
                     .where("S", controller(blocks(definition.get())))
-                    .where("V", blocks(GTNNCasingBlocks.RADIATION_PROOF_MACHINE_CASING.get()))
-                    .where(
-                        "A", blocks(GTNNCasingBlocks.RADIATION_PROOF_MACHINE_CASING.get())
-                            .or(autoAbilities(true, false, false))
-                            .or(abilities(PartAbility.OUTPUT_ENERGY).setMinGlobalLimited(1, 1))
+                    .where("V", blocks(GTNNCasingBlocks.RADIATION_PROOF_MACHINE_CASING.get())).where(
+                        "A", blocks(GTNNCasingBlocks.RADIATION_PROOF_MACHINE_CASING.get()).or(
+                            autoAbilities(
+                                true, false, false
+                            )
+                        ).or(abilities(PartAbility.OUTPUT_ENERGY).setMinGlobalLimited(1, 1))
                             .or(abilities(PartAbility.IMPORT_FLUIDS).setPreviewCount(1))
                             .or(abilities(PartAbility.EXPORT_FLUIDS).setPreviewCount(1))
-                    )
-                    .where("B", blocks(ChemicalHelper.getBlock(TagPrefix.frameGt, GTNNMaterials.RadiationProtection)))
+                    ).where("B", blocks(ChemicalHelper.getBlock(TagPrefix.frameGt, GTNNMaterials.RadiationProtection)))
                     .where("C", blocks(GTNNCasingBlocks.MAR_CASING.get()))
-                    .where("D", blocks(GTBlocks.CASING_TUNGSTENSTEEL_PIPE.get()))
-                    .where("#", air())
-                    .build()
-            }
-            .workableCasingRenderer(
+                    .where("D", blocks(GTBlocks.CASING_TUNGSTENSTEEL_PIPE.get())).where("#", air()).build()
+            }.workableCasingRenderer(
                 GTNN.id("block/casings/solid/radiation_proof_machine_casing"),
-                GTNN.id("block/multiblock/large_naquadah_reactor"), false
-            )
-            .additionalDisplay { controller, components ->
+                GTNN.id("block/multiblock/large_naquadah_reactor"),
+                false
+            ).additionalDisplay { controller, components ->
                 if (controller is LargeNaquadahReactorMachine && controller.isFormed()) run {
                     components.add(
                         Component.translatable(
-                            "gtnn.multiblock.large_naquadah_reactor.power",
-                            controller.getFinalPowerRate()
+                            "gtnn.multiblock.large_naquadah_reactor.power", controller.getFinalPowerRate()
                         )
                     )
                 }
-            }
-            .register()
+            }.register()
 
     fun init() {
         REGISTRATE.creativeModeTab { GTNNCreativeModeTabs.MAIN_TAB }

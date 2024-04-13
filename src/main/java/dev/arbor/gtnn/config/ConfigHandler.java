@@ -13,7 +13,8 @@ public final class ConfigHandler {
     public ClientConfigs Client = new ClientConfigs();
     @Configurable
     public ServerConfigs Server = new ServerConfigs();
-    public static class ServerConfigs{
+
+    public static class ServerConfigs {
         @Configurable
         @Configurable.Comment({"Enable Harder Platinum Line", "Default: true"})
         public boolean enableHarderPlatinumLine = true;
@@ -26,10 +27,12 @@ public final class ConfigHandler {
         @Configurable
         @Configurable.Comment({"Makes EMI Better", "Default: true"})
         public boolean makesEMIBetter = true;
-        ServerConfigs(){
+
+        ServerConfigs() {
         }
     }
-    public static class ClientConfigs{
+
+    public static class ClientConfigs {
         @Configurable
         @Configurable.Comment({"Use Extra Heart Renderer", "Default: false"})
         public boolean extraHeartRenderer = false;
@@ -43,7 +46,8 @@ public final class ConfigHandler {
         @Configurable
         @Configurable.Comment({"Enable Remake GTM EMI Integration", "Default: true"})
         public boolean enableRemakeGTMEMI = true;
-        ClientConfigs(){
+
+        ClientConfigs() {
         }
     }
 

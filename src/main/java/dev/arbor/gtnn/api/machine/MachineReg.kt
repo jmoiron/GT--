@@ -29,45 +29,34 @@ object MachineReg {
         tiers: IntArray
     ): Array<MachineDefinition?> {
         return Array(size = GTValues.TIER_COUNT) {
-            if (tiers.contains(it)){
+            if (tiers.contains(it)) {
                 return@Array builder.apply(
                     it,
-                    GTNNRegistries.REGISTRATE.machine(GTValues.VN[it].lowercase(Locale.ROOT) + "_" + name) { holder -> factory.apply(holder, it) }
-                        .tier(it)
+                    GTNNRegistries.REGISTRATE.machine(GTValues.VN[it].lowercase(Locale.ROOT) + "_" + name) { holder ->
+                        factory.apply(
+                            holder, it
+                        )
+                    }.tier(it)
                 )
             } else return@Array null
         }
     }
 
     fun registerSimpleMachines(
-        name: String,
-        recipeType: GTRecipeType,
-        tankScalingFunction: Int2LongFunction,
-        tiers: IntArray
+        name: String, recipeType: GTRecipeType, tankScalingFunction: Int2LongFunction, tiers: IntArray
     ): Array<MachineDefinition?> {
         return registerTieredMachines(name, { holder, tier ->
             SimpleTieredMachine(holder, tier, tankScalingFunction)
         }, { tier, builder ->
-            builder
-                .langValue("${GTValues.VLVH[tier]} ${FormattingUtil.toEnglishName(name)} ${GTValues.VLVT[tier]}")
+            builder.langValue("${GTValues.VLVH[tier]} ${FormattingUtil.toEnglishName(name)} ${GTValues.VLVT[tier]}")
                 .editableUI(SimpleTieredMachine.EDITABLE_UI_CREATOR.apply(GTCEu.id(name), recipeType))
-                .rotationState(RotationState.NON_Y_AXIS)
-                .recipeType(recipeType)
+                .rotationState(RotationState.NON_Y_AXIS).recipeType(recipeType)
                 .recipeModifier(GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK))
-                .workableTieredHullRenderer(GTNN.id("block/machines/$name"))
-                .tooltips(GTMachines.explosion())
-                .tooltips(
+                .workableTieredHullRenderer(GTNN.id("block/machines/$name")).tooltips(GTMachines.explosion()).tooltips(
                     *GTMachines.workableTiered(
-                        tier,
-                        GTValues.V[tier],
-                        GTValues.V[tier] * 64,
-                        recipeType,
-                        tankScalingFunction.apply(tier),
-                        true
+                        tier, GTValues.V[tier], GTValues.V[tier] * 64, recipeType, tankScalingFunction.apply(tier), true
                     )
-                )
-                .compassNode(name)
-                .register()
+                ).compassNode(name).register()
         }, tiers)
     }
 
@@ -79,24 +68,17 @@ object MachineReg {
         tiers: IntArray
     ): Array<MachineDefinition?> {
         return registerTieredMachines(name,
-            { holder, tier -> GTNNGeneratorMachine(holder, tier, name, tankScalingFunction) }, { tier, builder ->
-                builder
-                    .langValue("${GTValues.VLVH[tier]} ${FormattingUtil.toEnglishName(name)} Generator ${GTValues.LVT[tier - 3]}")
+            { holder, tier -> GTNNGeneratorMachine(holder, tier, name, tankScalingFunction) },
+            { tier, builder ->
+                builder.langValue("${GTValues.VLVH[tier]} ${FormattingUtil.toEnglishName(name)} Generator ${GTValues.LVT[tier - 3]}")
                     .editableUI(SimpleGeneratorMachine.EDITABLE_UI_CREATOR.apply(GTNN.id(name), recipeType))
-                    .rotationState(RotationState.ALL)
-                    .recipeType(recipeType)
-                    .recipeModifier(recipeModifier, true)
-                    .addOutputLimit(ItemRecipeCapability.CAP, 0)
-                    .addOutputLimit(FluidRecipeCapability.CAP, 0)
-                    .renderer { SimpleGeneratorMachineRenderer(tier, GTNN.id("block/generators/$name")) }
-                    .tooltips(
+                    .rotationState(RotationState.ALL).recipeType(recipeType).recipeModifier(recipeModifier, true)
+                    .addOutputLimit(ItemRecipeCapability.CAP, 0).addOutputLimit(FluidRecipeCapability.CAP, 0)
+                    .renderer { SimpleGeneratorMachineRenderer(tier, GTNN.id("block/generators/$name")) }.tooltips(
                         Component.translatable(
-                            "gtnn.machine.$name.tooltip",
-                            GTNNGeneratorMachine.getEfficiency(tier, name)
+                            "gtnn.machine.$name.tooltip", GTNNGeneratorMachine.getEfficiency(tier, name)
                         )
-                    )
-                    .tooltips(GTMachines.explosion())
-                    .tooltips(
+                    ).tooltips(GTMachines.explosion()).tooltips(
                         *GTMachines.workableTiered(
                             tier,
                             GTValues.V[tier],
@@ -105,10 +87,9 @@ object MachineReg {
                             tankScalingFunction.apply(tier),
                             false
                         )
-                    )
-                    .compassNode(name)
-                    .register()
-            }, tiers
+                    ).compassNode(name).register()
+            },
+            tiers
         )
     }
 }

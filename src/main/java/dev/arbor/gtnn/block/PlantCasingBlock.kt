@@ -8,20 +8,22 @@ import dev.arbor.gtnn.block.BlockTier.*
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.level.block.Block
+import dev.arbor.gtnn.api.tool.StringTools.gt
 
 enum class PlantCasingBlock(
     private val tier: ITier,
     private val blockName: String,
-    private val plantCasing: BlockEntry<Block>
+    private val plantCasing: BlockEntry<Block>,
+    private val texture: ResourceLocation
 ) : PlantCasingType {
-    BRONZE(TIER0, "Bronze", GTBlocks.CASING_BRONZE_BRICKS),
-    STEEL(TIER1, "Steel", GTBlocks.CASING_STEEL_SOLID),
-    ALUMINIUM(TIER2, "Aluminium", GTBlocks.CASING_ALUMINIUM_FROSTPROOF),
-    STAINLESS(TIER3, "Stainless", GTBlocks.CASING_STAINLESS_CLEAN),
-    TITANIUM(TIER4, "Titanium", GTBlocks.CASING_TITANIUM_STABLE),
-    TUNGSTENSTEEL(TIER5, "Tungstensteel", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST),
-    CHROME(TIER6, "Chrome", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST),
-    IRIDIUM(TIER7, "Iridium", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST);
+    BRONZE(TIER0, "Bronze", GTBlocks.CASING_BRONZE_BRICKS, "block/casings/solid/machine_casing_bronze_plated_bricks".gt()),
+    STEEL(TIER1, "Steel", GTBlocks.CASING_STEEL_SOLID, "block/casings/solid/machine_casing_solid_steel".gt()),
+    ALUMINIUM(TIER2, "Aluminium", GTBlocks.CASING_ALUMINIUM_FROSTPROOF, "block/casings/solid/machine_casing_frost_proof".gt()),
+    STAINLESS(TIER3, "Stainless", GTBlocks.CASING_STAINLESS_CLEAN, "block/casings/solid/machine_casing_clean_stainless_steel".gt()),
+    TITANIUM(TIER4, "Titanium", GTBlocks.CASING_TITANIUM_STABLE, "block/casings/solid/machine_casing_stable_titanium".gt()),
+    TUNGSTENSTEEL(TIER5, "Tungstensteel", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST, "block/casings/solid/machine_casing_robust_tungstensteel".gt()),
+    CHROME(TIER6, "Chrome", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST, "block/casings/solid/machine_casing_robust_tungstensteel".gt()),
+    IRIDIUM(TIER7, "Iridium", GTBlocks.CASING_TUNGSTENSTEEL_ROBUST, "block/casings/solid/machine_casing_robust_tungstensteel".gt());
 
     internal object PlantCasing {
         val All_PlantCasingBlock: MutableMap<String?, PlantCasingBlock> = Object2ObjectOpenHashMap()
@@ -68,6 +70,6 @@ enum class PlantCasingBlock(
     }
 
     override fun getResourceLocation(): ResourceLocation {
-        return plantCasing.id
+        return texture
     }
 }

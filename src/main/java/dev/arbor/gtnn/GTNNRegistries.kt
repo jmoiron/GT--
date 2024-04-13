@@ -18,8 +18,7 @@ import java.io.IOException
 object GTNNRegistries {
     private lateinit var MATERIAL_REGISTRY: MaterialRegistry
 
-    @JvmField
-    val REGISTRATE = GTRegistrate.create(GTNN.MODID)
+    val REGISTRATE: GTRegistrate by lazy { GTRegistrate.create(GTNN.MODID) }
 
     @JvmStatic
     fun registerMachine(@Suppress("UNUSED_PARAMETER") event: GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition>) {

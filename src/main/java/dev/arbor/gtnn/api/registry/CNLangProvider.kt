@@ -11,7 +11,8 @@ import net.minecraftforge.common.data.LanguageProvider
 import net.minecraftforge.fml.LogicalSide
 import java.util.concurrent.CompletableFuture
 
-class CNLangProvider(owner: AbstractRegistrate<*>, packOutput: PackOutput?): LanguageProvider(packOutput!!, owner.modid, "zh_cn"), RegistrateProvider {
+class CNLangProvider(owner: AbstractRegistrate<*>, packOutput: PackOutput?) :
+    LanguageProvider(packOutput!!, owner.modid, "zh_cn"), RegistrateProvider {
     private var owner: AbstractRegistrate<*>? = owner
 
     override fun getSide(): LogicalSide {

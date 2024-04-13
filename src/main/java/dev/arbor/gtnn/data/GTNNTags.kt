@@ -14,5 +14,5 @@ object GTNNTags {
         }
     }
 
-    val AD_ASTRA_STONES: TagKey<Block?>? = TagUtil.createBlockTag("ad_astra_stones")
+    val AD_ASTRA_STONES: TagKey<Block?> = TagUtil.createBlockTag("ad_astra_stones")
 }

@@ -1,6 +1,13 @@
 package dev.arbor.gtnn.data.lang
 
+import dev.arbor.gtnn.api.lang.LangGenerators.entry
+import dev.arbor.gtnn.api.lang.LanguageRoot
+
+
+@LanguageRoot("test")
 object MachineLang {
+    val TEST by entry("test")
+
     fun init() {
         machineNames()
         tsl("block.gtnn.neutron_sensor", "中子传感器")
@@ -67,15 +74,18 @@ object MachineLang {
             "§6Extra high-speed pipe blocks provide recipe time reduction, and lower the efficiency of the neutron accelerator"
         )
         tsl(
-            "gtnn.multiblock.neutron_activator.tooltip3", "§6没有中子加速器运行时，中子动能每秒降低§e72KeV§6中子动能",
+            "gtnn.multiblock.neutron_activator.tooltip3",
+            "§6没有中子加速器运行时，中子动能每秒降低§e72KeV§6中子动能",
             "§6Without a neutron accelerator running, neutron kinetic energy decreases by §e72KeV §6neutron kinetic energy per second"
         )
         tsl(
-            "gtnn.multiblock.neutron_activator.tooltip4", "§6输入石墨/铍粉可以立即吸收§e10MeV§6中子动能",
+            "gtnn.multiblock.neutron_activator.tooltip4",
+            "§6输入石墨/铍粉可以立即吸收§e10MeV§6中子动能",
             "§6Absorb §e10MeV §6neutron kinetic energy immediately when input cesium or beryllium dust"
         )
         tsl(
-            "gtnn.multiblock.neutron_activator.tooltip5", "§6当中子动能超过§41200MeV§6后将会爆炸！",
+            "gtnn.multiblock.neutron_activator.tooltip5",
+            "§6当中子动能超过§41200MeV§6后将会爆炸！",
             "§6When the neutron kinetic energy exceeds §41200MeV§6, it will explode!"
         )
         tsl("gtnn.multiblock.large_naquadah_reactor.tooltip1", "§o§7环境友好型!", "§o§7Environment Friendly!")
@@ -95,23 +105,28 @@ object MachineLang {
             "§6Input liquid fuel, if there are more than §4one §6fuel in the input hatch, the reactor will explode"
         )
         tsl(
-            "gtnn.multiblock.large_naquadah_reactor.tooltip5", "§6可以消耗§e1000L/s§6冷却液获得§e150%效率提升",
+            "gtnn.multiblock.large_naquadah_reactor.tooltip5",
+            "§6可以消耗§e1000L/s§6冷却液获得§e150%效率提升",
             "§6Can consume §e1000L/s§6 cooling fluid to get §e150% efficiency"
         )
         tsl(
-            "gtnn.multiblock.large_naquadah_reactor.tooltip6", "§6消耗激发流体以提升输出功率",
+            "gtnn.multiblock.large_naquadah_reactor.tooltip6",
+            "§6消耗激发流体以提升输出功率",
             "§6Consume igniting fluid to increase output power"
         )
         tsl(
-            "gtnn.multiblock.large_naquadah_reactor.tooltip7", "熔融铯        | §e2x功率 | §6180L/s",
+            "gtnn.multiblock.large_naquadah_reactor.tooltip7",
+            "熔融铯        | §e2x功率 | §6180L/s",
             "Cesium             | §e2x power | §6180L/s"
         )
         tsl(
-            "gtnn.multiblock.large_naquadah_reactor.tooltip8", "熔融铀-235  | §e3x功率 | §6180L/s",
+            "gtnn.multiblock.large_naquadah_reactor.tooltip8",
+            "熔融铀-235  | §e3x功率 | §6180L/s",
             "Uranium-235   | §e3x power | §6180L/s"
         )
         tsl(
-            "gtnn.multiblock.large_naquadah_reactor.tooltip9", "熔融硅岩      | §e4x功率 | §620L/s",
+            "gtnn.multiblock.large_naquadah_reactor.tooltip9",
+            "熔融硅岩      | §e4x功率 | §620L/s",
             "Naquadah       | §e4x power | §620L/s"
         )
         tsl("gtnn.multiblock.large_naquadah_reactor.power", "发电倍率: %s", "Power: %s")
@@ -119,7 +134,8 @@ object MachineLang {
         tsl("gtnn.multiblock.neutronactivator.height", "高度: %s", "Height: %s")
         tsl("gtnn.multiblock.neutronactivator.efficiency", "耗时: %s%%", "Efficiency: %s%%")
         tsl(
-            "gtnn.recipe.condition.neutron_activator_condition_tooltip", "最小中子动能:\n%s MeV\n最大中子动能:\n%s MeV",
+            "gtnn.recipe.condition.neutron_activator_condition_tooltip",
+            "最小中子动能:\n%s MeV\n最大中子动能:\n%s MeV",
             "Min Neutron Kinetic Energy:\n%s MeV\nMax Neutron Kinetic Energy:\n%s MeV"
         )
         tsl(
@@ -128,7 +144,8 @@ object MachineLang {
             "§7Could be installed on §bNeutron Activator§7"
         )
         tsl(
-            "block.gtnn.neutron_sensor.tooltip2", "基于§6中子动能§7输出红石信号，右键以打开GUI进行设置。",
+            "block.gtnn.neutron_sensor.tooltip2",
+            "基于§6中子动能§7输出红石信号，右键以打开GUI进行设置。",
             "Based on §6neutron kinetic energy §7output red stone signal, right-click to open the GUI for settings."
         )
         tsl("gtnn.universal.desc.neutron_kinetic_energy.min", "最小中子动能\n(%s)", "Min Neutron Kinetic Energy\n(%s)")

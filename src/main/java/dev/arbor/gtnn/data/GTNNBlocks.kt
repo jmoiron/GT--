@@ -16,23 +16,16 @@ import net.minecraft.world.level.block.state.BlockBehaviour
 object GTNNBlocks {
     val ITNT: BlockEntry<Block> = REGISTRATE.block<Block>(
         "itnt"
-    ) { properties: BlockBehaviour.Properties -> Block(properties) }
-        .initialProperties { Blocks.TNT }
-        .lang("ITNT")
+    ) { properties: BlockBehaviour.Properties -> Block(properties) }.initialProperties { Blocks.TNT }.lang("ITNT")
         .blockstate { ctx: DataGenContext<Block?, Block?>, prov: RegistrateBlockstateProvider ->
             prov.simpleBlock(
-                ctx.entry,
-                prov.models().getExistingFile(id("block/itnt"))
+                ctx.entry, prov.models().getExistingFile(id("block/itnt"))
             )
-        }
-        .item { block: Block?, properties: Item.Properties? ->
+        }.item { block: Block?, properties: Item.Properties? ->
             RendererBlockItem(
-                block,
-                properties
+                block, properties
             )
-        }
-        .model(NonNullBiConsumer.noop<DataGenContext<Item, RendererBlockItem>, RegistrateItemModelProvider>())
-        .build()
+        }.model(NonNullBiConsumer.noop<DataGenContext<Item, RendererBlockItem>, RegistrateItemModelProvider>()).build()
         .register()
 
     fun init() {

@@ -29,8 +29,11 @@ object APredicates {
                 }
             }
             return@TraceabilityPredicate false
-        }, { PlantCasingBlock.values().map{BlockInfo.fromBlockState(it.getPlantCasing(it.getTier()).get().defaultBlockState())}.toTypedArray() })
-        .addTooltips(Component.translatable("gtnn.multiblock.pattern.error.plant_casings"))
+        }, {
+            PlantCasingBlock.values()
+                .map { BlockInfo.fromBlockState(it.getPlantCasing(it.getTier()).get().defaultBlockState()) }
+                .toTypedArray()
+        }).addTooltips(Component.translatable("gtnn.multiblock.pattern.error.plant_casings"))
     }
 
     fun pipeBlock(): TraceabilityPredicate {
@@ -48,8 +51,10 @@ object APredicates {
                 }
             }
             return@TraceabilityPredicate false
-        }, { PipeBlock.Pipe.values().map{BlockInfo.fromBlockState(it.getPipe().get().defaultBlockState())}.toTypedArray() })
-                .addTooltips(Component.translatable("gtnn.multiblock.pattern.error.pipe"))
+        }, {
+            PipeBlock.Pipe.values().map { BlockInfo.fromBlockState(it.getPipe().get().defaultBlockState()) }
+                .toTypedArray()
+        }).addTooltips(Component.translatable("gtnn.multiblock.pattern.error.pipe"))
     }
 
     fun machineCasing(): TraceabilityPredicate {
@@ -67,12 +72,14 @@ object APredicates {
                 }
             }
             return@TraceabilityPredicate false
-        }, { MachineCasingBlock.MachineCasing.values().map{BlockInfo.fromBlockState(it.getMachineCasing().get().defaultBlockState())}.toTypedArray() })
-                .addTooltips(Component.translatable("gtnn.multiblock.pattern.error.machine_casing"))
+        }, {
+            MachineCasingBlock.MachineCasing.values()
+                .map { BlockInfo.fromBlockState(it.getMachineCasing().get().defaultBlockState()) }.toTypedArray()
+        }).addTooltips(Component.translatable("gtnn.multiblock.pattern.error.machine_casing"))
     }
 
     fun ability(ability: PartAbility): TraceabilityPredicate {
         val tiers = listOf(ULV, LV, MV, HV, EV, IV, LuV, ZPM, UV).filter { it <= 1 }.toIntArray()
-        return Predicates.blocks(*(if (tiers.isEmpty())  ability.allBlocks else ability.getBlocks(*tiers)).toTypedArray())
+        return Predicates.blocks(*(if (tiers.isEmpty()) ability.allBlocks else ability.getBlocks(*tiers)).toTypedArray())
     }
 }

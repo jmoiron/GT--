@@ -12,8 +12,7 @@ import org.apache.logging.log4j.Logger
 object GTNN {
     const val MODID = "gtnn"
 
-    @JvmField
-    val LOGGER: Logger = LogManager.getLogger(MODID)
+    val LOGGER: Logger by lazy { LogManager.getLogger(MODID) }
 
     fun init() {
         CommonProxy.init()
@@ -27,7 +26,6 @@ object GTNN {
         return ConfigHandler.INSTANCE.Server
     }
 
-    @JvmStatic
     fun id(path: String): ResourceLocation {
         return ResourceLocation(MODID, FormattingUtil.toLowerCaseUnder(path))
     }

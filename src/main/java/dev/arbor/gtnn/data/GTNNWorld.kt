@@ -17,11 +17,8 @@ object GTNNWorld {
     val GLACIO: ResourceLocation = ResourceLocation("ad_astra", "glacio")
 
     enum class GTNNWorldGenLayers(
-        private val id: String,
-        private val target: RuleTest,
-        private val levels: Set<ResourceLocation>
-    ) :
-        IWorldGenLayer, StringRepresentable {
+        private val id: String, private val target: RuleTest, private val levels: Set<ResourceLocation>
+    ) : IWorldGenLayer, StringRepresentable {
         AD("ad", TagMatchTest(GTNNTags.AD_ASTRA_STONES), setOf(MOON, MARS, MERCURY, VENUS, GLACIO)),
         TF("tf", TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES), setOf(TWILIGHT_FOREST));
 

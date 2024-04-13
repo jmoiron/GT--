@@ -7,7 +7,7 @@ import dev.arbor.gtnn.GTNN
 import dev.arbor.gtnn.api.registry.CNLangProvider
 
 class LangHandler {
-    companion object{
+    companion object {
         val INSTANCE: LangHandler = LangHandler()
         fun tsl(key: String?, cn: String?, en: String?) {
             INSTANCE.translate(key, cn, en)
@@ -28,8 +28,7 @@ class LangHandler {
         private fun translateMaterial(material: Material, cn: String?, en: String?) {
             if (en == null) {
                 if (INSTANCE.enLangProvider != null && INSTANCE.cnLangProvider == null) translateMaterial(
-                    INSTANCE.enLangProvider,
-                    material
+                    INSTANCE.enLangProvider, material
                 )
             } else {
                 try {
@@ -65,9 +64,10 @@ class LangHandler {
             MiscLang.init()
         }
     }
+
     private var cnLangProvider: CNLangProvider? = null
     private var enLangProvider: RegistrateLangProvider? = null
-    
+
     private fun translate(key: String?, cn: String?, en: String?) {
         if (enLangProvider != null && cnLangProvider == null) {
             key?.let { en?.let { it1 -> enLangProvider!!.add(it, it1) } }

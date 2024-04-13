@@ -16,20 +16,14 @@ object MiscLang {
         tsl("config.gtnn.option.Client", "客户端", "Client")
         tsl("config.gtnn.option.Server", "服务器", "Server")
         tsl(
-            "config.gtnn.option.enableHarderNaquadahLine",
-            "开启更难的硅岩处理",
-            "Enable Harder Naquadah Process Line"
+            "config.gtnn.option.enableHarderNaquadahLine", "开启更难的硅岩处理", "Enable Harder Naquadah Process Line"
         )
         tsl(
-            "config.gtnn.option.enableHarderPlatinumLine",
-            "开启更难的铂处理",
-            "Enable Harder Platinum Process Line"
+            "config.gtnn.option.enableHarderPlatinumLine", "开启更难的铂处理", "Enable Harder Platinum Process Line"
         )
         tsl("config.gtnn.option.extraHeartRenderer", "启用血条渲染", "Enable extra Heart renderer")
         tsl(
-            "config.gtnn.option.banCreateFanBlasting",
-            "禁用机械动力风扇熔炼",
-            "Disable Create Fan Blasting"
+            "config.gtnn.option.banCreateFanBlasting", "禁用机械动力风扇熔炼", "Disable Create Fan Blasting"
         )
         tsl("config.gtnn.option.makesEMIBetter", "使EMI更好用", "Makes EMI Better")
         tsl("config.gtnn.option.killToast", "禁用弹窗", "Disable toast")
@@ -46,24 +40,16 @@ object MiscLang {
 
     private fun items() {
         tsl(
-            "item.gtnn.heavy_ingot_t1.tooltip",
-            "§7用于制作T1重型合金板",
-            "§7Used for making Heavy Alloy Plate T1"
+            "item.gtnn.heavy_ingot_t1.tooltip", "§7用于制作T1重型合金板", "§7Used for making Heavy Alloy Plate T1"
         )
         tsl(
-            "item.gtnn.heavy_ingot_t2.tooltip",
-            "§7用于制作T2重型合金板",
-            "§7Used for making Heavy Alloy Plate T2"
+            "item.gtnn.heavy_ingot_t2.tooltip", "§7用于制作T2重型合金板", "§7Used for making Heavy Alloy Plate T2"
         )
         tsl(
-            "item.gtnn.heavy_ingot_t3.tooltip",
-            "§7用于制作T3重型合金板",
-            "§7Used for making Heavy Alloy Plate T3"
+            "item.gtnn.heavy_ingot_t3.tooltip", "§7用于制作T3重型合金板", "§7Used for making Heavy Alloy Plate T3"
         )
         tsl(
-            "item.gtnn.heavy_ingot_t4.tooltip",
-            "§7用于制作T4重型合金板",
-            "§7Used for making Heavy Alloy Plate T4"
+            "item.gtnn.heavy_ingot_t4.tooltip", "§7用于制作T4重型合金板", "§7Used for making Heavy Alloy Plate T4"
         )
         tsl("item.gtnn.heavy_plate_t1.tooltip", "§71阶", "§7T1")
         tsl("item.gtnn.heavy_plate_t2.tooltip", "§72阶", "§7T2")

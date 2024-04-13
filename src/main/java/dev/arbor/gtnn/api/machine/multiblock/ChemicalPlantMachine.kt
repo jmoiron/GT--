@@ -14,7 +14,6 @@ import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted
 import com.lowdragmc.lowdraglib.syncdata.annotation.RequireRerender
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder
-import dev.arbor.gtnn.GTNNForge
 import dev.arbor.gtnn.api.block.MachineCasingType
 import dev.arbor.gtnn.api.block.PipeType
 import dev.arbor.gtnn.api.block.PlantCasingType
@@ -45,7 +44,7 @@ class ChemicalPlantMachine(holder: IMachineBlockEntity) : CoilWorkableElectricMu
         scheduleRenderUpdate()
         super.onStructureFormed()
         // class dev.arbor.gtnn.block.MachineCasingBlock$MachineCasing cannot be cast to class java.lang.Void
-        GTNNForge.checkChemicalPlantMachine(this)
+        checkChemicalPlantMachine(this)
         // Get the plant casing tier
         this.machineTier = getPlantCasingTier()
     }
@@ -83,9 +82,10 @@ class ChemicalPlantMachine(holder: IMachineBlockEntity) : CoilWorkableElectricMu
     //******     RECIPE LOGIC    *******//
     //////////////////////////////////////
 
-    companion object{
+    companion object {
         private val MANAGED_FIELD_HOLDER =
             ManagedFieldHolder(ChemicalPlantMachine::class.java, WorkableMultiblockMachine.MANAGED_FIELD_HOLDER)
+
         fun chemicalPlantRecipe(machine: MetaMachine, recipe: GTRecipe): GTRecipe? {
             if (machine is ChemicalPlantMachine) {
                 if (RecipeHelper.getRecipeEUtTier(recipe) > machine.getMachineCasingTier() + 1) {
@@ -104,15 +104,12 @@ class ChemicalPlantMachine(holder: IMachineBlockEntity) : CoilWorkableElectricMu
                 val recipe2 = if (result.a == recipe) result.a.copy() else result.a
                 val parallelValue = result.b
                 recipe.duration = 1.coerceAtLeast(256 * parallelValue / maxParallel)
-                recipe.tickInputs[EURecipeCapability.CAP] = listOf(Content(parallelValue.toLong(), 1.0f, 0.0f, null, null))
+                recipe.tickInputs[EURecipeCapability.CAP] =
+                    listOf(Content(parallelValue.toLong(), 1.0f, 0.0f, null, null))
 
                 return RecipeHelper.applyOverclock(OverclockingLogic filter@{ _, recipeEUt, maxVoltage, duration, amountOC ->
                     val runOverclockingLogic = OverclockingLogic.NON_PERFECT_OVERCLOCK.logic.runOverclockingLogic(
-                        recipe2,
-                        recipeEUt,
-                        maxVoltage,
-                        duration,
-                        amountOC
+                        recipe2, recipeEUt, maxVoltage, duration, amountOC
                     )
                     if (machine.coilTier > 0) {
                         val eu = runOverclockingLogic.firstLong() * (1 - machine.coilTier * 0.5)
@@ -122,6 +119,23 @@ class ChemicalPlantMachine(holder: IMachineBlockEntity) : CoilWorkableElectricMu
                 }, recipe, machine.getMaxVoltage())
             }
             throw RuntimeException("Machine is not a ChemicalPlant")
+        }
+
+        fun checkChemicalPlantMachine(chemicalPlant: ChemicalPlantMachine) {
+            // Retrieve the multiblock state
+            val multiblockState = chemicalPlant.multiblockState
+            val matchContext = multiblockState.matchContext
+            // Get and store type objects to avoid repeated retrieval
+            val machineCasingType =
+                if (matchContext.get<Any>("MachineCasing") is MachineCasingType) matchContext.get<Any>("MachineCasing") as MachineCasingType else null
+            val pipeType =
+                if (matchContext.get<Any>("Pipe") is PipeType) matchContext.get<Any>("Pipe") as PipeType else null
+            val plantCasingType =
+                if (matchContext.get<Any>("PlantCasing") is PlantCasingType) matchContext.get<Any>("PlantCasing") as PlantCasingType else null
+            // Set type variables
+            chemicalPlant.machineCasingType = machineCasingType
+            chemicalPlant.pipeType = pipeType
+            chemicalPlant.plantCasingType = plantCasingType
         }
     }
 }

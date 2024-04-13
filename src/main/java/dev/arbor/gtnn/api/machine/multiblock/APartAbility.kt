@@ -4,14 +4,13 @@ import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility
 
 import java.util.function.Supplier
 
-class APartAbility(name: String): PartAbility(name) {
-    companion object{
-        @JvmField
+class APartAbility(name: String) : PartAbility(name) {
+    companion object {
         val NEUTRON_ACCELERATOR = PartAbility("neutron_accelerator")
-        @JvmField
+
         val NEUTRON_SENSOR = PartAbility("neutron_sensor")
-        @JvmStatic
-        fun <T> getOrDefault(value: T, defaultSupplier: Supplier<T>): T{
+
+        fun <T> getOrDefault(value: T, defaultSupplier: Supplier<T>): T {
             if (value == null) return defaultSupplier.get()
             return value
         }

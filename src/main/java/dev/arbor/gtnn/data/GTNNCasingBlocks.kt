@@ -24,68 +24,60 @@ import java.util.function.BiFunction
 
 object GTNNCasingBlocks {
 
-    val PROCESS_MACHINE_CASING: BlockEntry<Block> = createCasingBlock(
-        "clean_machine_casing", "Clean Machine Casing",
+    val PROCESS_MACHINE_CASING: BlockEntry<Block> = createCasingBlock("clean_machine_casing",
+        "Clean Machine Casing",
         { properties: BlockBehaviour.Properties?, renderer: IRenderer? ->
             RendererBlock(
-                properties,
-                renderer
+                properties, renderer
             )
         },
         id("block/casings/solid/process_machine_casing"),
         { Blocks.IRON_BLOCK })
 
-    val RADIATION_PROOF_MACHINE_CASING: BlockEntry<Block> = createCasingBlock(
-        "radiation_proof_machine_casing", "Radiation Proof Machine Casing",
+    val RADIATION_PROOF_MACHINE_CASING: BlockEntry<Block> = createCasingBlock("radiation_proof_machine_casing",
+        "Radiation Proof Machine Casing",
         { properties: BlockBehaviour.Properties?, renderer: IRenderer? ->
             RendererBlock(
-                properties,
-                renderer
+                properties, renderer
             )
         },
         id("block/casings/solid/radiation_proof_machine_casing"),
         { Blocks.IRON_BLOCK })
 
-    val MAR_CASING: BlockEntry<Block> = createCasingBlock(
-        "mar_casing", "Field Restriction Casing",
+    val MAR_CASING: BlockEntry<Block> = createCasingBlock("mar_casing",
+        "Field Restriction Casing",
         { properties: BlockBehaviour.Properties?, renderer: IRenderer? ->
             RendererBlock(
-                properties,
-                renderer
+                properties, renderer
             )
         },
         id("block/casings/solid/mar_casing"),
         { Blocks.IRON_BLOCK })
 
     private fun createCasingBlock(
-        name: String, displayName: String,
+        name: String,
+        displayName: String,
         blockSupplier: BiFunction<BlockBehaviour.Properties, IRenderer?, out RendererBlock>,
-        texture: ResourceLocation, properties: NonNullSupplier<out Block>
+        texture: ResourceLocation,
+        properties: NonNullSupplier<out Block>
     ): BlockEntry<Block> {
         return REGISTRATE.block<Block>(
             name
         ) { p: BlockBehaviour.Properties ->
             blockSupplier.apply(
-                p,
-                if (Platform.isClient()) TextureOverrideRenderer(
-                    ResourceLocation("block/cube_all"),
-                    mapOf("all" to texture)
+                p, if (Platform.isClient()) TextureOverrideRenderer(
+                    ResourceLocation("block/cube_all"), mapOf("all" to texture)
                 ) else null
             )
-        }
-            .initialProperties(properties)
-            .lang(displayName)
+        }.initialProperties(properties).lang(displayName)
             .blockstate(NonNullBiConsumer.noop<DataGenContext<Block, Block>, RegistrateBlockstateProvider>())
             .tag(GTToolType.WRENCH.harvestTags[0], BlockTags.MINEABLE_WITH_PICKAXE)
             .item { block: Block?, prop: Item.Properties? ->
                 RendererBlockItem(
-                    block,
-                    prop
+                    block, prop
                 )
-            }
-            .model(NonNullBiConsumer.noop<DataGenContext<Item, RendererBlockItem>, RegistrateItemModelProvider>())
-            .build()
-            .register()
+            }.model(NonNullBiConsumer.noop<DataGenContext<Item, RendererBlockItem>, RegistrateItemModelProvider>())
+            .build().register()
     }
 
     fun init() {

@@ -23,46 +23,46 @@ object BrineChain {
     fun init() {
         GTNNMaterials.addFluid(GTMaterials.Bromine)
         GTNNMaterials.addDust(GTMaterials.Iodine)
-        GTNNMaterials.IodizedBrine = GTNNMaterials.builder("iodized_brine")
+        GTNNMaterials.IodizedBrine = GTNNMaterials.Builder("iodized_brine")
             .fluid().color(0x525246)
             .buildAndRegister()
             .setFormula("I?", false)
-        GTNNMaterials.IodineBrineMixture = GTNNMaterials.builder("iodine_brine_mixture")
+        GTNNMaterials.IodineBrineMixture = GTNNMaterials.Builder("iodine_brine_mixture")
             .fluid()
             .color(0x525234)
             .buildAndRegister()
             .setFormula("I?Cl", false)
 
         //  18059 Brominated Brine
-        GTNNMaterials.BrominatedBrine = GTNNMaterials.builder("brominated_brine")
+        GTNNMaterials.BrominatedBrine = GTNNMaterials.Builder("brominated_brine")
             .fluid()
             .color(0xA9A990)
             .buildAndRegister()
             .setFormula("Br?", false)
 
         //  24039 Iodine Slurry
-        GTNNMaterials.IodineSlurry = GTNNMaterials.builder("iodine_slurry")
+        GTNNMaterials.IodineSlurry = GTNNMaterials.Builder("iodine_slurry")
             .fluid()
             .color(0x292923)
             .buildAndRegister()
             .setFormula("I?", false)
 
         //  24040 Acidic Brominated Brine
-        GTNNMaterials.AcidicBrominatedBrine = GTNNMaterials.builder("acidic_brominated_brine")
+        GTNNMaterials.AcidicBrominatedBrine = GTNNMaterials.Builder("acidic_brominated_brine")
             .acid()
             .color(0xC6A76F)
             .buildAndRegister()
             .setFormula("Br?(H2SO4)Cl", true)
 
         //  24041 Bromine Sulfate Solutions
-        GTNNMaterials.BromineSulfateSolution = GTNNMaterials.builder("bromine_sulfate_solution")
+        GTNNMaterials.BromineSulfateSolution = GTNNMaterials.Builder("bromine_sulfate_solution")
             .fluid()
             .color(0xCC9966)
             .buildAndRegister()
             .setFormula("H2SO4Br(H2O)Cl2", true)
 
         //  24042 Overheated Bromine Sulfate Gas
-        GTNNMaterials.OverheatedBromineSulfateSolution = GTNNMaterials.builder("overheated_bromine_sulfate_gas")
+        GTNNMaterials.OverheatedBromineSulfateSolution = GTNNMaterials.Builder("overheated_bromine_sulfate_gas")
             .gas()
             .color(0xC69337)
             .iconSet(MaterialIconSet.DULL)
@@ -70,7 +70,7 @@ object BrineChain {
             .setFormula("H2SO4Br(H2O)2Cl2", true)
 
         //  24043 Wet Bromine
-        GTNNMaterials.WetBromine = GTNNMaterials.builder("wet_bromine")
+        GTNNMaterials.WetBromine = GTNNMaterials.Builder("wet_bromine")
             .gas()
             .color(0xDB5C5C)
             .iconSet(MaterialIconSet.DULL)
@@ -78,7 +78,7 @@ object BrineChain {
             .setFormula("Br(H2O)", true)
 
         //  24044 Debrominated Water
-        GTNNMaterials.DebrominatedWater = GTNNMaterials.builder("debrominated_water")
+        GTNNMaterials.DebrominatedWater = GTNNMaterials.Builder("debrominated_water")
             .fluid()
             .color(0x24A3A3)
             .components(GTMaterials.Hydrogen, 2, GTMaterials.Oxygen, 1)

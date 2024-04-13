@@ -1,4 +1,4 @@
-package dev.arbor.gtnn.client.renderer.machine;
+package dev.arbor.gtnn.client.renderer.machine
 
 import com.gregtechceu.gtceu.GTCEu
 import com.gregtechceu.gtceu.api.capability.IWorkable
@@ -30,24 +30,46 @@ import java.util.function.Supplier
 
 @OnlyIn(Dist.CLIENT)
 class GTPPMachineRenderer(baseCasing: ResourceLocation, workableModel: ResourceLocation, tint: Boolean) :
-        MachineRenderer(if (tint) GTCEu.id("block/tinted_cube_all") else GTCEu.id("block/cube_all")), IControllerRenderer {
+    MachineRenderer(if (tint) GTCEu.id("block/tinted_cube_all") else GTCEu.id("block/cube_all")), IControllerRenderer {
     private val overlayModel = WorkableOverlayModel(workableModel)
 
     init {
         setTextureOverride(mapOf("all" to baseCasing))
     }
 
-    private fun render(side: Direction?, modelFacing: Direction?, quads: MutableList<BakedQuad>, machine: MetaMachine, modelState: ModelState) {
+    @OnlyIn(Dist.CLIENT)
+    private fun render(
+        side: Direction?,
+        modelFacing: Direction?,
+        quads: MutableList<BakedQuad>,
+        machine: MetaMachine,
+        modelState: ModelState
+    ) {
         var casing: BlockEntry<Block>? = null
         if (side != null && modelFacing != null && machine is IGTPPMachine) {
-            quads.add(FaceQuad.bakeFace(modelFacing, ModelFactory.getBlockSprite(PlantCasingBlock.getByTier(machine.getTier()).getResourceLocation()), modelState))
+            quads.add(
+                FaceQuad.bakeFace(
+                    modelFacing,
+                    ModelFactory.getBlockSprite(PlantCasingBlock.getByTier(machine.getTier()).getResourceLocation()),
+                    modelState
+                )
+            )
             casing = PlantCasingBlock.getByTier(machine.getTier()).getPlantCasing(machine.getTier())
         }
         machine.self().definition.appearance = Supplier { casing?.defaultState }
     }
 
-    override fun renderMachine(quads: MutableList<BakedQuad>?, definition: MachineDefinition?, machine: MetaMachine?,
-                               frontFacing: Direction?, side: Direction?, rand: RandomSource?, modelFacing: Direction?, modelState: ModelState?) {
+    @OnlyIn(Dist.CLIENT)
+    override fun renderMachine(
+        quads: MutableList<BakedQuad>?,
+        definition: MachineDefinition?,
+        machine: MetaMachine?,
+        frontFacing: Direction?,
+        side: Direction?,
+        rand: RandomSource?,
+        modelFacing: Direction?,
+        modelState: ModelState?
+    ) {
         super.renderMachine(quads, definition, machine, frontFacing, side, rand, modelFacing, modelState)
         if (machine is IGTPPMachine && machine is MultiblockControllerMachine) {
             if (machine.isFormed) {
@@ -62,11 +84,21 @@ class GTPPMachineRenderer(baseCasing: ResourceLocation, workableModel: ResourceL
         }
     }
 
-    override fun renderPartModel(quads: MutableList<BakedQuad>?, machine: IMultiController?, part: IMultiPart?,
-                                 frontFacing: Direction?, side: Direction?, rand: RandomSource?, modelFacing: Direction?, modelState: ModelState?) {
+    @OnlyIn(Dist.CLIENT)
+    override fun renderPartModel(
+        quads: MutableList<BakedQuad>?,
+        machine: IMultiController?,
+        part: IMultiPart?,
+        frontFacing: Direction?,
+        side: Direction?,
+        rand: RandomSource?,
+        modelFacing: Direction?,
+        modelState: ModelState?
+    ) {
         render(side, modelFacing, quads!!, machine!!.self(), modelState!!)
     }
 
+    @OnlyIn(Dist.CLIENT)
     override fun onPrepareTextureAtlas(atlasName: ResourceLocation, register: Consumer<ResourceLocation>) {
         super.onPrepareTextureAtlas(atlasName, register)
         if (atlasName == InventoryMenu.BLOCK_ATLAS) {

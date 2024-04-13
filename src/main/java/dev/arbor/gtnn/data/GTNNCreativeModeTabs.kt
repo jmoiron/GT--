@@ -12,7 +12,6 @@ object GTNNCreativeModeTabs {
     ) { builder: CreativeModeTab.Builder ->
         builder.displayItems(GTCreativeModeTabs.RegistrateDisplayItemsGenerator("main", REGISTRATE))
             .title(REGISTRATE.addLang("itemGroup", id("main"), "GT--"))
-            .icon { GTNNMachines.LargeNaquadahReactor.asStack() }
-            .build()
+            .icon { GTNNMachines.LargeNaquadahReactor.asStack() }.build()
     }.register()
 }
