@@ -36,6 +36,12 @@ object GTNNRecipeTypes {
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, FillDirection.LEFT_TO_RIGHT)
             .setSound(GTSoundEntries.CENTRIFUGE)
 
+    val STONE_BEDROCK_ORE_MACHINE_RECIPES: GTRecipeType =
+        GTRecipeTypes.register("homemade_bedrock_ore_machine", GTRecipeTypes.STEAM)
+            .setMaxIOSize(1, 6, 0, 0)
+            .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, FillDirection.LEFT_TO_RIGHT)
+            .setSound(GTSoundEntries.FURNACE)
+
     val ROCKET_ENGINE_RECIPES: GTRecipeType =
         GTRecipeTypes.register("rocket_engine", GTRecipeTypes.ELECTRIC).setMaxIOSize(0, 0, 1, 1).setEUIO(IO.OUT)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, FillDirection.LEFT_TO_RIGHT)

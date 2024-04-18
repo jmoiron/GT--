@@ -352,6 +352,7 @@ object SelfRecipes {
             .inputItems(TagPrefix.plate, GTMaterials.NaquadahAlloy, 8)
             .inputItems(TagPrefix.screw, GTMaterials.Osmium, 16)
             .outputItems(GTNNMachines.LargeNaquadahReactor)
+            .scannerResearch(GTNNMachines.NAQUADAH_REACTOR[GTValues.LuV]!!.asStack())
             .EUt(GTValues.VA[GTValues.ZPM].toLong()).duration(GTNNRecipes.dur(210.0)).save(provider)
         GTRecipeTypes.ASSEMBLER_RECIPES.recipeBuilder("neutron_accelerator_mv")
             .inputItems(GTNNItems.INVERTER.asStack())
@@ -402,6 +403,7 @@ object SelfRecipes {
             .inputItems(GTItems.ELECTRIC_MOTOR_LuV.asStack(2)) // .inputItems(wireGtQuadruple, ) todo mv超导
             .inputFluids(GTMaterials.Argon.getFluid(3000))
             .outputItems(GTNNMachines.NEUTRON_ACCELERATOR[GTValues.LuV]!!.asStack())
+            .scannerResearch(GTNNMachines.NEUTRON_ACCELERATOR[GTValues.IV]!!.asStack())
             .EUt(GTValues.VA[GTValues.LuV].toLong()).duration(GTNNRecipes.dur(15.0)).save(provider)
         GTRecipeTypes.ASSEMBLY_LINE_RECIPES.recipeBuilder("neutron_accelerator_zpm")
             .inputItems(GTNNItems.INVERTER.asStack(2))
@@ -415,6 +417,7 @@ object SelfRecipes {
             .inputItems(TagPrefix.wireGtQuadruple, GTMaterials.UraniumTriplatinum, 4)
             .inputFluids(GTMaterials.Xenon.getFluid(3000))
             .outputItems(GTNNMachines.NEUTRON_ACCELERATOR[GTValues.ZPM]!!.asStack())
+            .scannerResearch(GTNNMachines.NEUTRON_ACCELERATOR[GTValues.LuV]!!.asStack())
             .EUt(GTValues.VA[GTValues.ZPM].toLong()).duration(GTNNRecipes.dur(15.0)).save(provider)
         GTRecipeTypes.ASSEMBLY_LINE_RECIPES.recipeBuilder("neutron_accelerator_uv")
             .inputItems(GTNNItems.INVERTER.asStack(4))
@@ -429,6 +432,7 @@ object SelfRecipes {
             .inputItems(TagPrefix.wireGtQuadruple, GTMaterials.IndiumTinBariumTitaniumCuprate, 4)
             .inputFluids(GTMaterials.Oganesson.getFluid(3000))
             .outputItems(GTNNMachines.NEUTRON_ACCELERATOR[GTValues.UV]!!.asStack())
+            .scannerResearch(GTNNMachines.NEUTRON_ACCELERATOR[GTValues.ZPM]!!.asStack())
             .EUt(GTValues.VA[GTValues.UV].toLong()).duration(GTNNRecipes.dur(15.0)).save(provider)
         GTRecipeTypes.ASSEMBLER_RECIPES.recipeBuilder("neutron_sensor")
             .inputItems(GTBlocks.MACHINE_CASING_IV.asStack())
@@ -536,88 +540,7 @@ object SelfRecipes {
             'E', UnificationEntry(TagPrefix.gear, GTMaterials.Zeron100),
             'F', GTItems.ROBOT_ARM_ZPM
         )
-        VanillaRecipeHelper.addShapedRecipe(
-            provider, true, "rocket_engine_ev", GTNNMachines.Rocket_Engine[GTValues.EV]!!
-                .asStack(),
-            "ABA", "CDC", "EFE",
-            'A', GTItems.ELECTRIC_PISTON_EV,
-            'B', CustomTags.EV_CIRCUITS,
-            'C', GTItems.ELECTRIC_MOTOR_EV,
-            'D', GTMachines.HULL[GTValues.EV].asStack(),
-            'E', UnificationEntry(TagPrefix.gear, GTMaterials.TungstenSteel),  //todo
-            'F', UnificationEntry(TagPrefix.cableGtDouble, GTMaterials.Aluminium)
-        )
-        VanillaRecipeHelper.addShapedRecipe(
-            provider, true, "rocket_engine_iv", GTNNMachines.Rocket_Engine[GTValues.IV]!!
-                .asStack(),
-            "ABA", "CDC", "EFE",
-            'A', GTItems.ELECTRIC_PISTON_IV,
-            'B', CustomTags.IV_CIRCUITS,
-            'C', GTItems.ELECTRIC_MOTOR_IV,
-            'D', GTMachines.HULL[GTValues.IV].asStack(),
-            'E', UnificationEntry(TagPrefix.gear, GTMaterials.Titanium),  //todo
-            'F', UnificationEntry(TagPrefix.cableGtDouble, GTMaterials.Platinum)
-        )
-        VanillaRecipeHelper.addShapedRecipe(
-            provider, true, "rocket_engine_luv", GTNNMachines.Rocket_Engine[GTValues.LuV]!!
-                .asStack(),
-            "ABA", "CDC", "EFE",
-            'A', GTItems.ELECTRIC_PISTON_LUV,
-            'B', CustomTags.LuV_CIRCUITS,
-            'C', GTItems.ELECTRIC_MOTOR_LuV,
-            'D', GTMachines.HULL[GTValues.LuV].asStack(),
-            'E', UnificationEntry(TagPrefix.gear, GTMaterials.Zeron100),
-            'F', UnificationEntry(TagPrefix.cableGtDouble, GTMaterials.Tungsten)
-        )
-        VanillaRecipeHelper.addShapedRecipe(
-            provider, true, "naquadah_reactor_ev", GTNNMachines.NAQUADAH_REACTOR[GTValues.EV]!!
-                .asStack(),
-            "ABA", "CDC", "EBE",
-            'A', UnificationEntry(TagPrefix.rod, GTMaterials.Uranium235),
-            'B', CustomTags.IV_CIRCUITS,
-            'C', GTItems.FIELD_GENERATOR_EV,
-            'D', GTMachines.HULL[GTValues.EV].asStack(),
-            'E', UnificationEntry(TagPrefix.cableGtQuadruple, GTMaterials.Aluminium)
-        )
-        VanillaRecipeHelper.addShapedRecipe(
-            provider, true, "naquadah_reactor_iv", GTNNMachines.NAQUADAH_REACTOR[GTValues.IV]!!
-                .asStack(),
-            "ABA", "CDC", "EBE",
-            'A', UnificationEntry(TagPrefix.rod, GTMaterials.Plutonium241),
-            'B', CustomTags.LuV_CIRCUITS,
-            'C', GTItems.FIELD_GENERATOR_IV,
-            'D', GTMachines.HULL[GTValues.IV].asStack(),
-            'E', UnificationEntry(TagPrefix.cableGtQuadruple, GTMaterials.Tungsten)
-        )
-        VanillaRecipeHelper.addShapedRecipe(
-            provider, true, "naquadah_reactor_luv", GTNNMachines.NAQUADAH_REACTOR[GTValues.LuV]!!
-                .asStack(),
-            "ABA", "CDC", "EBE",
-            'A', UnificationEntry(TagPrefix.rod, GTMaterials.Europium),
-            'B', CustomTags.ZPM_CIRCUITS,
-            'C', GTItems.FIELD_GENERATOR_LuV,
-            'D', GTMachines.HULL[GTValues.LuV].asStack(),
-            'E', UnificationEntry(TagPrefix.cableGtQuadruple, GTMaterials.HSSG)
-        )
-        VanillaRecipeHelper.addShapedRecipe(
-            provider, true, "naquadah_reactor_zpm", GTNNMachines.NAQUADAH_REACTOR[GTValues.ZPM]!!
-                .asStack(),
-            "ABA", "CDC", "EBE",
-            'A', UnificationEntry(TagPrefix.rod, GTMaterials.Americium),
-            'B', CustomTags.UV_CIRCUITS,
-            'C', GTItems.FIELD_GENERATOR_ZPM,
-            'D', GTMachines.HULL[GTValues.ZPM].asStack(),
-            'E', UnificationEntry(TagPrefix.cableGtQuadruple, GTMaterials.Naquadah)
-        )
-        VanillaRecipeHelper.addShapedRecipe(
-            provider, true, "naquadah_reactor_uv", GTNNMachines.NAQUADAH_REACTOR[GTValues.UV]!!
-                .asStack(),
-            "ABA", "CDC", "EBE",
-            'A', UnificationEntry(TagPrefix.rod, GTMaterials.NaquadahAlloy),
-            'B', CustomTags.UHV_CIRCUITS,
-            'C', GTItems.FIELD_GENERATOR_UV,
-            'D', GTMachines.HULL[GTValues.UV].asStack(),
-            'E', UnificationEntry(TagPrefix.cableGtQuadruple, GTMaterials.EnrichedNaquadahTriniumEuropiumDuranide)
-        )
+
+
     }
 }

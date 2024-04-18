@@ -7,10 +7,12 @@ import com.tterrag.registrate.builders.ItemBuilder
 import com.tterrag.registrate.util.entry.ItemEntry
 import com.tterrag.registrate.util.nullness.NonNullConsumer
 import com.tterrag.registrate.util.nullness.NonNullFunction
+import dev.arbor.gtnn.GTNNIntegration
 import dev.arbor.gtnn.GTNNRegistries.REGISTRATE
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Rarity
+import net.minecraftforge.fml.loading.FMLLoader
 
 object GTNNItems {
     @Suppress("UNUSED")
@@ -335,6 +337,10 @@ object GTNNItems {
     }
 
     fun init() {
+        if (!GTNNIntegration.isAdAstraLoaded() || !FMLLoader.isProduction()) {
+            COMPUTER
+            COMPUTER_ADVANCED
+        }
     }
 
     private fun <T : Item?> createItem(

@@ -9,8 +9,9 @@ dependencies {
     forge forge.minecraftForge
 
     // kotlin
-    compileOnly "thedarkcolour:kotlinforforge:4.10.0"
-    modImplementation("maven.modrinth:kotlin-for-forge:4.10.0")
+    runtimeOnly "thedarkcolour:kotlinforforge:4.5.0"
+    compileOnly("thedarkcolour:kotlinforforge:4.10.0")
+    include("maven.modrinth:kotlin-for-forge:4.10.0")
 
     // lombok
     compileOnly 'org.projectlombok:lombok:1.18.24'
@@ -80,4 +81,5 @@ dependencies {
     modImplementation("curse.maven:cc-tweaked-282001:5118388")
     forgeRuntimeLibrary("cc.tweaked:cobalt:0.9.1")
     modImplementation("curse.maven:selene-499980:5146536")
+    modImplementation("com.cobblemon:forge:1.4.0+")
 }

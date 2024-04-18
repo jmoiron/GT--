@@ -6,12 +6,16 @@ import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
 
 class SingleLangEntry(private val key: String) {
-    fun get(vararg args: Any): MutableComponent = Component.translatable(key, *args)
+
+    operator fun invoke(vararg args: Any): MutableComponent {
+        return Component.translatable(key, *args)
+    }
+
     fun i18n(vararg args: Any): String = if (LDLib.isRemote()) I18n.get(key, *args) else key
 }
 
 class MultiLangEntry(private val keys: Set<String>) {
-    fun get(vararg args: List<Any>): List<MutableComponent> = keys.mapIndexed { idx, key ->
+    operator fun invoke(vararg args: List<Any>): List<MutableComponent> = keys.mapIndexed { idx, key ->
         Component.translatable(key, *args[idx].toTypedArray())
     }
 

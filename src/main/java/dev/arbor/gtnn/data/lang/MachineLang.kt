@@ -2,14 +2,17 @@ package dev.arbor.gtnn.data.lang
 
 import dev.arbor.gtnn.api.lang.LangGenerators.entry
 import dev.arbor.gtnn.api.lang.LanguageRoot
+import dev.arbor.gtnn.api.lang.SingleLangEntry
 
-
-@LanguageRoot("test")
+@LanguageRoot("gtnn")
 object MachineLang {
-    val TEST by entry("test")
+    val TEST: SingleLangEntry by entry("test")
 
     fun init() {
+        TEST()
+
         machineNames()
+        tsl("block.gtnn.homemade_bedrock_ore_machine", "土制基岩矿机")
         tsl("block.gtnn.neutron_sensor", "中子传感器")
         tsl("block.gtnn.exxonmobil_chemical_plant", "埃克森美孚化工厂")
         tsl("block.gtnn.neutron_activator", "中子活化器")

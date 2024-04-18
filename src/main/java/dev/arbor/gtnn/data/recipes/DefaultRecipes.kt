@@ -4,15 +4,16 @@ import com.gregtechceu.gtceu.api.GTValues
 import com.gregtechceu.gtceu.api.data.chemical.material.stack.UnificationEntry
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix
 import com.gregtechceu.gtceu.api.machine.multiblock.CleanroomType
-import com.gregtechceu.gtceu.common.data.GTBlocks
-import com.gregtechceu.gtceu.common.data.GTItems
-import com.gregtechceu.gtceu.common.data.GTMaterials
-import com.gregtechceu.gtceu.common.data.GTRecipeTypes
+import com.gregtechceu.gtceu.common.data.*
+import com.gregtechceu.gtceu.data.recipe.CustomTags
 import com.gregtechceu.gtceu.data.recipe.VanillaRecipeHelper
+import dev.arbor.gtnn.GTNN
 import dev.arbor.gtnn.GTNNIntegration.isCCTweakedLoaded
 import dev.arbor.gtnn.GTNNIntegration.isSupplementariesLoaded
 import dev.arbor.gtnn.data.GTNNBlocks
 import dev.arbor.gtnn.data.GTNNItems
+import dev.arbor.gtnn.data.GTNNMachines.STONE_BEDROCK_ORE_MACHINE
+import dev.arbor.gtnn.data.GTNNMaterials.Cerrobase140
 import dev.arbor.gtnn.data.GTNNRecipes
 import net.mehvahdjukaar.supplementaries.Supplementaries
 import net.mehvahdjukaar.supplementaries.reg.ModRegistry
@@ -97,6 +98,52 @@ object DefaultRecipes {
 
     object Misc {
         fun init(provider: Consumer<FinishedRecipe>) {
+            if (GTNN.getServerConfig().skyblock) {
+                VanillaRecipeHelper.addShapedRecipe(
+                    provider, "homemade_bedrock_ore_machine", STONE_BEDROCK_ORE_MACHINE.asStack(),
+                    "ABA", "CDC", "AEA",
+                    'A', UnificationEntry(TagPrefix.plate, GTMaterials.WroughtIron),
+                    'B', UnificationEntry(TagPrefix.plate, GTMaterials.Steel),
+                    'C', Items.AMETHYST_SHARD,
+                    'D', GTBlocks.BRONZE_HULL,
+                    'E', UnificationEntry(TagPrefix.toolHeadDrill, GTMaterials.Diamond)
+                )
+                GTRecipeTypes.ASSEMBLER_RECIPES.recipeBuilder("bedrock_ore_machine_i")
+                    .inputItems(GTMachines.HULL[GTValues.MV])
+                    .inputItems(TagPrefix.frameGt, GTMaterials.Aluminium, 4)
+                    .inputItems(CustomTags.MV_CIRCUITS, 4)
+                    .inputItems(GTItems.ELECTRIC_MOTOR_MV, 4)
+                    .inputItems(GTItems.ELECTRIC_PUMP_MV, 4)
+                    .inputItems(TagPrefix.gear, GTMaterials.Steel, 4)
+                    .inputFluids(GTMaterials.SolderingAlloy.getFluid(72))
+                    .outputItems(GTMachines.BEDROCK_ORE_MINER[GTValues.MV])
+                    .circuitMeta(2)
+                    .duration(GTNNRecipes.dur(20.0)).EUt(GTValues.VA[GTValues.MV].toLong()).save(provider)
+                GTRecipeTypes.ASSEMBLER_RECIPES.recipeBuilder("bedrock_ore_machine_ii")
+                    .inputItems(GTMachines.LARGE_MINER[GTValues.EV])
+                    .inputItems(TagPrefix.frameGt, GTMaterials.Titanium, 4)
+                    .inputItems(CustomTags.EV_CIRCUITS, 4)
+                    .inputItems(GTItems.ELECTRIC_MOTOR_EV, 4)
+                    .inputItems(GTItems.ELECTRIC_PUMP_EV, 4)
+                    .inputItems(TagPrefix.gear, GTMaterials.Tungsten, 4)
+                    .inputFluids(GTMaterials.SolderingAlloy.getFluid(144))
+                    .outputItems(GTMachines.BEDROCK_ORE_MINER[GTValues.HV])
+                    .circuitMeta(2)
+                    .duration(GTNNRecipes.dur(60.0)).EUt(GTValues.VA[GTValues.EV].toLong()).save(provider)
+                GTRecipeTypes.ASSEMBLY_LINE_RECIPES.recipeBuilder("bedrock_ore_machine_iii")
+                    .inputItems(GTMachines.LARGE_MINER[GTValues.LuV])
+                    .inputItems(TagPrefix.frameGt, GTMaterials.Tritanium, 9)
+                    .inputItems(TagPrefix.plate, GTMaterials.Europium, 3)
+                    .inputItems(GTItems.ELECTRIC_MOTOR_LuV, 9)
+                    .inputItems(GTItems.EMITTER_LuV, 9)
+                    .inputItems(GTItems.FIELD_GENERATOR_LuV, 9)
+                    .inputItems(TagPrefix.screw, GTMaterials.Europium, 36)
+                    .inputFluids(Cerrobase140.getFluid(1440))
+                    .inputFluids(GTMaterials.Neon.getFluid(20000))
+                    .outputItems(GTMachines.BEDROCK_ORE_MINER[GTValues.EV])
+                    .scannerResearch(GTMachines.LARGE_MINER[GTValues.LuV].asStack())
+                    .duration(GTNNRecipes.dur(300.0)).EUt(GTValues.VA[GTValues.LuV].toLong()).save(provider)
+            }
             if (isSupplementariesLoaded()) {
                 GTRecipeTypes.CHEMICAL_RECIPES.recipeBuilder("bomb")
                     .inputItems(Items.PAPER)
@@ -180,10 +227,10 @@ object DefaultRecipes {
         }
 
         private val computerAdvanced: Supplier<out ItemLike?>
-            get() = if (isCCTweakedLoaded()) dan200.computercraft.shared.ModRegistry.Blocks.COMPUTER_ADVANCED else GTNNItems.COMPUTER_ADVANCED!!
+            get() = if (isCCTweakedLoaded()) dan200.computercraft.shared.ModRegistry.Blocks.COMPUTER_ADVANCED else GTNNItems.COMPUTER_ADVANCED
 
         private val computer: Supplier<out ItemLike?>
-            get() = if (isCCTweakedLoaded()) dan200.computercraft.shared.ModRegistry.Blocks.COMPUTER_NORMAL else GTNNItems.COMPUTER!!
+            get() = if (isCCTweakedLoaded()) dan200.computercraft.shared.ModRegistry.Blocks.COMPUTER_NORMAL else GTNNItems.COMPUTER
 
         fun removeRecipes(consumer: Consumer<ResourceLocation>) {
             consumer.accept(ResourceLocation("minecraft:lightning_rod"))

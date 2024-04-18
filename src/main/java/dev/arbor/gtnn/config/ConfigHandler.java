@@ -27,7 +27,9 @@ public final class ConfigHandler {
         @Configurable
         @Configurable.Comment({"Makes EMI Better", "Default: true"})
         public boolean makesEMIBetter = true;
-
+        @Configurable
+        @Configurable.Comment({"Skyblock Mode", "Default: false"})
+        public boolean skyblock = false;
         ServerConfigs() {
         }
     }

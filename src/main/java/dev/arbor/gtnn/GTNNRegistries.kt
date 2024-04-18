@@ -6,8 +6,10 @@ import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialRegistryEv
 import com.gregtechceu.gtceu.api.data.chemical.material.registry.MaterialRegistry
 import com.gregtechceu.gtceu.api.machine.MachineDefinition
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate
+import dev.arbor.gtnn.api.lang.LangGenerators
 import dev.arbor.gtnn.data.GTNNMachines
 import dev.arbor.gtnn.data.GTNNMaterials
+import dev.arbor.gtnn.data.lang.MachineLang
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.packs.FilePackResources
 import net.minecraft.server.packs.PackResources
@@ -18,7 +20,9 @@ import java.io.IOException
 object GTNNRegistries {
     private lateinit var MATERIAL_REGISTRY: MaterialRegistry
 
-    val REGISTRATE: GTRegistrate by lazy { GTRegistrate.create(GTNN.MODID) }
+    val REGISTRATE: GTRegistrate by lazy {
+        GTRegistrate.create(GTNN.MODID).also(::addAdditionalDataGenerators)
+    }
 
     @JvmStatic
     fun registerMachine(@Suppress("UNUSED_PARAMETER") event: GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition>) {
@@ -52,5 +56,9 @@ object GTNNRegistries {
             }
         }
         return packResources
+    }
+
+    private fun addAdditionalDataGenerators(registrate: GTRegistrate) {
+        LangGenerators.initDatagen(registrate, MachineLang::class)
     }
 }

@@ -82,4 +82,7 @@ repositories {
         url = 'https://thedarkcolour.github.io/KotlinForForge/'
         content { includeGroup "thedarkcolour" }
     }
+    maven {
+        url "https://maven.impactdev.net/repository/development/"
+    }
 }

@@ -2,10 +2,14 @@ package dev.arbor.gtnn.data.recipes
 
 import com.gregtechceu.gtceu.api.GTValues
 import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper
+import com.gregtechceu.gtceu.api.data.chemical.material.stack.UnificationEntry
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix
+import com.gregtechceu.gtceu.common.data.GTItems
 import com.gregtechceu.gtceu.common.data.GTMachines
 import com.gregtechceu.gtceu.common.data.GTMaterials
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes
+import com.gregtechceu.gtceu.data.recipe.CustomTags
+import com.gregtechceu.gtceu.data.recipe.VanillaRecipeHelper
 import dev.arbor.gtnn.block.PlantCasingBlock
 import dev.arbor.gtnn.data.GTNNMachines
 import dev.arbor.gtnn.data.GTNNMaterials
@@ -183,5 +187,38 @@ object RocketFuel {
             .EUt(-GTValues.V[GTValues.EV])
             .duration(6)
             .save(provider)
+        VanillaRecipeHelper.addShapedRecipe(
+            provider, true, "rocket_engine_ev", GTNNMachines.Rocket_Engine[GTValues.EV]!!
+                .asStack(),
+            "ABA", "CDC", "EFE",
+            'A', GTItems.ELECTRIC_PISTON_EV,
+            'B', CustomTags.EV_CIRCUITS,
+            'C', GTItems.ELECTRIC_MOTOR_EV,
+            'D', GTMachines.HULL[GTValues.EV].asStack(),
+            'E', UnificationEntry(TagPrefix.gear, GTMaterials.TungstenSteel),  //todo
+            'F', UnificationEntry(TagPrefix.cableGtDouble, GTMaterials.Aluminium)
+        )
+        VanillaRecipeHelper.addShapedRecipe(
+            provider, true, "rocket_engine_iv", GTNNMachines.Rocket_Engine[GTValues.IV]!!
+                .asStack(),
+            "ABA", "CDC", "EFE",
+            'A', GTItems.ELECTRIC_PISTON_IV,
+            'B', CustomTags.IV_CIRCUITS,
+            'C', GTItems.ELECTRIC_MOTOR_IV,
+            'D', GTMachines.HULL[GTValues.IV].asStack(),
+            'E', UnificationEntry(TagPrefix.gear, GTMaterials.Titanium),  //todo
+            'F', UnificationEntry(TagPrefix.cableGtDouble, GTMaterials.Platinum)
+        )
+        VanillaRecipeHelper.addShapedRecipe(
+            provider, true, "rocket_engine_luv", GTNNMachines.Rocket_Engine[GTValues.LuV]!!
+                .asStack(),
+            "ABA", "CDC", "EFE",
+            'A', GTItems.ELECTRIC_PISTON_LUV,
+            'B', CustomTags.LuV_CIRCUITS,
+            'C', GTItems.ELECTRIC_MOTOR_LuV,
+            'D', GTMachines.HULL[GTValues.LuV].asStack(),
+            'E', UnificationEntry(TagPrefix.gear, GTMaterials.Zeron100),
+            'F', UnificationEntry(TagPrefix.cableGtDouble, GTMaterials.Tungsten)
+        )
     }
 }
