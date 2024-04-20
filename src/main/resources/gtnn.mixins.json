@@ -8,7 +8,7 @@
   "mixins": [
     "create.CreateFanMixin",
     "emi.FluidEmiStackMixin",
-    "gt.BedrockOreMinerLogicMixin",
+    "gt.BedrockOreMinerMachineMixin",
     "gt.FluidStorageMixin",
     "gt.GTOreMixin",
     "gt.GTRecipeTypeMixin",

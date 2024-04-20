@@ -1,4 +1,4 @@
-package dev.arbor.gtnn.data;
+package dev.arbor.gtnn.data
 
 import dev.arbor.gtnn.GTNN.getServerConfig
 import dev.arbor.gtnn.GTNNIntegration.isAdAstraLoaded

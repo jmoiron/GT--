@@ -53,6 +53,7 @@
   "config.gtnn.option.extraHeartRenderer": "Enable extra Heart renderer",
   "config.gtnn.option.killToast": "Disable toast",
   "config.gtnn.option.makesEMIBetter": "Makes EMI Better",
+  "config.gtnn.option.skyblock": "Enable SkyBlock mode",
   "copper_vein_ad": "Copper Vein Ad",
   "desh_vein_ad": "Desh Vein Ad",
   "diamond_vein_tf": "Diamond Vein Tf",

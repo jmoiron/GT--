@@ -7,6 +7,7 @@ import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix
 import com.gregtechceu.gtceu.api.machine.MachineDefinition
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition
+import com.gregtechceu.gtceu.api.machine.SimpleTieredMachine
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern
 import com.gregtechceu.gtceu.api.pattern.MultiblockShapeInfo
@@ -22,11 +23,16 @@ import dev.arbor.gtnn.GTNNRegistries.REGISTRATE
 import dev.arbor.gtnn.api.machine.GTNNGeneratorMachine
 import dev.arbor.gtnn.api.machine.MachineReg
 import dev.arbor.gtnn.api.machine.ModifyMachines
-import dev.arbor.gtnn.api.machine.multiblock.*
+import dev.arbor.gtnn.api.machine.StoneBedrockOreMinerMachine
+import dev.arbor.gtnn.api.machine.multiblock.APartAbility
+import dev.arbor.gtnn.api.machine.multiblock.ChemicalPlantMachine
+import dev.arbor.gtnn.api.machine.multiblock.LargeNaquadahReactorMachine
+import dev.arbor.gtnn.api.machine.multiblock.NeutronActivatorMachine
 import dev.arbor.gtnn.api.machine.multiblock.part.HighSpeedPipeBlock
 import dev.arbor.gtnn.api.machine.multiblock.part.NeutronAcceleratorMachine
 import dev.arbor.gtnn.api.machine.multiblock.part.NeutronSensorMachine
 import dev.arbor.gtnn.api.pattern.APredicates
+import dev.arbor.gtnn.api.tool.StringTools.nn
 import dev.arbor.gtnn.block.BlockTier
 import dev.arbor.gtnn.block.MachineCasingBlock
 import dev.arbor.gtnn.block.PipeBlock
@@ -100,18 +106,17 @@ object GTNNMachines {
 
     val STONE_BEDROCK_ORE_MACHINE: MachineDefinition =
         REGISTRATE.machine("homemade_bedrock_ore_machine", ::StoneBedrockOreMinerMachine)
-            .langValue("Homemade Bedrock Ore Machine")
-            .rotationState(RotationState.ALL)
-            .recipeType(GTNNRecipeTypes.STONE_BEDROCK_ORE_MACHINE_RECIPES)
-            .renderer { MinerRenderer(0, GTCEu.id("block/machines/miner")) }
-            .tooltips(Component.translatable("gtceu.machine.bedrock_ore_miner.description"))
-            .tooltips(
-                Component.translatable(
-                    "gtceu.machine.bedrock_ore_miner.depletion",
-                    FormattingUtil.formatNumbers(100.0)
+            .langValue("Homemade Bedrock Ore Machine").rotationState(RotationState.ALL)
+            .recipeType(GTNNRecipeTypes.STONE_BEDROCK_ORE_MACHINE_RECIPES).editableUI(
+                SimpleTieredMachine.EDITABLE_UI_CREATOR.apply(
+                    "homemade_bedrock_ore_machine".nn(), GTNNRecipeTypes.STONE_BEDROCK_ORE_MACHINE_RECIPES
                 )
-            )
-            .register()
+            ).renderer { MinerRenderer(0, GTCEu.id("block/machines/miner")) }
+            .tooltips(Component.translatable("gtceu.machine.bedrock_ore_miner.description")).tooltips(
+                Component.translatable(
+                    "gtceu.machine.bedrock_ore_miner.depletion", FormattingUtil.formatNumbers(100.0)
+                )
+            ).register()
 
     val CHEMICAL_PLANT: MultiblockMachineDefinition = REGISTRATE.multiblock(
         "exxonmobil_chemical_plant"

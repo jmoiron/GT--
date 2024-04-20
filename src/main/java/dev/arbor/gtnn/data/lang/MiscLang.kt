@@ -1,4 +1,4 @@
-package dev.arbor.gtnn.data.lang;
+package dev.arbor.gtnn.data.lang
 
 object MiscLang {
     fun init() {
@@ -29,6 +29,7 @@ object MiscLang {
         tsl("config.gtnn.option.killToast", "禁用弹窗", "Disable toast")
         tsl("config.gtnn.option.addChatAnimation", "启用聊天动画", "Enable Chat Animation")
         tsl("config.gtnn.option.enableRemakeGTMEMI", "启用重制GTM-EMI支持", "Enable Remake GTM-EMI support")
+        tsl("config.gtnn.option.skyblock", "开启空岛模式", "Enable SkyBlock mode")
     }
 
     private fun blocks() {
