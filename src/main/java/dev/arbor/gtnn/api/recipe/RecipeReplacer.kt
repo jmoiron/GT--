@@ -17,7 +17,7 @@ interface RecipeReplacer {
         for (content in contents) {
             val ing = content.content
             if (ing is Ingredient) {
-                if (ing.getItems().any { itemStack: ItemStack -> itemStack.item === item.item }
+                if (ing.items.any { itemStack: ItemStack -> itemStack.item === item.item }
                 ) {
                     content.content = sizedIngredient
                 }

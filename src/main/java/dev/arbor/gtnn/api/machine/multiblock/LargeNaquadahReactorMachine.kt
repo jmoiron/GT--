@@ -5,13 +5,13 @@ import com.gregtechceu.gtceu.api.capability.recipe.IO
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity
 import com.gregtechceu.gtceu.api.machine.MetaMachine
 import com.gregtechceu.gtceu.api.machine.feature.IExplosionMachine
-import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine
 import com.gregtechceu.gtceu.api.recipe.GTRecipe
 import com.gregtechceu.gtceu.api.recipe.RecipeHelper
 import com.gregtechceu.gtceu.api.recipe.content.Content
 import com.gregtechceu.gtceu.common.data.GTMaterials
 import com.gregtechceu.gtceu.common.machine.multiblock.part.FluidHatchPartMachine
+import com.gregtechceu.gtceu.common.machine.multiblock.primitive.PrimitiveWorkableMachine
 import com.lowdragmc.lowdraglib.side.fluid.FluidStack
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder
@@ -25,7 +25,7 @@ import javax.annotation.ParametersAreNonnullByDefault
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-class LargeNaquadahReactorMachine(holder: IMachineBlockEntity) : WorkableElectricMultiblockMachine(holder),
+class LargeNaquadahReactorMachine(holder: IMachineBlockEntity) : PrimitiveWorkableMachine(holder),
     IExplosionMachine {
     private val activeFluid: Map<Fluid, Int> = mapOf(
         GTMaterials.Caesium.getFluid() to 2,

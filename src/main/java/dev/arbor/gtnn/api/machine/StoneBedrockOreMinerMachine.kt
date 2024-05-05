@@ -2,13 +2,12 @@ package dev.arbor.gtnn.api.machine
 
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity
 import com.gregtechceu.gtceu.api.machine.SimpleTieredMachine
-import com.gregtechceu.gtceu.api.machine.WorkableTieredMachine
 import com.gregtechceu.gtceu.api.machine.trait.NotifiableEnergyContainer
 import com.gregtechceu.gtceu.api.machine.trait.RecipeLogic
 import com.gregtechceu.gtceu.common.data.GTMachines
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder
-import dev.arbor.gtnn.api.recipe.BedrockOreHelper.ALLOW_ITEM
-import dev.arbor.gtnn.api.recipe.BedrockOreMinerLogic
+import dev.arbor.gtnn.api.recipe.GTNNBedrockOreMinerLogic
+import dev.arbor.gtnn.api.recipe.OresHelper.ALLOW_ITEM
 import net.minecraft.world.item.Item
 
 class StoneBedrockOreMinerMachine(holder: IMachineBlockEntity) :
@@ -27,7 +26,7 @@ class StoneBedrockOreMinerMachine(holder: IMachineBlockEntity) :
     }
 
     override fun createRecipeLogic(vararg args: Any?): RecipeLogic {
-        return BedrockOreMinerLogic(this)
+        return GTNNBedrockOreMinerLogic(this)
     }
 
     fun getFilter(): Item? {
@@ -39,6 +38,6 @@ class StoneBedrockOreMinerMachine(holder: IMachineBlockEntity) :
 
     companion object {
         private val MANAGED_FIELD_HOLDER: ManagedFieldHolder =
-            ManagedFieldHolder(StoneBedrockOreMinerMachine::class.java, WorkableTieredMachine.MANAGED_FIELD_HOLDER)
+            ManagedFieldHolder(StoneBedrockOreMinerMachine::class.java, SimpleTieredMachine.MANAGED_FIELD_HOLDER)
     }
 }

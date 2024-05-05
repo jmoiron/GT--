@@ -14,11 +14,7 @@ import net.minecraft.world.item.crafting.Recipe
 
 object OreReplace {
     private val INSTANCE = OreReplace()
-    private val ores = arrayListOf(
-        "dirty_dust_to_dust", "refined_ore_to_dust", "pure_dust_to_dust", "crushed_ore_to_refined_ore",
-        "crushed_ore_to_impure_dust", "crushed_ore_to_purified_ore", "crushed_ore_to_dust", "ore_to_raw_ore",
-        "purified_ore_to_refined_ore"
-    )
+    private val ores = listOf<String>()
 
     class OreReplace : RecipeReplacer
 

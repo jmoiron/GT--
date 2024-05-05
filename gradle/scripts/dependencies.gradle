@@ -76,6 +76,9 @@ dependencies {
     modImplementation("org.arbor:arbormixin:1.0")
     include("org.arbor:arbormixin:1.0")
 
+    // lol
+    modImplementation("curse.maven:gt-985872:5251216")
+
     //others
     modImplementation("curse.maven:supplementaries-412082:5147148")
     modImplementation("curse.maven:cc-tweaked-282001:5118388")

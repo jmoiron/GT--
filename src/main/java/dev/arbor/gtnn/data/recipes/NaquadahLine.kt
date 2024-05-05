@@ -73,7 +73,7 @@ object NaquadahLine {
             .outputItems(TagPrefix.dust, GTMaterials.TriniumSulfide)
             .outputFluids(GTNNMaterials.XenoauricFluoroantimonicAcid.getFluid(1000))
             .EUt(GTValues.VA[GTValues.EV].toLong())
-            .duration(480)
+            .duration(240)
             .save(consumer)
 
         //  Xenoauric Fluoroantimonic Acid Cycle

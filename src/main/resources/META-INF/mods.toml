@@ -7,7 +7,7 @@ license = "MIT"
 modId = "gtnn"
 version = "${version}"
 displayName = "GT--"
-authors = "Arborsm"
+authors = "${mod_authors}"
 description = '''${mod_description}'''
 #logoFile = ""
 

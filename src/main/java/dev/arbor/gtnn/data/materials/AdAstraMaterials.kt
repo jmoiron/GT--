@@ -3,11 +3,14 @@ package dev.arbor.gtnn.data.materials
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.*
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialIconSet.METALLIC
 import com.gregtechceu.gtceu.common.data.GTMaterials.*
+import dev.arbor.gtnn.data.GTNNElement
 import dev.arbor.gtnn.data.GTNNMaterials.*
 
 object AdAstraMaterials {
     fun init() {
-        addOre(Neutronium)
+        addOre(Neutronium, NeutroniumMixture)
+        addOre(NaquadahEnriched, EnrichedNaquadahOxideMixture)
+        addOre(Naquadria, NaquadriaOxideMixture)
         addOre(Perlite)
         addOre(Uvarovite)
         addOre(Andradite)
@@ -27,20 +30,18 @@ object AdAstraMaterials {
         addOre(Rutile)
         addOre(Tungsten)
         addOre(Chromium)
-        addOre(NaquadahEnriched)
-        addOre(Naquadria)
         Desh =
-            Builder("desh").ingot().fluid().ore().color(0xF2A057).secondaryColor(0x2E2F04)
+            Builder("desh").ingot().fluid().ore().color(0xF2A057).secondaryColor(0x2E2F04).element(GTNNElement.Ds)
                 .iconSet(METALLIC).appendFlags(
                     EXT2_METAL, GENERATE_ROTOR, GENERATE_DENSE, GENERATE_SMALL_GEAR
                 ).buildAndRegister()
         Ostrum =
-            Builder("ostrum").ingot().fluid().ore().color(0xE5939B).secondaryColor(0x2F0425)
+            Builder("ostrum").ingot().fluid().ore().color(0xE5939B).secondaryColor(0x2F0425).element(GTNNElement.Ot)
                 .iconSet(METALLIC).appendFlags(
                     EXT2_METAL, GENERATE_ROTOR, GENERATE_DENSE, GENERATE_SMALL_GEAR
                 ).buildAndRegister()
         Calorite =
-            Builder("calorite").ingot().fluid().ore().color(0xE65757).secondaryColor(0x2F0506)
+            Builder("calorite").ingot().fluid().ore().color(0xE65757).secondaryColor(0x2F0506).element(GTNNElement.Ct)
                 .iconSet(METALLIC).appendFlags(
                     EXT2_METAL, GENERATE_ROTOR, GENERATE_DENSE, GENERATE_SMALL_GEAR
                 ).buildAndRegister()

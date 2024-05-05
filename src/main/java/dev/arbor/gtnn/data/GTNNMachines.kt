@@ -9,14 +9,13 @@ import com.gregtechceu.gtceu.api.machine.MachineDefinition
 import com.gregtechceu.gtceu.api.machine.MultiblockMachineDefinition
 import com.gregtechceu.gtceu.api.machine.SimpleTieredMachine
 import com.gregtechceu.gtceu.api.machine.multiblock.PartAbility
+import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine
 import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern
 import com.gregtechceu.gtceu.api.pattern.MultiblockShapeInfo
 import com.gregtechceu.gtceu.api.pattern.Predicates.*
 import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection
 import com.gregtechceu.gtceu.client.renderer.machine.MinerRenderer
-import com.gregtechceu.gtceu.common.data.GTBlocks
-import com.gregtechceu.gtceu.common.data.GTMachines
-import com.gregtechceu.gtceu.common.data.GTMaterials
+import com.gregtechceu.gtceu.common.data.*
 import com.gregtechceu.gtceu.utils.FormattingUtil
 import dev.arbor.gtnn.GTNN
 import dev.arbor.gtnn.GTNNRegistries.REGISTRATE
@@ -32,6 +31,7 @@ import dev.arbor.gtnn.api.machine.multiblock.part.HighSpeedPipeBlock
 import dev.arbor.gtnn.api.machine.multiblock.part.NeutronAcceleratorMachine
 import dev.arbor.gtnn.api.machine.multiblock.part.NeutronSensorMachine
 import dev.arbor.gtnn.api.pattern.APredicates
+import dev.arbor.gtnn.api.tool.StringTools.gt
 import dev.arbor.gtnn.api.tool.StringTools.nn
 import dev.arbor.gtnn.block.BlockTier
 import dev.arbor.gtnn.block.MachineCasingBlock
@@ -242,6 +242,32 @@ object GTNNMachines {
                 GTNN.id("block/multiblock/neutron_activator"),
                 false
             ).register()
+
+    val LARGE_DEHYDRATOR: MultiblockMachineDefinition =
+        REGISTRATE.multiblock("neutron_activator") { WorkableElectricMultiblockMachine(it) }
+            .rotationState(RotationState.NON_Y_AXIS)
+            .recipeTypes(GTNNRecipeTypes.DEHYDRATOR_RECIPES)
+            .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH)
+            .appearanceBlock(GCyMBlocks.CASING_HIGH_TEMPERATURE_SMELTING)
+            .pattern { definition ->
+                FactoryBlockPattern.start()
+                    .aisle("XXX", "CCC", "CCC", "CCC", "XXX")
+                    .aisle("XXX", "C#C", "C#C", "C#C", "XXX")
+                    .aisle("XSX", "CCC", "CCC", "CCC", "XXX")
+                    .where('S', controller(blocks(definition.block)))
+                    .where(
+                        'X', blocks(GCyMBlocks.CASING_HIGH_TEMPERATURE_SMELTING.get()).setMinGlobalLimited(9)
+                            .or(autoAbilities(*definition.recipeTypes))
+                            .or(autoAbilities(true, false, true))
+                    )
+                    .where('C', blocks(GTBlocks.COIL_NAQUADAH.get()))
+                    .where('#', air())
+                    .build()
+            }.workableCasingRenderer(
+                "block/casings/gcym/high_temperature_smelting_casing".gt(),
+                "block/multiblock/gcym/large_assembler".gt(), false
+            )
+            .register()
 
 
     val LargeNaquadahReactor: MultiblockMachineDefinition =

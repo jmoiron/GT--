@@ -6,20 +6,46 @@ import com.gregtechceu.gtceu.api.data.chemical.material.Material
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix
 import com.gregtechceu.gtceu.api.data.worldgen.GTOreDefinition
 import com.gregtechceu.gtceu.api.registry.GTRegistries.ORE_VEINS
+import com.gregtechceu.gtceu.common.data.GTMaterials.*
 import com.mojang.datafixers.util.Either
+import dev.arbor.gtnn.GTNN.getServerConfig
+import dev.arbor.gtnn.api.recipe.GTNNBedrockOreMinerLogic.Companion.DURATION
+import dev.arbor.gtnn.data.GTNNMaterials.*
+import dev.arbor.gtnn.data.GTNNRecipeTypes
+import net.minecraft.data.recipes.FinishedRecipe
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
+import java.util.function.Consumer
 
-object BedrockOreHelper {
-
+object OresHelper {
+    @JvmField
+    val ORE_REPLACEMENTS: MutableMap<Material, Material> = mutableMapOf(Neutronium to NeutroniumMixture)
     private val ores: List<Pair<Set<ResourceKey<Level>>, Pair<Int, Pair<List<Int>, List<ItemStack>>>>>
     val ORES_WEIGHTED: List<Pair<Set<ResourceKey<Level>>, Pair<Int, ItemStack>>>
+    private val ORES_CLEAN: Map<ResourceKey<Level>, List<Pair<Int, ItemStack>>>
     val ALLOW_ITEM: List<Item>
 
     init {
+        if (getServerConfig().enableHarderNaquadahLine) {
+            ORE_REPLACEMENTS.putAll(
+                listOf(
+                    Naquadah to NaquadahOxideMixture,
+                    NaquadahEnriched to EnrichedNaquadahOxideMixture,
+                    Naquadria to NaquadriaOxideMixture
+                )
+            )
+        }
+        if (getServerConfig().enableHarderPlatinumLine) {
+            ORE_REPLACEMENTS.putAll(
+                listOf(
+                    Platinum to PlatinumMetal,
+                    Palladium to PalladiumMetal
+                )
+            )
+        }
         ores = ORE_VEINS.map {
             it.dimensionFilter() to (it.weight() to (getChance(it) to getContainedOresAndBlocks(it)))
         }
@@ -30,6 +56,13 @@ object BedrockOreHelper {
             chances.zip(ores) { chance, ore ->
                 Pair(dimensions, weight * chance to ore)
             }
+        }
+        ORES_CLEAN = ORES_WEIGHTED.flatMap { weightedPair ->
+            weightedPair.first.map { resourceKey ->
+                resourceKey to weightedPair.second
+            }
+        }.groupBy(keySelector = { it.first }, valueTransform = { it.second }).mapValues { (_, value) ->
+            value.toList()
         }
         ALLOW_ITEM = ORES_WEIGHTED.map { it.second.second.item }
     }
@@ -70,5 +103,23 @@ object BedrockOreHelper {
         if (tier == GTValues.HV) return 32
         if (tier == GTValues.EV) return 64
         return 1
+    }
+
+    fun saveRecipe(consumer: Consumer<FinishedRecipe>) {
+        val levels = ORES_CLEAN.keys
+        for (level in levels) {
+            val recipeBuilder =
+                GTNNRecipeTypes.STONE_BEDROCK_ORE_MACHINE_RECIPES.recipeBuilder("void_ores_" + level.location().path)
+            val sum = ORES_CLEAN[level]!!.sumOf { it.first }
+            for (ore in ORES_CLEAN[level]!!) {
+                val chance = ore.first * 10000 / sum
+                val stack = ItemStack(ore.second.item, 1)
+                if (stack.isEmpty) continue
+                recipeBuilder.chancedOutput(stack, chance, 0)
+            }
+            recipeBuilder.dimension(level.location())
+            recipeBuilder.duration(DURATION)
+            recipeBuilder.save(consumer)
+        }
     }
 }

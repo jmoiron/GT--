@@ -247,7 +247,7 @@ class NeutronActivatorMachine(holder: IMachineBlockEntity, vararg args: Any) : W
         val container = WidgetGroup(4, 4, 170, 129)
         container.addWidget(
             DraggableScrollableWidgetGroup(4, 4, 162, 121).setBackground(screenTexture)
-                .addWidget(LabelWidget(4, 5, self().blockState.block.getDescriptionId())).addWidget(
+                .addWidget(LabelWidget(4, 5, self().blockState.block.descriptionId)).addWidget(
                     ComponentPanelWidget(4, 17, this::addDisplayText).setMaxWidthLimit(150)
                         .clickHandler(this::handleDisplayClick)
                 )
@@ -266,7 +266,8 @@ class NeutronActivatorMachine(holder: IMachineBlockEntity, vararg args: Any) : W
     }
 
     override fun getSubTabs(): List<IFancyUIProvider> {
-        return getParts().filter { e -> e !is HighSpeedPipeBlock }.filter(IFancyUIProvider::class.java::isInstance)
+        return getParts().filter { e -> e !is HighSpeedPipeBlock }
+            .filter(IFancyUIProvider::class.java::isInstance)
             .map(IFancyUIProvider::class.java::cast)
     }
 

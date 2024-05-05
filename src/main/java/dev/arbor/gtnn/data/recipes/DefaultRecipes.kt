@@ -10,6 +10,7 @@ import com.gregtechceu.gtceu.data.recipe.VanillaRecipeHelper
 import dev.arbor.gtnn.GTNN
 import dev.arbor.gtnn.GTNNIntegration.isCCTweakedLoaded
 import dev.arbor.gtnn.GTNNIntegration.isSupplementariesLoaded
+import dev.arbor.gtnn.api.recipe.OresHelper
 import dev.arbor.gtnn.data.GTNNBlocks
 import dev.arbor.gtnn.data.GTNNItems
 import dev.arbor.gtnn.data.GTNNMachines.STONE_BEDROCK_ORE_MACHINE
@@ -30,6 +31,7 @@ object DefaultRecipes {
     fun init(provider: Consumer<FinishedRecipe>) {
         Misc.init(provider)
         SelfRecipes.init(provider)
+        OresHelper.saveRecipe(provider)
         GTRecipeTypes.CHEMICAL_RECIPES.recipeBuilder("itnt")
             .inputItems(GTItems.GELLED_TOLUENE.asStack(4))
             .inputFluids(GTMaterials.NitrationMixture.getFluid(200))

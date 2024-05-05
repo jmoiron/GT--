@@ -30,8 +30,8 @@ dependencyResolutionManagement {
         def ad_astra_version = "1.15.18"
         def resourcefullib_version = "2.1.23"
         def resourcefulconfig_version = "2.1.2"
-        def gtmVersion = "1.2.0"
-        def ldLibVersion = "1.0.25.c"
+        def gtmVersion = "1.2.1"
+        def ldLibVersion = "1.0.25.g"
         def shimmerVersion = "0.2.4"
 
         // Libs

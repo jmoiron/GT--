@@ -10,10 +10,12 @@
     "emi.FluidEmiStackMixin",
     "gt.BedrockOreMinerMachineMixin",
     "gt.FluidStorageMixin",
+    "gt.GTOreByProductMixin",
     "gt.GTOreMixin",
     "gt.GTRecipeTypeMixin",
     "gt.MaterialBuilderMixin",
     "gt.MaterialMixin",
+    "gt.OreRecipeHandlerMixin",
     "mc.MinecraftServerMixin",
     "mc.RecipeManagerMixin",
     "mc.WorldLoaderPackConfigMixin"

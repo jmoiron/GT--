@@ -6,9 +6,9 @@ import com.gregtechceu.gtceu.api.capability.recipe.FluidRecipeCapability
 import com.gregtechceu.gtceu.api.capability.recipe.ItemRecipeCapability
 import com.gregtechceu.gtceu.api.data.RotationState
 import com.gregtechceu.gtceu.api.machine.*
-import com.gregtechceu.gtceu.api.recipe.GTRecipe
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType
 import com.gregtechceu.gtceu.api.recipe.OverclockingLogic
+import com.gregtechceu.gtceu.api.recipe.modifier.RecipeModifier
 import com.gregtechceu.gtceu.api.registry.registrate.MachineBuilder
 import com.gregtechceu.gtceu.client.renderer.machine.SimpleGeneratorMachineRenderer
 import com.gregtechceu.gtceu.common.data.GTMachines
@@ -63,7 +63,7 @@ object MachineReg {
     fun registerGTNNGeneratorMachines(
         name: String,
         recipeType: GTRecipeType,
-        recipeModifier: BiFunction<MetaMachine, GTRecipe, GTRecipe?>,
+        recipeModifier: RecipeModifier,
         tankScalingFunction: Int2LongFunction,
         tiers: IntArray
     ): Array<MachineDefinition?> {

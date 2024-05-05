@@ -190,6 +190,7 @@ class ExtraHeartRenderHandler {
         event.isCanceled = true
         RenderSystem.disableBlend()
         mc.profiler.pop()
+        @Suppress("UnstableApiUsage")
         MinecraftForge.EVENT_BUS.post(
             RenderGuiOverlayEvent.Post(
                 event.window, guiGraphics, event.partialTick, VanillaGuiOverlay.PLAYER_HEALTH.type()

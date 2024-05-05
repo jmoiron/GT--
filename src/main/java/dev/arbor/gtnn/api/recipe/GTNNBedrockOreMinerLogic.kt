@@ -9,16 +9,16 @@ import com.gregtechceu.gtceu.api.recipe.content.ContentModifier
 import com.gregtechceu.gtceu.common.machine.multiblock.electric.BedrockOreMinerMachine
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder
 import dev.arbor.gtnn.api.machine.StoneBedrockOreMinerMachine
-import dev.arbor.gtnn.api.recipe.BedrockOreHelper.ORES_WEIGHTED
+import dev.arbor.gtnn.api.recipe.OresHelper.ORES_WEIGHTED
 import dev.arbor.gtnn.api.tool.StringTools.nn
 import dev.arbor.gtnn.data.GTNNRecipeTypes
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.item.ItemStack
 import net.minecraftforge.fml.loading.FMLLoader
 
-class BedrockOreMinerLogic<T : IRecipeLogicMachine>(machine: T) : RecipeLogic(machine) {
+class GTNNBedrockOreMinerLogic<T : IRecipeLogicMachine>(machine: T) : RecipeLogic(machine) {
     companion object {
-        private val DURATION: Int = if (FMLLoader.isProduction()) 20 else 1
+        val DURATION: Int = if (FMLLoader.isProduction()) 20 else 1
     }
 
     private var veinOres: List<Pair<Int, ItemStack>>? = null
@@ -28,7 +28,7 @@ class BedrockOreMinerLogic<T : IRecipeLogicMachine>(machine: T) : RecipeLogic(ma
         if (level is ServerLevel) {
             lastRecipe = null
             ORES_WEIGHTED.filter { it.first.contains(level.dimension()) }.map { it.second }.let { veinOres = it }
-            val match = getOreMinerRecipe()
+            val match: GTRecipe? = getOreMinerRecipe()
             if (match != null) {
                 val copied = match.copy(ContentModifier(match.duration.toDouble(), 0.0))
                 if (match.matchRecipe(this.machine).isSuccess && copied.matchTickRecipe(this.machine).isSuccess) {
@@ -42,12 +42,12 @@ class BedrockOreMinerLogic<T : IRecipeLogicMachine>(machine: T) : RecipeLogic(ma
         val machine = getMachine()
         val level = machine.level
         if (level is ServerLevel && veinOres != null && machine is IRecipeLogicMachine) {
-            val stack = veinOres!![BedrockOreHelper.getRandomItem(veinOres!!, veinOres!!.size)].second
+            val stack = veinOres!![OresHelper.getRandomItem(veinOres!!, veinOres!!.size)].second
             if (stack.isEmpty) return null
             var amount = 1
             val recipe: GTRecipe
             if (machine is BedrockOreMinerMachine) {
-                amount = BedrockOreHelper.getRigMultiplier(machine.tier)
+                amount = OresHelper.getRigMultiplier(machine.tier)
                 if (machine.overclockTier > machine.tier) {
                     amount *= 3 / 2
                 }

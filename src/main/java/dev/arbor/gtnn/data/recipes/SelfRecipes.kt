@@ -341,6 +341,16 @@ object SelfRecipes {
     }
 
     private fun machineRecipes(provider: Consumer<FinishedRecipe>) {
+        GTRecipeTypes.ASSEMBLER_RECIPES.recipeBuilder("large_naquadah_reactor_casing")
+            .inputItems(GCyMBlocks.CASING_HIGH_TEMPERATURE_SMELTING.asItem())
+            .inputItems(TagPrefix.wireGtHex, GTMaterials.IndiumTinBariumTitaniumCuprate, 4)
+            .inputItems(GTItems.BATTERY_LUV_VANADIUM.asStack(1))
+            .inputItems(GTItems.ROBOT_ARM_EV.asStack(4))
+            .inputItems(TagPrefix.plate, GTMaterials.Zeron100, 8)
+            .inputItems(CustomTags.IV_CIRCUITS, 8)
+            .inputFluids(GTMaterials.Zeron100.getFluid(2880))
+            .outputItems(GTNNMachines.LARGE_DEHYDRATOR)
+            .EUt(GTValues.VA[GTValues.LuV].toLong()).duration(GTNNRecipes.dur(120.0)).save(provider)
         GTRecipeTypes.ASSEMBLY_LINE_RECIPES.recipeBuilder("large_naquadah_reactor")
             .inputItems(TagPrefix.frameGt, GTMaterials.Neutronium, 8)
             .inputItems(GTNNItems.PlateRadiationProtection.asStack(16))

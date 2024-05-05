@@ -24,12 +24,11 @@ class GTNNGeneratorMachine(
         fun nonParallel(machine: MetaMachine, recipe: GTRecipe): GTRecipe? {
             if (machine is GTNNGeneratorMachine) {
                 val eut = RecipeHelper.getOutputEUt(recipe)
-                val recipeModifier = recipe.copy()
+                val recipeModified = recipe.copy()
                 RecipeHelper.setOutputEUt(
-                    recipeModifier, eut * machine.efficiency / 100
-
+                    recipeModified, eut * machine.efficiency / 100
                 )
-                return recipeModifier
+                return recipeModified
             }
             return null
         }

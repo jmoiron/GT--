@@ -2,13 +2,16 @@ package dev.arbor.gtnn.data.materials
 
 import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.*
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.BlastProperty
+import com.gregtechceu.gtceu.api.data.chemical.material.properties.OreProperty
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.WireProperties
 import com.gregtechceu.gtceu.common.data.GTMaterials.*
+import dev.arbor.gtnn.GTNN.getServerConfig
 import dev.arbor.gtnn.data.GTNNMaterials.*
 
 object AdjustGTMaterials {
     fun init() {
+        adjustOres()
         Neutronium.setProperty(
             PropertyKey.BLAST,
             BlastProperty(9000, BlastProperty.GasTier.HIGHEST, 491250, 144 * 20)
@@ -41,5 +44,29 @@ object AdjustGTMaterials {
         addFluid(Caesium)
         addFluid(AmmoniumChloride)
         addDust(Praseodymium)
+    }
+
+    private fun adjustOres() {
+        if (getServerConfig().enableHarderPlatinumLine) {
+            var oreProp: OreProperty = Nickel.getProperty(PropertyKey.ORE)
+            oreProp.oreByProducts.clear()
+            oreProp.setOreByProducts(Cobalt, Iron, PlatinumMetal)
+
+            oreProp = Cooperite.getProperty(PropertyKey.ORE)
+            oreProp.oreByProducts.clear()
+            oreProp.setOreByProducts(Nickel, Nickel, Cobalt, PalladiumMetal)
+
+            oreProp = Platinum.getProperty(PropertyKey.ORE)
+            oreProp.oreByProducts.clear()
+            oreProp.setOreByProducts(Nickel, Nickel, Cobalt, PalladiumMetal)
+            oreProp.directSmeltResult = PlatinumMetal
+        }
+        if (getServerConfig().enableHarderNaquadahLine) {
+            val oreProp = Naquadah.getProperty(PropertyKey.ORE)
+            oreProp.oreByProducts.clear()
+            oreProp.setOreByProducts(Sulfur, Barite, EnrichedNaquadahOxideMixture)
+            oreProp.separatedInto.clear()
+            oreProp.setSeparatedInto(EnrichedNaquadahOxideMixture)
+        }
     }
 }

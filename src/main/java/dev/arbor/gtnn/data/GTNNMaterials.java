@@ -136,7 +136,6 @@ public class GTNNMaterials extends Material {
     }
 
     public static void init() {
-        AdjustGTMaterials.INSTANCE.init();
         FirstMaterials.INSTANCE.init();
         SecondMaterials.INSTANCE.init();
         BrineChain.INSTANCE.init();
@@ -145,6 +144,7 @@ public class GTNNMaterials extends Material {
         if (GTNNIntegration.INSTANCE.isAdAstraLoaded()) AdAstraMaterials.INSTANCE.init();
         if (GTNNIntegration.INSTANCE.isBotaniaLoaded()) BotaniaMaterials.INSTANCE.init();
         if (GTNNIntegration.INSTANCE.isCreateLoaded()) CreateMaterials.INSTANCE.init();
+        AdjustGTMaterials.INSTANCE.init();
     }
 
     public static void addDust(Material material) {
@@ -161,8 +161,14 @@ public class GTNNMaterials extends Material {
         material.getProperty(PropertyKey.FLUID).getStorage().enqueueRegistration(FluidStorageKeys.GAS, new FluidBuilder());
     }
 
-    public static void addOre(Material material){
-        material.setProperty(PropertyKey.ORE, new OreProperty());
+    public static void addOre(Material... materials) {
+        materials[0].setProperty(PropertyKey.ORE, new OreProperty());
+        if (materials.length == 2) {
+            var oreProperty = materials[0].getProperty(PropertyKey.ORE);
+            oreProperty.setDirectSmeltResult(materials[1]);
+            oreProperty.setOreByProducts(materials[1]);
+            oreProperty.setSeparatedInto(materials[1]);
+        }
     }
 
     public static GTNNBuilder Builder(String id) {
