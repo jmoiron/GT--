@@ -3,7 +3,7 @@ name: auto-build
 on:
   push:
     branches:
-      - 'kotlin'
+      - 'releases'
 
 jobs:
   build:
@@ -43,5 +43,6 @@ jobs:
         with:
           github-tag: ${{ steps.var.outputs.version }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          version-type: release
           files: |
-            build/libs/!(*-@(dev|sources|javadoc|dev-shadow)).jar
+            build/libs/*
