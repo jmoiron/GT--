@@ -10,8 +10,8 @@ object MachineLang {
 
     fun init() {
         TEST()
-
         machineNames()
+        tsl("block.gtnn.large_dehydrator", "大型脱水机")
         tsl("block.gtnn.homemade_bedrock_ore_machine", "土制基岩矿机")
         tsl("block.gtnn.neutron_sensor", "中子传感器")
         tsl("block.gtnn.exxonmobil_chemical_plant", "埃克森美孚化工厂")

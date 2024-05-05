@@ -244,7 +244,7 @@ object GTNNMachines {
             ).register()
 
     val LARGE_DEHYDRATOR: MultiblockMachineDefinition =
-        REGISTRATE.multiblock("neutron_activator") { WorkableElectricMultiblockMachine(it) }
+        REGISTRATE.multiblock("large_dehydrator") { WorkableElectricMultiblockMachine(it) }
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeTypes(GTNNRecipeTypes.DEHYDRATOR_RECIPES)
             .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH)
