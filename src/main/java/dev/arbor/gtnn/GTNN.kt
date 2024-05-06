@@ -34,6 +34,7 @@ object GTNN {
     fun genericListener(modBus: IEventBus) {
         modBus.addGenericListener(MachineDefinition::class.java, GTNNRegistries::registerMachine)
     }
+
     @JvmStatic
     fun register(modBus: IEventBus) {
         modBus.addListener(GTNNRegistries::registerMaterials)

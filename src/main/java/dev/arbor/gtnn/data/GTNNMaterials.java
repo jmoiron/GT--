@@ -152,18 +152,22 @@ public class GTNNMaterials extends Material {
     }
 
     public static void addFluid(Material material){
-        material.setProperty(PropertyKey.FLUID, new FluidProperty());
+        if (!material.hasProperty(PropertyKey.FLUID)) {
+            material.setProperty(PropertyKey.FLUID, new FluidProperty());
+        }
         material.getProperty(PropertyKey.FLUID).getStorage().enqueueRegistration(FluidStorageKeys.LIQUID, new FluidBuilder());
     }
 
     public static void addGas(Material material) {
-        material.setProperty(PropertyKey.FLUID, new FluidProperty());
+        if (!material.hasProperty(PropertyKey.FLUID)) {
+            material.setProperty(PropertyKey.FLUID, new FluidProperty());
+        }
         material.getProperty(PropertyKey.FLUID).getStorage().enqueueRegistration(FluidStorageKeys.GAS, new FluidBuilder());
     }
 
     public static void addOre(Material... materials) {
         materials[0].setProperty(PropertyKey.ORE, new OreProperty());
-        if (materials.length == 2) {
+        if (materials.length == 2 && materials[1] != null) {
             var oreProperty = materials[0].getProperty(PropertyKey.ORE);
             oreProperty.setDirectSmeltResult(materials[1]);
             oreProperty.setOreByProducts(materials[1]);
