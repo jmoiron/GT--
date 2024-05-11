@@ -9,7 +9,7 @@ dependencies {
     forge forge.minecraftForge
 
     // kotlin
-    runtimeOnly "thedarkcolour:kotlinforforge:4.5.0"
+    runtimeOnly "thedarkcolour:kotlinforforge:4.10.0"
     compileOnly("thedarkcolour:kotlinforforge:4.10.0")
     include("maven.modrinth:kotlin-for-forge:4.10.0")
 

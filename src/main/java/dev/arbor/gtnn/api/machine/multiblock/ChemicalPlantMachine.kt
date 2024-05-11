@@ -101,8 +101,8 @@ class ChemicalPlantMachine(holder: IMachineBlockEntity) : CoilWorkableElectricMu
                 val maxParallel = 1 + 2 * machine.getPipeTier()
                 val parallelLimit = maxParallel.coerceAtMost(machine.getMaxVoltage().toInt())
                 val result = GTRecipeModifiers.accurateParallel(machine, recipe, parallelLimit, false)
-                val recipe2 = if (result.a == recipe) result.a.copy() else result.a
-                val parallelValue = result.b
+                val recipe2 = if (result.first == recipe) result.first.copy() else result.first
+                val parallelValue = result.second
                 recipe.duration = 1.coerceAtLeast(256 * parallelValue / maxParallel)
                 recipe.tickInputs[EURecipeCapability.CAP] =
                     listOf(Content(parallelValue.toLong(), 1.0f, 0.0f, null, null))

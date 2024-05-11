@@ -1,6 +1,7 @@
 package dev.arbor.gtnn.data
 
 import com.gregtechceu.gtceu.GTCEu
+import com.gregtechceu.gtceu.api.GTCEuAPI
 import com.gregtechceu.gtceu.api.GTValues.*
 import com.gregtechceu.gtceu.api.data.RotationState
 import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper
@@ -163,9 +164,9 @@ object GTNNMachines {
                 shapeBlock[machineCasing.getMachineCasingTier() + 20] =
                     machineCasing.getMachineCasing(machineCasing.getMachineCasingTier()).defaultState
             }
-            for (coil in GTBlocks.ALL_COILS.keys) {
+            for (coil in GTCEuAPI.HEATING_COILS.keys) {
                 shapeBlock[coil.tier + 30] =
-                    GTBlocks.ALL_COILS[coil]?.get()?.defaultBlockState() ?: Blocks.AIR.defaultBlockState()
+                    GTCEuAPI.HEATING_COILS[coil]?.get()?.defaultBlockState() ?: Blocks.AIR.defaultBlockState()
             }
             for (pipe in PipeBlock.Pipe.values()) {
                 shapeBlock[pipe.getPipeTier() + 40] = pipe.getPipe(pipe.getPipeTier()).defaultState

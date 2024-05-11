@@ -33,7 +33,7 @@ object ModifyMachines {
         largeAssembler.setRecipeModifier(::assemblyRecipeModifier)
     }
 
-    private fun assemblyRecipeModifier(machine: MetaMachine, gtRecipe: GTRecipe): GTRecipe {
+    private fun assemblyRecipeModifier(machine: MetaMachine, gtRecipe: GTRecipe): GTRecipe? {
         return if (gtRecipe.recipeType == GTNNRecipeTypes.PRECISION_ASSEMBLY_RECIPES) {
             GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK).apply(machine, gtRecipe)
         } else {
