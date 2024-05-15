@@ -301,32 +301,9 @@ object GTNNItems {
         )
     }.lang("Radiation Protection Plate").register()
 
-    val COMPUTER: ItemEntry<ComponentItem> by lazy {
-        createItem(
-            "computer_circuit"
-        ) { properties: Item.Properties ->
-            ComponentItem.create(
-                properties
-            )
-        }.lang("Computer Chip").properties { p: Item.Properties ->
-            p.rarity(
-                Rarity.UNCOMMON
-            )
-        }.register()
-    }
-    val COMPUTER_ADVANCED: ItemEntry<ComponentItem> by lazy {
-        createItem(
-            "computer_advanced_circuit"
-        ) { properties: Item.Properties ->
-            ComponentItem.create(
-                properties
-            )
-        }.lang("Advanced Computer Chip").properties { p: Item.Properties ->
-            p.rarity(
-                Rarity.RARE
-            )
-        }.register()
-    }
+    lateinit var COMPUTER: ItemEntry<ComponentItem>
+
+    lateinit var COMPUTER_ADVANCED: ItemEntry<ComponentItem>
 
     private fun attach(components: TooltipBehavior): NonNullConsumer<in ComponentItem> {
         return NonNullConsumer { item: ComponentItem ->
@@ -338,8 +315,29 @@ object GTNNItems {
 
     fun init() {
         if (!GTNNIntegration.isAdAstraLoaded() || !FMLLoader.isProduction()) {
-            COMPUTER
-            COMPUTER_ADVANCED
+            COMPUTER = createItem(
+                "computer_circuit"
+            ) { properties: Item.Properties ->
+                ComponentItem.create(
+                    properties
+                )
+            }.lang("Computer Chip").properties { p: Item.Properties ->
+                p.rarity(
+                    Rarity.UNCOMMON
+                )
+            }.register()
+
+            COMPUTER_ADVANCED = createItem(
+                "computer_advanced_circuit"
+            ) { properties: Item.Properties ->
+                ComponentItem.create(
+                    properties
+                )
+            }.lang("Advanced Computer Chip").properties { p: Item.Properties ->
+                p.rarity(
+                    Rarity.RARE
+                )
+            }.register()
         }
     }
 
