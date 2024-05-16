@@ -16,20 +16,35 @@ public final class ConfigHandler {
 
     public static class ServerConfigs {
         @Configurable
+        @Configurable.Synchronized
         @Configurable.Comment({"Enable Harder Platinum Line", "Default: true"})
         public boolean enableHarderPlatinumLine = true;
         @Configurable
+        @Configurable.Synchronized
         @Configurable.Comment({"Enable Harder Naquadah Line", "Default: true"})
         public boolean enableHarderNaquadahLine = true;
         @Configurable
+        @Configurable.Synchronized
         @Configurable.Comment({"Ban Create Fan Blasting", "Default: false"})
         public boolean banCreateFanBlasting = false;
         @Configurable
+        @Configurable.Synchronized
         @Configurable.Comment({"Makes EMI Better", "Default: true"})
         public boolean makesEMIBetter = true;
         @Configurable
+        @Configurable.Synchronized
         @Configurable.Comment({"Skyblock Mode", "Default: false"})
         public boolean skyblock = false;
+        @Configurable
+        @Configurable.Synchronized
+        @Configurable.DecimalRange(min = 0F, max = 10.0F)
+        @Configurable.Comment({"GT Ores Generated Size Multiplier", "Default: 1.0F"})
+        public float gtOresMultiplyNum = 1.0F;
+        @Configurable
+        @Configurable.Synchronized
+        @Configurable.Range(min = 1, max = 10)
+        @Configurable.Comment({"* Times OreVeins in One Chunk", "Default: 1"})
+        public int timesOreVeins = 1;
         ServerConfigs() {
         }
     }

@@ -30,6 +30,8 @@ object MiscLang {
         tsl("config.gtnn.option.addChatAnimation", "启用聊天动画", "Enable Chat Animation")
         tsl("config.gtnn.option.enableRemakeGTMEMI", "启用重制GTM-EMI支持", "Enable Remake GTM-EMI support")
         tsl("config.gtnn.option.skyblock", "开启空岛模式", "Enable SkyBlock mode")
+        tsl("config.gtnn.option.gtOresMultiplyNum", "GT矿脉大小倍数", "GT OreVeins Size Multiplier")
+        tsl("config.gtnn.option.timesOreVeins", "单区块GT矿脉生成数量", "GT OreVeins Num Per Chunk")
     }
 
     private fun blocks() {
