@@ -85,4 +85,6 @@ dependencies {
     forgeRuntimeLibrary("cc.tweaked:cobalt:0.9.1")
     modImplementation("curse.maven:selene-499980:5146536")
     modImplementation("com.cobblemon:forge:1.4.0+")
+    modRuntimeOnly("curse.maven:observable-509575:5080064")
+    modRuntimeOnly("curse.maven:architectury-api-419699:5137938")
 }

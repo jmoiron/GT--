@@ -5,13 +5,13 @@ import com.gregtechceu.gtceu.api.capability.recipe.IO
 import com.gregtechceu.gtceu.api.machine.IMachineBlockEntity
 import com.gregtechceu.gtceu.api.machine.MetaMachine
 import com.gregtechceu.gtceu.api.machine.feature.IExplosionMachine
+import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMachine
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine
 import com.gregtechceu.gtceu.api.recipe.GTRecipe
 import com.gregtechceu.gtceu.api.recipe.RecipeHelper
 import com.gregtechceu.gtceu.api.recipe.content.Content
 import com.gregtechceu.gtceu.common.data.GTMaterials
 import com.gregtechceu.gtceu.common.machine.multiblock.part.FluidHatchPartMachine
-import com.gregtechceu.gtceu.common.machine.multiblock.primitive.PrimitiveWorkableMachine
 import com.lowdragmc.lowdraglib.side.fluid.FluidStack
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted
 import com.lowdragmc.lowdraglib.syncdata.field.ManagedFieldHolder
@@ -25,7 +25,7 @@ import javax.annotation.ParametersAreNonnullByDefault
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-class LargeNaquadahReactorMachine(holder: IMachineBlockEntity) : PrimitiveWorkableMachine(holder),
+class LargeNaquadahReactorMachine(holder: IMachineBlockEntity) : WorkableElectricMultiblockMachine(holder),
     IExplosionMachine {
     private val activeFluid: Map<Fluid, Int> = mapOf(
         GTMaterials.Caesium.getFluid() to 2,
@@ -54,21 +54,25 @@ class LargeNaquadahReactorMachine(holder: IMachineBlockEntity) : PrimitiveWorkab
     private var activeFluidPower = 1
     private var lockFluid: Fluid? = null
 
-    private fun checkHatch(largeNaquadahReactorMachine: LargeNaquadahReactorMachine, duration: Int) {
-        largeNaquadahReactorMachine.hasCool = false
-        largeNaquadahReactorMachine.hasAir = false
-        largeNaquadahReactorMachine.activeFluidPower = 1
-        for (hatch in largeNaquadahReactorMachine.hatchPartMachines!!) {
+    private fun checkHatch(machine: LargeNaquadahReactorMachine, duration: Int) {
+        machine.hasCool = false
+        machine.hasAir = false
+        machine.activeFluidPower = 1
+        for (hatch in machine.hatchPartMachines!!) {
             val tank = hatch.tank
             val io = tank.getHandlerIO()
             if (io == IO.IN || io == IO.BOTH) {
                 for (i in tank.storages) {
                     val fluid = i.fluid
-                    checkLockFluid(largeNaquadahReactorMachine, fluid)
-                    active(largeNaquadahReactorMachine, fluid, duration)
-                    if (cool(fluid, duration)) largeNaquadahReactorMachine.hasCool = true
-                    if (air(fluid, duration)) largeNaquadahReactorMachine.hasAir = true
+                    if (i.fluid == FluidStack.empty()) continue
+                    checkLockFluid(machine, fluid)
+                    active(machine, fluid, duration)
+                    if (cool(fluid, duration)) machine.hasCool = true
+                    if (air(fluid, duration)) machine.hasAir = true
                 }
+            }
+            if (machine.hasCool && machine.hasAir && machine.activeFluidPower != 1) {
+                return
             }
         }
     }
