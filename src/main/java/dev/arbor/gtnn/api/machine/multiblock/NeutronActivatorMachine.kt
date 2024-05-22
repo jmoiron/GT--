@@ -60,9 +60,9 @@ class NeutronActivatorMachine(holder: IMachineBlockEntity, vararg args: Any) : W
     private var neutronEnergySubs = ConditionalSubscriptionHandler(this, this::neutronEnergyUpdate) { isFormed }
     private var moderateSubs = ConditionalSubscriptionHandler(this, this::moderateUpdate) { eV > 0 }
     private var absorptionSubs = ConditionalSubscriptionHandler(this, this::absorptionUpdate) { eV > 0 }
-    private var sensorMachines: Set<NeutronSensorMachine>? = null
-    private var busMachines: Set<ItemBusPartMachine>? = null
-    private var acceleratorMachines: Set<NeutronAcceleratorMachine>? = null
+    private var sensorMachines: HashSet<NeutronSensorMachine>? = null
+    private var busMachines: HashSet<ItemBusPartMachine>? = null
+    private var acceleratorMachines: HashSet<NeutronAcceleratorMachine>? = null
 
     //////////////////////////////////////
     //***    Multiblock LifeCycle    ***//
@@ -96,16 +96,16 @@ class NeutronActivatorMachine(holder: IMachineBlockEntity, vararg args: Any) : W
                 }
             }
             if (part is ItemBusPartMachine) {
-                busMachines = APartAbility.getOrDefault(busMachines, ::mutableSetOf)
-                (busMachines as MutableSet).add(part)
+                busMachines = APartAbility.getOrDefault(busMachines, ::hashSetOf)
+                busMachines!!.add(part)
             }
             if (part is NeutronSensorMachine) {
-                sensorMachines = APartAbility.getOrDefault(sensorMachines, ::mutableSetOf)
-                (sensorMachines as MutableSet).add(part)
+                sensorMachines = APartAbility.getOrDefault(sensorMachines, ::hashSetOf)
+                sensorMachines!!.add(part)
             }
             if (part is NeutronAcceleratorMachine) {
-                acceleratorMachines = APartAbility.getOrDefault(acceleratorMachines, ::mutableSetOf)
-                (acceleratorMachines as MutableSet).add(part)
+                acceleratorMachines = APartAbility.getOrDefault(acceleratorMachines, ::hashSetOf)
+                acceleratorMachines!!.add(part)
             }
             if (part is HighSpeedPipeBlock) height++
         }

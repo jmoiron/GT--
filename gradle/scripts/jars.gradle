@@ -1,3 +1,4 @@
+//file:noinspection GroovyUnusedAssignment
 apply plugin: "dev.architectury.loom"
 
 java {
@@ -29,4 +30,4 @@ remapSlimJar {
 
 tasks.remapJar.dependsOn('remapSlimJar')
 
-archivesBaseName = "${project.name}-${libs.versions.minecraft.get()}"
+archivesBaseName = "${project.name}"

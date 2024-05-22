@@ -29,7 +29,7 @@ public final class ConfigHandler {
         public boolean banCreateFanBlasting = false;
         @Configurable
         @Configurable.Synchronized
-        @Configurable.Comment({"Makes EMI Better", "Default: true"})
+        @Configurable.Comment({"Click Fluid to Get Bucket of Fliud by Cheat", "Default: true"})
         public boolean makesEMIBetter = true;
         @Configurable
         @Configurable.Synchronized

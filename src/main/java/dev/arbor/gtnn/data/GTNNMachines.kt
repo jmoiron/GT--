@@ -62,7 +62,7 @@ object GTNNMachines {
     //////////////////////////////////////
     val NEUTRON_ACCELERATOR: Array<MachineDefinition?> = MachineReg.registerTieredMachines(
         "neutron_accelerator", ::NeutronAcceleratorMachine, { tier, builder ->
-            builder.langValue(VNF[tier] + "Neutron Accelerator").rotationState(RotationState.ALL)
+            builder.langValue(VNF[tier] + " Neutron Accelerator").rotationState(RotationState.ALL)
                 .abilities(APartAbility.NEUTRON_ACCELERATOR)
                 .tooltips(Component.translatable("gtnn.machine.neutron_accelerator.tooltip1"))
                 .tooltips(Component.translatable("gtnn.machine.neutron_accelerator.tooltip2", V[tier]))
