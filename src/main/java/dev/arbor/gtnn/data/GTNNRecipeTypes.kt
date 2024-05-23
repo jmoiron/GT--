@@ -4,12 +4,10 @@ import com.gregtechceu.gtceu.api.GTValues
 import com.gregtechceu.gtceu.api.capability.recipe.IO
 import com.gregtechceu.gtceu.api.gui.GuiTextures
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType
-import com.gregtechceu.gtceu.api.recipe.ui.GTRecipeTypeUI
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes
 import com.gregtechceu.gtceu.common.data.GTSoundEntries
 import com.gregtechceu.gtceu.data.recipe.builder.GTRecipeBuilder
 import com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection
-import dev.arbor.gtnn.api.tool.StringTools.nn
 
 object GTNNRecipeTypes {
     val CHEMICAL_PLANT_RECIPES: GTRecipeType =
@@ -42,11 +40,6 @@ object GTNNRecipeTypes {
         GTRecipeTypes.register("homemade_bedrock_ore_machine", GTRecipeTypes.STEAM)
             .setMaxIOSize(1, 6, 0, 0)
             .setProgressBar(GuiTextures.PROGRESS_BAR_ARROW, FillDirection.LEFT_TO_RIGHT)
-            .setRecipeUI(
-                GTRecipeTypeUI(
-                    GTRecipeType("dummy".nn(), "dummy").setMaxIOSize(0, 81, 0, 0)
-                )
-            )
             .setSound(GTSoundEntries.FURNACE)
 
     val ROCKET_ENGINE_RECIPES: GTRecipeType =

@@ -10,8 +10,6 @@ import com.gregtechceu.gtceu.data.recipe.VanillaRecipeHelper
 import dev.arbor.gtnn.GTNN
 import dev.arbor.gtnn.GTNNIntegration.isCCTweakedLoaded
 import dev.arbor.gtnn.GTNNIntegration.isSupplementariesLoaded
-import dev.arbor.gtnn.api.recipe.OresHelper
-import dev.arbor.gtnn.data.GTNNBlocks
 import dev.arbor.gtnn.data.GTNNItems
 import dev.arbor.gtnn.data.GTNNMachines.STONE_BEDROCK_ORE_MACHINE
 import dev.arbor.gtnn.data.GTNNMaterials.Cerrobase140
@@ -31,13 +29,6 @@ object DefaultRecipes {
     fun init(provider: Consumer<FinishedRecipe>) {
         Misc.init(provider)
         SelfRecipes.init(provider)
-        OresHelper.saveRecipe(provider)
-        GTRecipeTypes.CHEMICAL_RECIPES.recipeBuilder("itnt")
-            .inputItems(GTItems.GELLED_TOLUENE.asStack(4))
-            .inputFluids(GTMaterials.NitrationMixture.getFluid(200))
-            .outputItems(GTNNBlocks.ITNT)
-            .circuitMeta(1)
-            .duration(GTNNRecipes.dur(4.0)).EUt(GTValues.VA[GTValues.HV].toLong()).save(provider)
         addBOOMRecipes(
             "heavy_plate_t1",
             GTNNItems.HEAVY_INGOT_T1,
@@ -80,22 +71,46 @@ object DefaultRecipes {
         level: Int,
         provider: Consumer<FinishedRecipe>
     ) {
-        GTRecipeTypes.IMPLOSION_RECIPES.recipeBuilder(name)
+        GTRecipeTypes.IMPLOSION_RECIPES.recipeBuilder("implode_" + name + "_tnt")
             .inputItems(input)
-            .inputItems(ItemStack(Items.TNT, level * 8))
             .outputItems(output)
-            .duration(time).save(provider)
-        GTRecipeTypes.IMPLOSION_RECIPES.recipeBuilder(name + "_2")
+            .chancedOutput(TagPrefix.dust, GTMaterials.DarkAsh, 2500, 0)
+            .explosivesType(ItemStack(Items.TNT, level * 4))
+            .duration(time)
+            .save(provider)
+
+        GTRecipeTypes.IMPLOSION_RECIPES.recipeBuilder("implode_" + name + "_powderbarrel")
             .inputItems(input)
-            .inputItems(GTNNBlocks.ITNT.asStack(level * 2))
             .outputItems(output)
-            .duration(time).save(provider)
+            .chancedOutput(TagPrefix.dust, GTMaterials.DarkAsh, 2500, 0)
+            .explosivesType(ItemStack(GTBlocks.POWDERBARREL, level * 8))
+            .duration(time)
+            .save(provider)
+
+        GTRecipeTypes.IMPLOSION_RECIPES.recipeBuilder("implode_" + name + "_dynamite")
+            .inputItems(input)
+            .outputItems(output)
+            .chancedOutput(TagPrefix.dust, GTMaterials.DarkAsh, 2500, 0)
+            .explosivesType(GTItems.DYNAMITE.asStack(level * 2))
+            .duration(time)
+            .save(provider)
+
+        GTRecipeTypes.IMPLOSION_RECIPES.recipeBuilder("implode_" + name + "_itnt")
+            .inputItems(input)
+            .outputItems(output)
+            .chancedOutput(TagPrefix.dust, GTMaterials.DarkAsh, 2500, 0)
+            .explosivesType(ItemStack(GTBlocks.INDUSTRIAL_TNT, level))
+            .duration(time)
+            .save(provider)
+
         if (!isSupplementariesLoaded()) return
-        GTRecipeTypes.IMPLOSION_RECIPES.recipeBuilder(name + "_3")
+        GTRecipeTypes.IMPLOSION_RECIPES.recipeBuilder("implode_" + name + "_bomb")
             .inputItems(input)
-            .inputItems(ItemStack(ModRegistry.BOMB_ITEM.get(), level * 4))
             .outputItems(output)
-            .duration(time).save(provider)
+            .chancedOutput(TagPrefix.dust, GTMaterials.DarkAsh, 2500, 0)
+            .explosivesType(ItemStack(ModRegistry.BOMB_ITEM.get(), level * 4))
+            .duration(time)
+            .save(provider)
     }
 
     object Misc {

@@ -9,16 +9,12 @@ import com.gregtechceu.gtceu.api.registry.GTRegistries.ORE_VEINS
 import com.gregtechceu.gtceu.common.data.GTMaterials.*
 import com.mojang.datafixers.util.Either
 import dev.arbor.gtnn.GTNN.getServerConfig
-import dev.arbor.gtnn.api.recipe.GTNNBedrockOreMinerLogic.Companion.DURATION
 import dev.arbor.gtnn.data.GTNNMaterials.*
-import dev.arbor.gtnn.data.GTNNRecipeTypes
-import net.minecraft.data.recipes.FinishedRecipe
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
-import java.util.function.Consumer
 
 object OresHelper {
     @JvmField
@@ -105,21 +101,20 @@ object OresHelper {
         return 1
     }
 
-    fun saveRecipe(consumer: Consumer<FinishedRecipe>) {
+    fun getOreCleanList(): MutableList<Pair<ResourceKey<Level>, HashMap<ItemStack, Int>>> {
         val levels = ORES_CLEAN.keys
+        val all: MutableList<Pair<ResourceKey<Level>, HashMap<ItemStack, Int>>> = mutableListOf()
         for (level in levels) {
-            val recipeBuilder =
-                GTNNRecipeTypes.STONE_BEDROCK_ORE_MACHINE_RECIPES.recipeBuilder("void_ores_" + level.location().path)
+            val things: HashMap<ItemStack, Int> = HashMap()
             val sum = ORES_CLEAN[level]!!.sumOf { it.first }
             for (ore in ORES_CLEAN[level]!!) {
                 val chance = ore.first * 10000 / sum
                 val stack = ItemStack(ore.second.item, 1)
                 if (stack.isEmpty) continue
-                recipeBuilder.chancedOutput(stack, chance, 0)
+                things[stack] = chance
             }
-            recipeBuilder.dimension(level.location())
-            recipeBuilder.duration(DURATION)
-            recipeBuilder.save(consumer)
+            all.add(level to things)
         }
+        return all
     }
 }
