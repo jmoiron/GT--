@@ -314,7 +314,7 @@ object GTNNItems {
     }
 
     fun init() {
-        if (!GTNNIntegration.isAdAstraLoaded() || !FMLLoader.isProduction()) {
+        if (!GTNNIntegration.isCCTweakedLoaded() || !FMLLoader.isProduction()) {
             COMPUTER = createItem(
                 "computer_circuit"
             ) { properties: Item.Properties ->
