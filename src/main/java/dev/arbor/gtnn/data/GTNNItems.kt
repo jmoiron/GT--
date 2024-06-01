@@ -7,12 +7,10 @@ import com.tterrag.registrate.builders.ItemBuilder
 import com.tterrag.registrate.util.entry.ItemEntry
 import com.tterrag.registrate.util.nullness.NonNullConsumer
 import com.tterrag.registrate.util.nullness.NonNullFunction
-import dev.arbor.gtnn.GTNNIntegration
 import dev.arbor.gtnn.GTNNRegistries.REGISTRATE
 import net.minecraft.network.chat.Component
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Rarity
-import net.minecraftforge.fml.loading.FMLLoader
 
 object GTNNItems {
     @Suppress("UNUSED")
@@ -301,9 +299,29 @@ object GTNNItems {
         )
     }.lang("Radiation Protection Plate").register()
 
-    lateinit var COMPUTER: ItemEntry<ComponentItem>
+    val COMPUTER: ItemEntry<ComponentItem> = createItem(
+        "computer_circuit"
+    ) { properties: Item.Properties ->
+        ComponentItem.create(
+            properties
+        )
+    }.lang("Computer Chip").properties { p: Item.Properties ->
+        p.rarity(
+            Rarity.UNCOMMON
+        )
+    }.register()
 
-    lateinit var COMPUTER_ADVANCED: ItemEntry<ComponentItem>
+    val COMPUTER_ADVANCED: ItemEntry<ComponentItem> = createItem(
+        "computer_advanced_circuit"
+    ) { properties: Item.Properties ->
+        ComponentItem.create(
+            properties
+        )
+    }.lang("Advanced Computer Chip").properties { p: Item.Properties ->
+        p.rarity(
+            Rarity.RARE
+        )
+    }.register()
 
     private fun attach(components: TooltipBehavior): NonNullConsumer<in ComponentItem> {
         return NonNullConsumer { item: ComponentItem ->
@@ -314,31 +332,6 @@ object GTNNItems {
     }
 
     fun init() {
-        if (!GTNNIntegration.isCCTweakedLoaded() || !FMLLoader.isProduction()) {
-            COMPUTER = createItem(
-                "computer_circuit"
-            ) { properties: Item.Properties ->
-                ComponentItem.create(
-                    properties
-                )
-            }.lang("Computer Chip").properties { p: Item.Properties ->
-                p.rarity(
-                    Rarity.UNCOMMON
-                )
-            }.register()
-
-            COMPUTER_ADVANCED = createItem(
-                "computer_advanced_circuit"
-            ) { properties: Item.Properties ->
-                ComponentItem.create(
-                    properties
-                )
-            }.lang("Advanced Computer Chip").properties { p: Item.Properties ->
-                p.rarity(
-                    Rarity.RARE
-                )
-            }.register()
-        }
     }
 
     private fun <T : Item?> createItem(
