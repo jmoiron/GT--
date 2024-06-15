@@ -78,9 +78,17 @@ class GTPPMachineRenderer(baseCasing: ResourceLocation, workableModel: ResourceL
             }
         }
         if (machine is IWorkable) {
-            quads!!.addAll(overlayModel.bakeQuads(side, frontFacing!!, machine.isActive, machine.isWorkingEnabled))
+            quads!!.addAll(
+                overlayModel.bakeQuads(
+                    side,
+                    frontFacing!!,
+                    side!!,
+                    machine.isActive,
+                    machine.isWorkingEnabled
+                )
+            )
         } else {
-            quads!!.addAll(overlayModel.bakeQuads(side, frontFacing!!, false, false))
+            quads!!.addAll(overlayModel.bakeQuads(side, frontFacing!!, side!!, false, false))
         }
     }
 

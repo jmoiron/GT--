@@ -73,8 +73,8 @@ dependencies {
     forgeRuntimeLibrary("com.teamresourceful:yabn:1.0.3")
 
     // lib
-    modImplementation("org.arbor:arbormixin:1.0")
-    include("org.arbor:arbormixin:1.0")
+    //modImplementation("org.arbor:arbormixin:1.0")
+    //include("org.arbor:arbormixin:1.0")
 
     // test
     modImplementation("maven.modrinth:gtnn:1.0.6c")

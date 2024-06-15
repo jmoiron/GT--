@@ -28,8 +28,8 @@ side = "BOTH"
 [[dependencies.gtnn]]
 modId = "gtceu"
 mandatory = true
-versionRange = "[1.1.3.b,)"
-ordering = "AFTER"
+versionRange = "[1.3.0,)"
+ordering = "BEFORE"
 side = "BOTH"
 
 [[dependencies.gtnn]]
