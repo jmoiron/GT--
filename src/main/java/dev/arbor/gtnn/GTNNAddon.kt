@@ -56,9 +56,7 @@ class GTNNAddon : IGTAddon {
     }
 
     override fun registerWorldgenLayers() {
-        if (GTNNIntegration.isAdAstraLoaded()) {
-            GTNNWorld.GTNNWorldGenLayers.init()
-        }
+        GTNNWorld.GTNNWorldGenLayers.init()
     }
 
     override fun collectMaterialCasings(event: MaterialCasingCollectionEvent?) {
