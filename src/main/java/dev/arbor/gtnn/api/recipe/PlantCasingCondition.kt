@@ -11,12 +11,10 @@ import net.minecraft.network.chat.Component
 import net.minecraft.util.GsonHelper
 
 
-class PlantCasingCondition(var plantCasing: PlantCasingBlock?) : RecipeCondition() {
+class PlantCasingCondition(var plantCasing: PlantCasingBlock? = null) : RecipeCondition() {
     companion object{
         val INSTANCE: PlantCasingCondition = PlantCasingCondition()
     }
-
-    constructor(): this(null)
 
     override fun getType(): String {
         return "chemical_plant_casing"
@@ -41,26 +39,26 @@ class PlantCasingCondition(var plantCasing: PlantCasingBlock?) : RecipeCondition
 
     override fun serialize(): JsonObject {
         val value = super.serialize()
-        value.addProperty("plantCasing", plantCasing!!.getName())
+        value.addProperty("plantCasing", plantCasing!!.getTier())
         return value
     }
 
     override fun deserialize(config: JsonObject): RecipeCondition {
         super.deserialize(config)
-        this.plantCasing = PlantCasingBlock.getByName(
-            GsonHelper.getAsString(config, "plantCasing", "plantCasing")
+        this.plantCasing = PlantCasingBlock.getByTier(
+            GsonHelper.getAsInt(config, "plantCasing", 0)
         )
         return this
     }
 
     override fun toNetwork(buf: FriendlyByteBuf) {
         super.toNetwork(buf)
-        buf.writeUtf(plantCasing!!.getName())
+        buf.writeInt(plantCasing!!.getTier())
     }
 
     override fun fromNetwork(buf: FriendlyByteBuf): RecipeCondition {
         super.fromNetwork(buf)
-        this.plantCasing = PlantCasingBlock.getByNameOrDefault(buf.readUtf())
+        this.plantCasing = PlantCasingBlock.getByTier(buf.readInt())
         return this
     }
 }

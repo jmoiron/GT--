@@ -34,14 +34,6 @@ enum class PlantCasingBlock(
         fun getByTier(tier: Int): PlantCasingBlock {
             return PlantCasing.All_PlantCasing_Tier[tier] ?: BRONZE
         }
-
-        fun getByName(name: String?): PlantCasingBlock {
-            return getByNameOrDefault(name)
-        }
-
-        fun getByNameOrDefault(name: String?): PlantCasingBlock {
-            return PlantCasing.All_PlantCasingBlock[name] ?: return BRONZE
-        }
     }
 
     init {
