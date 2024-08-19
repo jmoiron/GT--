@@ -37,7 +37,7 @@ dependencies {
     // JEI
     modCompileOnly(forge.jei.common.api) { transitive = false }
     modCompileOnly(forge.jei.forge.api) { transitive = false }
-    modImplementation(forge.jei.forge.impl) { transitive = false }
+    modCompileOnly(forge.jei.forge.impl) { transitive = false }
 
     // REI
     modCompileOnly forge.rei.plugin
@@ -63,6 +63,9 @@ dependencies {
 
     // GTM
     modImplementation(forge.gtm) { transitive = false }
+
+    // ae2
+    modImplementation(forge.ae2) { transitive = false }
 
     // AdAstra
     modImplementation(forge.ad.astra) { transitive = false }

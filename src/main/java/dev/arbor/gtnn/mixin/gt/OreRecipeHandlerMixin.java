@@ -4,13 +4,10 @@ import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper;
 import com.gregtechceu.gtceu.api.data.chemical.material.Material;
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix;
 import com.gregtechceu.gtceu.data.recipe.generated.OreRecipeHandler;
-import dev.arbor.gtnn.GTNN;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-
-import java.util.Map;
 
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.dust;
 import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
@@ -19,24 +16,6 @@ import static dev.arbor.gtnn.data.GTNNMaterials.*;
 
 @Mixin(OreRecipeHandler.class)
 public class OreRecipeHandlerMixin {
-
-    static {
-        ORE_REPLACEMENTS.put(Neutronium, NeutroniumMixture);
-        if (GTNN.INSTANCE.getServerConfig().enableHarderNaquadahLine) {
-            ORE_REPLACEMENTS.putAll(Map.of(
-                    Naquadah, NaquadahOxideMixture,
-                    NaquadahEnriched, EnrichedNaquadahOxideMixture,
-                    Naquadria, NaquadriaOxideMixture
-            ));
-        }
-        if (GTNN.INSTANCE.getServerConfig().enableHarderPlatinumLine) {
-            ORE_REPLACEMENTS.putAll(Map.of(
-                    Platinum, PlatinumMetal,
-                    Palladium, PalladiumMetal
-            ));
-        }
-    }
-
     @Redirect(
             method = "processDirtyDust", remap = false,
             at = @At(value = "INVOKE", target = "Lcom/gregtechceu/gtceu/api/data/chemical/ChemicalHelper;get(Lcom/gregtechceu/gtceu/api/data/tag/TagPrefix;Lcom/gregtechceu/gtceu/api/data/chemical/material/Material;)Lnet/minecraft/world/item/ItemStack;")

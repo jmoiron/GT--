@@ -153,16 +153,14 @@ public class GTNNMaterials extends Material {
 
     public static void addFluid(Material material){
         if (!material.hasProperty(PropertyKey.FLUID)) {
-            material.setProperty(PropertyKey.FLUID, new FluidProperty());
+            material.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.LIQUID, new FluidBuilder()));
         }
-        material.getProperty(PropertyKey.FLUID).getStorage().enqueueRegistration(FluidStorageKeys.LIQUID, new FluidBuilder());
     }
 
     public static void addGas(Material material) {
         if (!material.hasProperty(PropertyKey.FLUID)) {
-            material.setProperty(PropertyKey.FLUID, new FluidProperty());
+            material.setProperty(PropertyKey.FLUID, new FluidProperty(FluidStorageKeys.GAS, new FluidBuilder()));
         }
-        material.getProperty(PropertyKey.FLUID).getStorage().enqueueRegistration(FluidStorageKeys.GAS, new FluidBuilder());
     }
 
     public static void addOre(Material... materials) {

@@ -105,7 +105,7 @@ class ChemicalPlantMachine(holder: IMachineBlockEntity) : CoilWorkableElectricMu
                 val parallelValue = result.second
                 recipe.duration = 1.coerceAtLeast(256 * parallelValue / maxParallel)
                 recipe.tickInputs[EURecipeCapability.CAP] =
-                    listOf(Content(parallelValue.toLong(), 1.0f, 0.0f, null, null))
+                    listOf(Content(parallelValue.toLong(), 1, 1, 0, "", ""))
 
                 return RecipeHelper.applyOverclock(OverclockingLogic filter@{ _, recipeEUt, maxVoltage, duration, amountOC ->
                     val runOverclockingLogic = OverclockingLogic.NON_PERFECT_OVERCLOCK.logic.runOverclockingLogic(

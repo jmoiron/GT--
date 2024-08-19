@@ -192,7 +192,7 @@ class LargeNaquadahReactorMachine(holder: IMachineBlockEntity) : WorkableElectri
                     eut = (eut * 1.5).toLong()
                 }
                 eut *= machine.activeFluidPower
-                copyRecipe.tickOutputs[EURecipeCapability.CAP] = listOf(Content(eut, 1.0f, 0.0f, null, null))
+                copyRecipe.tickOutputs[EURecipeCapability.CAP] = listOf(Content(eut, 1, 1, 0, "", ""))
                 return copyRecipe
             }
             return null

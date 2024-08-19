@@ -30,7 +30,7 @@ import java.util.function.Supplier
 
 @OnlyIn(Dist.CLIENT)
 class GTPPMachineRenderer(baseCasing: ResourceLocation, workableModel: ResourceLocation, tint: Boolean) :
-    MachineRenderer(if (tint) GTCEu.id("block/tinted_cube_all") else GTCEu.id("block/cube_all")), IControllerRenderer {
+    MachineRenderer(if (tint) GTCEu.id("block/cube/tinted/all") else GTCEu.id("block/cube/all")), IControllerRenderer {
     private val overlayModel = WorkableOverlayModel(workableModel)
 
     init {

@@ -77,7 +77,7 @@ class GTNNBedrockOreMinerLogic<T : IRecipeLogicMachine>(machine: T) : RecipeLogi
         machine.afterWorking()
         if (lastRecipe != null) {
             lastRecipe!!.postWorking(this.machine)
-            lastRecipe!!.handleRecipeIO(IO.OUT, this.machine)
+            lastRecipe!!.handleRecipeIO(IO.OUT, this.machine, this.chanceCaches)
         }
         // try it again
         val match = getOreMinerRecipe()

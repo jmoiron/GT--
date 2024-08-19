@@ -12,9 +12,9 @@ import net.minecraft.network.chat.Component
 
 object ModifyMachines {
     fun init() {
-        if (GTRecipeTypes.ASSEMBLER_RECIPES.maxTooltips == 3) GTRecipeTypes.ASSEMBLER_RECIPES.setMaxTooltips(4)
-        if (GTRecipeTypes.BREWING_RECIPES.maxTooltips == 3) GTRecipeTypes.ASSEMBLER_RECIPES.setMaxTooltips(4)
-        if (GTRecipeTypes.FLUID_HEATER_RECIPES.maxTooltips == 3) GTRecipeTypes.ASSEMBLER_RECIPES.setMaxTooltips(4)
+        GTRecipeTypes.ASSEMBLER_RECIPES.setMaxTooltips(4)
+        GTRecipeTypes.BREWING_RECIPES.setMaxTooltips(4)
+        GTRecipeTypes.FLUID_HEATER_RECIPES.setMaxTooltips(4)
         modifyGTAssembly()
     }
 

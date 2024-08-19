@@ -309,7 +309,7 @@ class NeutronActivatorMachine(holder: IMachineBlockEntity, vararg args: Any) : W
             if (eV > (condition.evRange / 10000) * 1000000 || eV < (condition.evRange % 10000) * 1000000) {
                 newRecipe.outputs.clear()
                 newRecipe.outputs[ItemRecipeCapability.CAP] =
-                    listOf(Content(Ingredient.of(GTNNItems.RADIOACTIVE_WASTE), 1F, 0F, null, null))
+                    listOf(Content(Ingredient.of(GTNNItems.RADIOACTIVE_WASTE), 1, 1, 0, "", ""))
             }
         }
         return super.getRealRecipe(newRecipe)

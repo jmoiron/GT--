@@ -27,9 +27,9 @@ class LangHandler {
 
         private fun translateMaterial(material: Material, cn: String?, en: String?) {
             if (en == null) {
-                if (INSTANCE.enLangProvider != null && INSTANCE.cnLangProvider == null) translateMaterial(
-                    INSTANCE.enLangProvider, material
-                )
+                if (INSTANCE.enLangProvider != null && INSTANCE.cnLangProvider == null) {
+                    translateMaterial(INSTANCE.enLangProvider, material)
+                }
             } else {
                 try {
                     INSTANCE.enLangProvider!!.add("material.gtceu." + material.name, en)
