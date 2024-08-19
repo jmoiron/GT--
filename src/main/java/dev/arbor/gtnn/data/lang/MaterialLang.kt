@@ -134,6 +134,9 @@ object MaterialLang {
         translateMaterial(WetBromine, "湿溴气")
         translateMaterial(DebrominatedWater, "脱溴盐水")
         translateMaterial(NeutroniumMixture, "中子素混合物")
+        translateMaterial(ManaSteel, "魔力钢")
+        translateMaterial(Elementium, "源质钢")
+        translateMaterial(TerraSteel, "泰拉钢")
     }
 
     private fun jeiOreVeins() {

@@ -65,7 +65,7 @@ dependencies {
     modImplementation(forge.gtm) { transitive = false }
 
     // ae2
-    modImplementation(forge.ae2) { transitive = false }
+    //modImplementation(forge.ae2) { transitive = false }
 
     // AdAstra
     modImplementation(forge.ad.astra) { transitive = false }
@@ -91,4 +91,7 @@ dependencies {
     modImplementation("curse.maven:ascension-megamons-971821:5336649")
     modRuntimeOnly("curse.maven:observable-509575:5080064")
     modRuntimeOnly("curse.maven:architectury-api-419699:5137938")
+    modImplementation("curse.maven:botania-225643:5594997")
+    modImplementation("curse.maven:curios-309927:5367944")
+    modImplementation("curse.maven:patchouli-306770:4966125")
 }
