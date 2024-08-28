@@ -167,8 +167,8 @@ class ChemicalPlantMachine(holder: IMachineBlockEntity) : WorkableElectricMultib
         sourceState: BlockState,
         sourcePos: BlockPos
     ): BlockState {
-        val appearanceBlock: BlockState? = APPEARANCE_MAP[casingTier]
-        return appearanceBlock ?: super.getBlockAppearance(state, level, pos, side, sourceState, sourcePos)
+        val appearanceBlock: BlockState = getAppearance()
+        return appearanceBlock
     }
 
     override fun locationGetter(): ResourceLocation {
