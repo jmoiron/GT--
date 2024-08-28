@@ -12,16 +12,14 @@ import com.gregtechceu.gtceu.client.renderer.machine.IControllerRenderer
 import com.gregtechceu.gtceu.client.renderer.machine.MachineRenderer
 import com.lowdragmc.lowdraglib.client.bakedpipeline.FaceQuad
 import com.lowdragmc.lowdraglib.client.model.ModelFactory
-import com.tterrag.registrate.util.entry.BlockEntry
 import dev.arbor.gtnn.api.machine.feature.IGTPPMachine
-import dev.arbor.gtnn.block.PlantCasingBlock
 import net.minecraft.client.renderer.block.model.BakedQuad
 import net.minecraft.client.resources.model.ModelState
 import net.minecraft.core.Direction
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.RandomSource
 import net.minecraft.world.inventory.InventoryMenu
-import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.state.BlockState
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.api.distmarker.OnlyIn
 import java.util.function.Consumer
@@ -45,18 +43,18 @@ class GTPPMachineRenderer(baseCasing: ResourceLocation, workableModel: ResourceL
         machine: MetaMachine,
         modelState: ModelState
     ) {
-        var casing: BlockEntry<Block>? = null
+        var casing: BlockState? = null
         if (side != null && modelFacing != null && machine is IGTPPMachine) {
             quads.add(
                 FaceQuad.bakeFace(
                     modelFacing,
-                    ModelFactory.getBlockSprite(PlantCasingBlock.getByTier(machine.getTier()).getResourceLocation()),
+                    ModelFactory.getBlockSprite(machine.locationGetter()),
                     modelState
                 )
             )
-            casing = PlantCasingBlock.getByTier(machine.getTier()).getPlantCasing(machine.getTier())
+            casing = machine.getAppearance()
         }
-        machine.self().definition.appearance = Supplier { casing?.defaultState }
+        machine.self().definition.appearance = Supplier { casing }
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -10,7 +10,7 @@ import com.gregtechceu.gtceu.common.data.GTMaterials
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes
 import com.gregtechceu.gtceu.data.recipe.CustomTags
 import com.gregtechceu.gtceu.data.recipe.VanillaRecipeHelper
-import dev.arbor.gtnn.block.PlantCasingBlock
+import dev.arbor.gtnn.api.recipe.PlantCasingCondition
 import dev.arbor.gtnn.data.GTNNMachines
 import dev.arbor.gtnn.data.GTNNMaterials
 import dev.arbor.gtnn.data.GTNNRecipeTypes
@@ -42,7 +42,7 @@ object RocketFuel {
 
 
         GTNNRecipeTypes.CHEMICAL_PLANT_RECIPES.recipeBuilder("rp_1_mixed_fuel")
-            .addCondition(GTNNRecipes.setPlantCasing(PlantCasingBlock.STAINLESS))
+            .addCondition(GTNNRecipes.setPlantCasing(PlantCasingCondition.STAINLESS_STEEL))
             .inputFluids(GTMaterials.Oxygen.getFluid(2000))
             .inputFluids(GTNNMaterials.RP1RocketFuel.getFluid(500))
             .outputFluids(GTNNMaterials.RP1.getFluid(1000))
@@ -62,7 +62,7 @@ object RocketFuel {
             .duration(16).EUt(GTValues.VA[GTValues.MV].toLong()).save(provider)
 
         GTNNRecipeTypes.CHEMICAL_PLANT_RECIPES.recipeBuilder("dense_hydrazine_mixed_fuel")
-            .addCondition(GTNNRecipes.setPlantCasing(PlantCasingBlock.TITANIUM))
+            .addCondition(GTNNRecipes.setPlantCasing(PlantCasingCondition.TITANIUM))
             .inputFluids(GTMaterials.Methanol.getFluid(6000))
             .inputFluids(GTNNMaterials.Hydrazine.getFluid(4000))
             .outputFluids(GTNNMaterials.DenseHydrazineMixedFuel.getFluid(10000))
@@ -70,7 +70,7 @@ object RocketFuel {
             .duration(GTNNRecipes.dur(30.0)).EUt(GTValues.VA[GTValues.HV].toLong()).save(provider)
 
         GTNNRecipeTypes.CHEMICAL_PLANT_RECIPES.recipeBuilder("hydrazine")
-            .addCondition(GTNNRecipes.setPlantCasing(PlantCasingBlock.STEEL))
+            .addCondition(GTNNRecipes.setPlantCasing(PlantCasingCondition.STEEL))
             .inputFluids(GTMaterials.Ammonia.getFluid(1000))
             .inputFluids(GTNNMaterials.HydrogenPeroxide.getFluid(1000))
             .outputFluids(GTNNMaterials.Hydrazine.getFluid(1000))
@@ -78,7 +78,7 @@ object RocketFuel {
             .duration(GTNNRecipes.dur(10.0)).EUt(GTValues.VA[GTValues.HV].toLong()).save(provider)
 
         GTNNRecipeTypes.CHEMICAL_PLANT_RECIPES.recipeBuilder("hydrogen_peroxide_oxygen")
-            .addCondition(GTNNRecipes.setPlantCasing(PlantCasingBlock.STEEL))
+            .addCondition(GTNNRecipes.setPlantCasing(PlantCasingCondition.STEEL))
             .inputFluids(GTMaterials.Oxygen.getFluid(10000))
             .inputFluids(GTNNMaterials.EthylAnthraHydroQuinone.getFluid(5000))
             .inputFluids(GTNNMaterials.Anthracene.getFluid(50))
@@ -88,7 +88,7 @@ object RocketFuel {
             .duration(GTNNRecipes.dur(5.0)).EUt(GTValues.VA[GTValues.HV].toLong()).save(provider)
 
         GTNNRecipeTypes.CHEMICAL_PLANT_RECIPES.recipeBuilder("hydrogen_peroxide_air")
-            .addCondition(GTNNRecipes.setPlantCasing(PlantCasingBlock.STEEL))
+            .addCondition(GTNNRecipes.setPlantCasing(PlantCasingCondition.STEEL))
             .inputFluids(GTMaterials.Air.getFluid(20000))
             .inputFluids(GTNNMaterials.EthylAnthraHydroQuinone.getFluid(5000))
             .inputFluids(GTNNMaterials.Anthracene.getFluid(50))
@@ -98,7 +98,7 @@ object RocketFuel {
             .duration(GTNNRecipes.dur(30.0)).EUt(GTValues.VA[GTValues.HV].toLong()).save(provider)
 
         GTNNRecipeTypes.CHEMICAL_PLANT_RECIPES.recipeBuilder("ethyl_anthra_quinone")
-            .addCondition(GTNNRecipes.setPlantCasing(PlantCasingBlock.ALUMINIUM))
+            .addCondition(GTNNRecipes.setPlantCasing(PlantCasingCondition.ALUMINIUM))
             .inputItems(ChemicalHelper.get(TagPrefix.dust, GTNNMaterials.PhthalicAnhydride, 15))
             .inputFluids(GTMaterials.Ethylbenzene.getFluid(1000))
             .outputFluids(GTNNMaterials.EthylAnthraQuinone.getFluid(1000))
@@ -129,7 +129,7 @@ object RocketFuel {
             .duration(GTNNRecipes.dur(8.0)).EUt(GTValues.VA[GTValues.HV].toLong()).save(provider)
 
         GTNNRecipeTypes.CHEMICAL_PLANT_RECIPES.recipeBuilder("ethyl_anthra_hydro_quinone")
-            .addCondition(GTNNRecipes.setPlantCasing(PlantCasingBlock.ALUMINIUM))
+            .addCondition(GTNNRecipes.setPlantCasing(PlantCasingCondition.ALUMINIUM))
             .inputFluids(GTNNMaterials.EthylAnthraQuinone.getFluid(1000))
             .inputFluids(GTMaterials.Hydrogen.getFluid(2000))
             .chancedInput(ChemicalHelper.get(TagPrefix.dust, GTNNMaterials.OrangeMetalCatalyst, 1), 5000, -1000)
@@ -149,7 +149,7 @@ object RocketFuel {
             .save(provider)
 
         GTNNRecipeTypes.CHEMICAL_PLANT_RECIPES.recipeBuilder("methyl_hydrazine")
-            .addCondition(GTNNRecipes.setPlantCasing(PlantCasingBlock.ALUMINIUM))
+            .addCondition(GTNNRecipes.setPlantCasing(PlantCasingCondition.ALUMINIUM))
             .inputItems(ChemicalHelper.get(TagPrefix.dust, GTMaterials.Carbon, 1))
             .inputFluids(GTMaterials.Hydrogen.getFluid(2000))
             .inputFluids(GTNNMaterials.Hydrazine.getFluid(1000))
@@ -158,7 +158,7 @@ object RocketFuel {
             .duration(GTNNRecipes.dur(48.0)).EUt(GTValues.VA[GTValues.HV].toLong()).save(provider)
 
         GTNNRecipeTypes.CHEMICAL_PLANT_RECIPES.recipeBuilder("methylhydrazine_nitrate_rocket_fuel")
-            .addCondition(GTNNRecipes.setPlantCasing(PlantCasingBlock.TUNGSTENSTEEL))
+            .addCondition(GTNNRecipes.setPlantCasing(PlantCasingCondition.STAINLESS_STEEL))
             .inputFluids(GTNNMaterials.MethylHydrazine.getFluid(2000))
             .inputFluids(GTMaterials.NitricAcid.getFluid(1000))
             .outputFluids(GTNNMaterials.MethylhydrazineNitrateRocketFuel.getFluid(2000))

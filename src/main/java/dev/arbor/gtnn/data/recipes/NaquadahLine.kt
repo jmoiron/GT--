@@ -248,13 +248,14 @@ object NaquadahLine {
 
         //  Acidic Naquadria Solution Cycle
         // todo BURNER_REACTOR_RECIPES
-        GTRecipeTypes.BLAST_RECIPES.recipeBuilder("impure_enriched_naquadah_solution")
+        GTNNRecipeTypes.CHEMICAL_PLANT_RECIPES.recipeBuilder("impure_enriched_naquadah_solution")
             .inputFluids(GTMaterials.AcidicNaquadriaSolution.getFluid(3000))
             .outputFluids(GTMaterials.NaquadriaWaste.getFluid(1000))
             .outputFluids(GTMaterials.ImpureEnrichedNaquadahSolution.getFluid(1000))
-            .EUt(GTValues.VA[GTValues.ZPM].toLong())
+            .EUt(GTValues.VA[GTValues.HV].toLong())
+            .addCondition(GTNNRecipes.setPlantCasing(3))
             .duration(1000)
-            .blastFurnaceTemp(1280)
+            //.blastFurnaceTemp(1280)
             .save(consumer)
 
         GTNNRecipeTypes.NEUTRON_ACTIVATOR_RECIPES.recipeBuilder("naquadria")

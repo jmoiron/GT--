@@ -4,8 +4,6 @@ import dev.arbor.gtnn.GTNN.getServerConfig
 import dev.arbor.gtnn.GTNNIntegration.isAdAstraLoaded
 import dev.arbor.gtnn.api.recipe.NeutronActivatorCondition
 import dev.arbor.gtnn.api.recipe.PlantCasingCondition
-import dev.arbor.gtnn.block.PlantCasingBlock
-import dev.arbor.gtnn.block.PlantCasingBlock.Companion.getByTier
 import dev.arbor.gtnn.data.recipes.*
 import net.minecraft.data.recipes.FinishedRecipe
 import java.util.function.Consumer
@@ -30,10 +28,6 @@ object GTNNRecipes {
     }
 
     fun setPlantCasing(tier: Int): PlantCasingCondition {
-        return PlantCasingCondition(getByTier(tier - 1))
-    }
-
-    fun setPlantCasing(plantCasing: PlantCasingBlock): PlantCasingCondition {
-        return PlantCasingCondition(plantCasing)
+        return PlantCasingCondition(tier)
     }
 }

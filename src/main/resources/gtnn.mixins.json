@@ -10,6 +10,7 @@
     "emi.FluidEmiStackMixin",
     "gt.BedrockOreMinerMachineMixin",
     "gt.FluidStorageMixin",
+    "gt.GTBlocksMixin",
     "gt.GTOreByProductMixin",
     "gt.GTOreDefinitionMixin",
     "gt.GTOreMixin",

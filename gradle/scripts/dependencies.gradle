@@ -1,7 +1,7 @@
 dependencies {
     minecraft "com.mojang:minecraft:${libs.versions.minecraft.get()}"
     mappings loom.layered {
-        it.mappings("org.quiltmc:quilt-mappings:${libs.versions.minecraft.get()}+build.${libs.versions.quiltMappings.get()}:intermediary-v2")
+        //it.mappings("org.quiltmc:quilt-mappings:${libs.versions.minecraft.get()}+build.${libs.versions.quiltMappings.get()}:intermediary-v2")
         it.parchment("org.parchmentmc.data:parchment-${libs.versions.minecraft.get()}:${libs.versions.parchment.get()}@zip")
         it.officialMojangMappings { nameSyntheticMembers = false }
     }
@@ -35,9 +35,9 @@ dependencies {
     modImplementation forge.flywheel
 
     // JEI
-    modCompileOnly(forge.jei.common.api) { transitive = false }
-    modCompileOnly(forge.jei.forge.api) { transitive = false }
-    modCompileOnly(forge.jei.forge.impl) { transitive = false }
+    //modCompileOnly(forge.jei.common.api) { transitive = false }
+    //modCompileOnly(forge.jei.forge.api) { transitive = false }
+    //modCompileOnly(forge.jei.forge.impl) { transitive = false }
 
     // REI
     modCompileOnly forge.rei.plugin
@@ -59,13 +59,13 @@ dependencies {
     modImplementation(forge.configuration)
 
     // Shimmer
-    modImplementation(forge.shimmer.forge) { transitive = false }
+    modCompileOnly(forge.shimmer.forge) { transitive = false }
 
     // GTM
     modImplementation(forge.gtm) { transitive = false }
 
     // ae2
-    //modImplementation(forge.ae2) { transitive = false }
+    modImplementation(forge.ae2) { transitive = false }
 
     // AdAstra
     modImplementation(forge.ad.astra) { transitive = false }
@@ -80,17 +80,17 @@ dependencies {
     //include("org.arbor:arbormixin:1.0")
 
     // test
-    modImplementation("maven.modrinth:gtnn:1.0.6c")
+    // modImplementation("maven.modrinth:gtnn:1.0.6c")
 
     //others
     modImplementation("curse.maven:supplementaries-412082:5340612")
     modImplementation("curse.maven:cc-tweaked-282001:5118388")
     forgeRuntimeLibrary("cc.tweaked:cobalt:0.9.1")
     modImplementation("curse.maven:selene-499980:5361081")
-    modImplementation("com.cobblemon:forge:1.5.0+")
-    modImplementation("curse.maven:ascension-megamons-971821:5336649")
-    modRuntimeOnly("curse.maven:observable-509575:5080064")
-    modRuntimeOnly("curse.maven:architectury-api-419699:5137938")
+    //modImplementation("com.cobblemon:forge:1.5.0+")
+    //modImplementation("curse.maven:ascension-megamons-971821:5336649")
+    //modRuntimeOnly("curse.maven:observable-509575:5080064")
+    //modRuntimeOnly("curse.maven:architectury-api-419699:5137938")
     modImplementation("curse.maven:botania-225643:5594997")
     modImplementation("curse.maven:curios-309927:5367944")
     modImplementation("curse.maven:patchouli-306770:4966125")

@@ -6,6 +6,7 @@ import com.gregtechceu.gtceu.api.data.chemical.material.event.MaterialRegistryEv
 import com.gregtechceu.gtceu.api.data.chemical.material.registry.MaterialRegistry
 import com.gregtechceu.gtceu.api.machine.MachineDefinition
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate
+import dev.arbor.gtnn.api.block.BlockMaps
 import dev.arbor.gtnn.api.lang.LangGenerators
 import dev.arbor.gtnn.data.GTNNMachines
 import dev.arbor.gtnn.data.GTNNMaterials
@@ -13,10 +14,12 @@ import dev.arbor.gtnn.data.lang.MachineLang
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.server.packs.FilePackResources
 import net.minecraft.server.packs.PackResources
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
 import org.apache.commons.io.FileUtils
 import java.io.File
 import java.io.IOException
 
+@Suppress("UNUSED_PARAMETER")
 object GTNNRegistries {
     private lateinit var MATERIAL_REGISTRY: MaterialRegistry
 
@@ -25,19 +28,24 @@ object GTNNRegistries {
     }
 
     @JvmStatic
-    fun registerMachine(@Suppress("UNUSED_PARAMETER") event: GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition>) {
+    fun registerMachine(event: GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition>) {
         GTNNMachines.init()
         GTNN.LOGGER.info("register GTNN Machines")
     }
 
     @JvmStatic
-    fun registerMaterialRegistryEvent(@Suppress("UNUSED_PARAMETER") event: MaterialRegistryEvent) {
+    fun onCommonSetup(modBus: FMLCommonSetupEvent) {
+        BlockMaps.initBlocks()
+    }
+
+    @JvmStatic
+    fun registerMaterialRegistryEvent(event: MaterialRegistryEvent) {
         MATERIAL_REGISTRY = GTCEuAPI.materialManager.createRegistry(GTNN.MODID)
         GTNN.LOGGER.info("register GTNN Materials")
     }
 
     @JvmStatic
-    fun registerMaterials(@Suppress("UNUSED_PARAMETER") event: MaterialEvent) {
+    fun registerMaterials(event: MaterialEvent) {
         GTNNMaterials.init()
     }
 

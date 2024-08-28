@@ -1,13 +1,10 @@
 package dev.arbor.gtnn.api.machine.feature
 
-import com.gregtechceu.gtceu.api.machine.multiblock.MultiblockControllerMachine
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.level.block.state.BlockState
 
 interface IGTPPMachine {
     fun getTier(): Int
-
-    fun scheduleRenderUpdate(machine: MultiblockControllerMachine) {
-        for (part in machine.getParts()) {
-            part.self().scheduleRenderUpdate()
-        }
-    }
+    fun locationGetter(): ResourceLocation
+    fun getAppearance(): BlockState
 }

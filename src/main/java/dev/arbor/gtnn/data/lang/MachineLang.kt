@@ -165,6 +165,12 @@ object MachineLang {
         )
         tsl("gtnn.machine.naquadah_reactor.tooltip", "效率: %s%%", "Efficiency: %s%%")
         tsl("gtnn.machine.rocket_engine.tooltip", "效率: %s%%", "Efficiency: %s%%")
+        tsl("gtnn.recipe.condition.plant_casing.tier.bronze", "青铜", "Bronze")
+        tsl("gtnn.recipe.condition.plant_casing.tier.steel", "钢", "Steel")
+        tsl("gtnn.recipe.condition.plant_casing.tier.aluminium", "铝", "Aluminium")
+        tsl("gtnn.recipe.condition.plant_casing.tier.stainless_steel", "不锈钢", "Stainless Steel")
+        tsl("gtnn.recipe.condition.plant_casing.tier.titanium", "钛", "Titanium")
+        tsl("gtnn.recipe.condition.plant_casing.tier.tungsten_steel", "钨钢", "Tungsten Steel")
     }
 
     private fun machineNames() {

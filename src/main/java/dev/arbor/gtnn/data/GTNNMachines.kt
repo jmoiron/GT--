@@ -15,11 +15,14 @@ import com.gregtechceu.gtceu.api.pattern.FactoryBlockPattern
 import com.gregtechceu.gtceu.api.pattern.MultiblockShapeInfo
 import com.gregtechceu.gtceu.api.pattern.Predicates.*
 import com.gregtechceu.gtceu.api.pattern.util.RelativeDirection
+import com.gregtechceu.gtceu.api.recipe.OverclockingLogic
 import com.gregtechceu.gtceu.client.renderer.machine.MinerRenderer
 import com.gregtechceu.gtceu.common.data.*
 import com.gregtechceu.gtceu.utils.FormattingUtil
 import dev.arbor.gtnn.GTNN
 import dev.arbor.gtnn.GTNNRegistries.REGISTRATE
+import dev.arbor.gtnn.api.block.BlockMaps
+import dev.arbor.gtnn.api.block.ITierType
 import dev.arbor.gtnn.api.machine.GTNNGeneratorMachine
 import dev.arbor.gtnn.api.machine.MachineReg
 import dev.arbor.gtnn.api.machine.ModifyMachines
@@ -34,10 +37,6 @@ import dev.arbor.gtnn.api.machine.multiblock.part.NeutronSensorMachine
 import dev.arbor.gtnn.api.pattern.APredicates
 import dev.arbor.gtnn.api.tool.StringTools.gt
 import dev.arbor.gtnn.api.tool.StringTools.nn
-import dev.arbor.gtnn.block.BlockTier
-import dev.arbor.gtnn.block.MachineCasingBlock
-import dev.arbor.gtnn.block.PipeBlock
-import dev.arbor.gtnn.block.PlantCasingBlock
 import dev.arbor.gtnn.client.renderer.machine.BlockMachineRenderer
 import dev.arbor.gtnn.client.renderer.machine.GTPPMachineRenderer
 import net.minecraft.core.Direction
@@ -126,8 +125,13 @@ object GTNNMachines {
         .tooltips(Component.translatable("gtnn.multiblock.chemical_plant.tooltip2"))
         .tooltips(Component.translatable("gtnn.multiblock.chemical_plant.tooltip3"))
         .tooltips(Component.translatable("gtnn.multiblock.chemical_plant.tooltip4"))
-        .recipeTypes(GTNNRecipeTypes.CHEMICAL_PLANT_RECIPES).recipeModifier(ChemicalPlantMachine::chemicalPlantRecipe)
-        .appearanceBlock(GTBlocks.CASING_BRONZE_BRICKS).pattern { definition ->
+        .recipeTypes(GTNNRecipeTypes.CHEMICAL_PLANT_RECIPES)
+        .recipeModifiers(
+            GTNNRecipeModifiers.GTNN_PARALLEL,
+            GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK)
+        )
+        .appearanceBlock(GTBlocks.CASING_BRONZE_BRICKS)
+        .pattern { definition ->
             FactoryBlockPattern.start()
                 .aisle("VVVVVVV", "A#####A", "A#####A", "A#####A", "A#####A", "A#####A", "AAAAAAA")
                 .aisle("VBBBBBV", "#BBBBB#", "#######", "#######", "#######", "#BBBBB#", "AAAAAAA")
@@ -157,57 +161,36 @@ object GTNNMachines {
                 .where('S', definition, Direction.NORTH).where('#', Blocks.AIR.defaultBlockState())
                 .where('J', GTMachines.MAINTENANCE_HATCH, Direction.NORTH)
             val shapeBlock = hashMapOf<Int, BlockState>()
-            for (casing in PlantCasingBlock.values()) {
-                shapeBlock[casing.getTier() + 10] = casing.getPlantCasing(casing.getTier()).defaultState
+            for (casing in BlockMaps.ALL_CP_CASINGS) {
+                shapeBlock[casing.key.tier + 10] = casing.value.get().defaultBlockState()
             }
-            for (machineCasing in MachineCasingBlock.MachineCasing.values()) {
-                shapeBlock[machineCasing.getMachineCasingTier() + 20] =
-                    machineCasing.getMachineCasing(machineCasing.getMachineCasingTier()).defaultState
+            for (machineCasing in BlockMaps.ALL_MACHINE_CASINGS) {
+                shapeBlock[machineCasing.key.tier + 20] = machineCasing.value.get().defaultBlockState()
             }
-            for (coil in GTCEuAPI.HEATING_COILS.keys) {
-                shapeBlock[coil.tier + 30] =
-                    GTCEuAPI.HEATING_COILS[coil]?.get()?.defaultBlockState() ?: Blocks.AIR.defaultBlockState()
+            for (coil in GTCEuAPI.HEATING_COILS) {
+                shapeBlock[coil.key.tier + 30] = coil.value.get().defaultBlockState()
             }
-            for (pipe in PipeBlock.Pipe.values()) {
-                shapeBlock[pipe.getPipeTier() + 40] = pipe.getPipe(pipe.getPipeTier()).defaultState
+            for (pipe in BlockMaps.ALL_CP_TUBES) {
+                shapeBlock[pipe.key.tier + 40] = pipe.value.get().defaultBlockState()
             }
-            for (tier in BlockTier.values()) {
-                builder.where('A', shapeBlock[tier.tier() + 10])
-                builder.where('B', shapeBlock[tier.tier() + 20])
-                builder.where('C', shapeBlock[tier.tier() + 30])
-                builder.where('D', shapeBlock[tier.tier() + 40])
-                builder.where('K', GTMachines.ITEM_IMPORT_BUS[tier.tier()], Direction.WEST)
-                builder.where('L', GTMachines.ITEM_EXPORT_BUS[tier.tier()], Direction.EAST)
-                builder.where('M', GTMachines.FLUID_IMPORT_HATCH[tier.tier()], Direction.WEST)
-                builder.where('N', GTMachines.FLUID_EXPORT_HATCH[tier.tier()], Direction.EAST)
-                builder.where('O', GTMachines.ENERGY_INPUT_HATCH[tier.tier()], Direction.NORTH)
+            for (tier in ITierType.TierBlockType.values().map { it.tier }.filter { it >= 0 }) {
+                builder.where('A', shapeBlock[tier + 10])
+                builder.where('B', shapeBlock[tier + 20])
+                builder.where('C', shapeBlock[tier + 30])
+                builder.where('D', shapeBlock[tier + 40])
+                builder.where('K', GTMachines.ITEM_IMPORT_BUS[tier], Direction.WEST)
+                builder.where('L', GTMachines.ITEM_EXPORT_BUS[tier], Direction.EAST)
+                builder.where('M', GTMachines.FLUID_IMPORT_HATCH[tier], Direction.WEST)
+                builder.where('N', GTMachines.FLUID_EXPORT_HATCH[tier], Direction.EAST)
+                builder.where('O', GTMachines.ENERGY_INPUT_HATCH[tier], Direction.NORTH)
                 shapeInfo.add(builder.shallowCopy().build())
             }
             return@shapeInfos shapeInfo
         }.renderer {
             GTPPMachineRenderer(
                 GTCEu.id("block/casings/solid/machine_casing_bronze_plated_bricks"),
-                GTNN.id("block/multiblock/chemical_plant"),
-                false
+                GTNN.id("block/multiblock/chemical_plant"), false
             )
-        }.additionalDisplay { controller, components ->
-            if (controller is ChemicalPlantMachine && controller.isFormed()) {
-                components.add(
-                    Component.translatable(
-                        "gtnn.multiblock.chemical_plant.heating_coil", controller.coilTier * 50
-                    )
-                )
-                components.add(
-                    Component.translatable(
-                        "gtnn.multiblock.chemical_plant.parallel_level", controller.getPipeTier() * 2
-                    )
-                )
-                components.add(
-                    Component.translatable(
-                        "gtnn.multiblock.chemical_plant.tier", VNF[controller.getMachineCasingTier() + 1]
-                    )
-                )
-            }
         }.register()
 
 

@@ -6,9 +6,7 @@ import com.gregtechceu.gtceu.api.pattern.Predicates
 import com.gregtechceu.gtceu.api.pattern.TraceabilityPredicate
 import com.gregtechceu.gtceu.api.pattern.error.PatternStringError
 import com.lowdragmc.lowdraglib.utils.BlockInfo
-import dev.arbor.gtnn.block.MachineCasingBlock
-import dev.arbor.gtnn.block.PipeBlock
-import dev.arbor.gtnn.block.PlantCasingBlock
+import dev.arbor.gtnn.api.block.BlockMaps
 import net.minecraft.network.chat.Component
 
 
@@ -17,9 +15,9 @@ object APredicates {
     fun plantCasings(): TraceabilityPredicate {
         return TraceabilityPredicate({
             val blockState = it.getBlockState()
-            for (entry in PlantCasingBlock.values()) {
-                if (blockState.`is`(entry.getPlantCasing(entry.getTier()).get())) {
-                    val stats = entry.plantCasingType()
+            for (entry in BlockMaps.ALL_CP_CASINGS) {
+                if (blockState.`is`(entry.value.get())) {
+                    val stats = entry.key
                     val currentPlantCasing = it.matchContext.getOrPut("PlantCasing", stats)
                     if (!currentPlantCasing.equals(stats)) {
                         it.setError(PatternStringError("gtnn.multiblock.pattern.error.plant_casings"))
@@ -30,8 +28,8 @@ object APredicates {
             }
             return@TraceabilityPredicate false
         }, {
-            PlantCasingBlock.values()
-                .map { BlockInfo.fromBlockState(it.getPlantCasing(it.getTier()).get().defaultBlockState()) }
+            BlockMaps.ALL_CP_CASINGS.values
+                .map { BlockInfo.fromBlockState(it.get().defaultBlockState()) }
                 .toTypedArray()
         }).addTooltips(Component.translatable("gtnn.multiblock.pattern.error.plant_casings"))
     }
@@ -39,9 +37,9 @@ object APredicates {
     fun pipeBlock(): TraceabilityPredicate {
         return TraceabilityPredicate({
             val blockState = it.getBlockState()
-            for (entry in PipeBlock.Pipe.values()) {
-                if (blockState.`is`(entry.getPipe().get())) {
-                    val stats = entry.pipeType()
+            for (entry in BlockMaps.ALL_CP_TUBES) {
+                if (blockState.`is`(entry.value.get())) {
+                    val stats = entry.key
                     val currentPipeBlock = it.matchContext.getOrPut("Pipe", stats)
                     if (!currentPipeBlock.equals(stats)) {
                         it.setError(PatternStringError("gtnn.multiblock.pattern.error.pipe"))
@@ -52,7 +50,8 @@ object APredicates {
             }
             return@TraceabilityPredicate false
         }, {
-            PipeBlock.Pipe.values().map { BlockInfo.fromBlockState(it.getPipe().get().defaultBlockState()) }
+            BlockMaps.ALL_CP_TUBES
+                .map { BlockInfo.fromBlockState(it.value.get().defaultBlockState()) }
                 .toTypedArray()
         }).addTooltips(Component.translatable("gtnn.multiblock.pattern.error.pipe"))
     }
@@ -60,9 +59,9 @@ object APredicates {
     fun machineCasing(): TraceabilityPredicate {
         return TraceabilityPredicate({
             val blockState = it.getBlockState()
-            for (entry in MachineCasingBlock.MachineCasing.values()) {
-                if (blockState.`is`(entry.getMachineCasing().get())) {
-                    val stats = entry.machineCasingType()
+            for (entry in BlockMaps.ALL_MACHINE_CASINGS) {
+                if (blockState.`is`(entry.value.get())) {
+                    val stats = entry.key
                     val currentMachineCasing = it.matchContext.getOrPut("MachineCasing", stats)
                     if (!currentMachineCasing.equals(stats)) {
                         it.setError(PatternStringError("gtnn.multiblock.pattern.error.machine_casing"))
@@ -73,8 +72,9 @@ object APredicates {
             }
             return@TraceabilityPredicate false
         }, {
-            MachineCasingBlock.MachineCasing.values()
-                .map { BlockInfo.fromBlockState(it.getMachineCasing().get().defaultBlockState()) }.toTypedArray()
+            BlockMaps.ALL_MACHINE_CASINGS
+                .map { BlockInfo.fromBlockState(it.value.get().defaultBlockState()) }
+                .toTypedArray()
         }).addTooltips(Component.translatable("gtnn.multiblock.pattern.error.machine_casing"))
     }
 
