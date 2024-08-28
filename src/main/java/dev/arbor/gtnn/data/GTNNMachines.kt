@@ -3,6 +3,7 @@ package dev.arbor.gtnn.data
 import com.gregtechceu.gtceu.GTCEu
 import com.gregtechceu.gtceu.api.GTCEuAPI
 import com.gregtechceu.gtceu.api.GTValues.*
+import com.gregtechceu.gtceu.api.block.ICoilType
 import com.gregtechceu.gtceu.api.data.RotationState
 import com.gregtechceu.gtceu.api.data.chemical.ChemicalHelper
 import com.gregtechceu.gtceu.api.data.tag.TagPrefix
@@ -41,8 +42,10 @@ import dev.arbor.gtnn.client.renderer.machine.BlockMachineRenderer
 import dev.arbor.gtnn.client.renderer.machine.GTPPMachineRenderer
 import net.minecraft.core.Direction
 import net.minecraft.network.chat.Component
+import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.BlockState
+import java.util.function.Supplier
 
 object GTNNMachines {
     private val ULV2UV: IntArray = tiersBetween(0, 8)
@@ -162,7 +165,7 @@ object GTNNMachines {
                 .where('J', GTMachines.MAINTENANCE_HATCH, Direction.NORTH)
             val shapeBlock = hashMapOf<Int, BlockState>()
             for (casing in BlockMaps.ALL_CP_CASINGS) {
-                shapeBlock[casing.key.tier + 10] = casing.value.get().defaultBlockState()
+                shapeBlock[casing.key.tier + 9] = casing.value.get().defaultBlockState()
             }
             for (machineCasing in BlockMaps.ALL_MACHINE_CASINGS) {
                 shapeBlock[machineCasing.key.tier + 20] = machineCasing.value.get().defaultBlockState()
@@ -171,13 +174,13 @@ object GTNNMachines {
                 shapeBlock[coil.key.tier + 30] = coil.value.get().defaultBlockState()
             }
             for (pipe in BlockMaps.ALL_CP_TUBES) {
-                shapeBlock[pipe.key.tier + 40] = pipe.value.get().defaultBlockState()
+                shapeBlock[pipe.key.tier + 39] = pipe.value.get().defaultBlockState()
             }
-            for (tier in ITierType.TierBlockType.values().map { it.tier }.filter { it >= 0 }) {
-                builder.where('A', shapeBlock[tier + 10])
-                builder.where('B', shapeBlock[tier + 20])
-                builder.where('C', shapeBlock[tier + 30])
-                builder.where('D', shapeBlock[tier + 40])
+            for (tier in ITierType.TierBlockType.values().map { it.tier }.filter { it in 0..8 }) {
+                builder.where('A', shapeBlock.getOrDefault(tier + 10, BlockMaps.ALL_CP_CASINGS.getMax()))
+                builder.where('B', shapeBlock.getOrDefault(tier + 20, BlockMaps.ALL_MACHINE_CASINGS.getMax()))
+                builder.where('C', shapeBlock.getOrDefault(tier + 30, GTCEuAPI.HEATING_COILS.getMax()))
+                builder.where('D', shapeBlock.getOrDefault(tier + 40, BlockMaps.ALL_CP_TUBES.getMax()))
                 builder.where('K', GTMachines.ITEM_IMPORT_BUS[tier], Direction.WEST)
                 builder.where('L', GTMachines.ITEM_EXPORT_BUS[tier], Direction.EAST)
                 builder.where('M', GTMachines.FLUID_IMPORT_HATCH[tier], Direction.WEST)
@@ -192,6 +195,15 @@ object GTNNMachines {
                 GTNN.id("block/multiblock/chemical_plant"), false
             )
         }.register()
+
+    private fun Map<ITierType, Supplier<Block>>.getMax(): BlockState {
+        return this.entries.maxBy { it.key.tier }.value.get().defaultBlockState()
+    }
+
+    @JvmName("getCoilMax")
+    private fun Map<ICoilType, Supplier<out Block>>.getMax(): BlockState {
+        return this.entries.maxBy { it.key.tier }.value.get().defaultBlockState()
+    }
 
 
     val NEUTRON_ACTIVATOR: MultiblockMachineDefinition =
