@@ -5,7 +5,9 @@ import com.gregtechceu.gtceu.api.gui.GuiTextures
 import com.gregtechceu.gtceu.api.recipe.GTRecipeType
 import com.gregtechceu.gtceu.common.data.GTRecipeTypes
 import com.gregtechceu.gtceu.common.data.GTSoundEntries
+import com.gregtechceu.gtceu.common.data.machines.GCyMMachines
 import com.lowdragmc.lowdraglib.gui.texture.ProgressTexture.FillDirection
+import java.util.function.Supplier
 
 object GTNNRecipeTypes {
     val CHEMICAL_PLANT_RECIPES: GTRecipeType =
@@ -58,5 +60,6 @@ object GTNNRecipeTypes {
             .setSound(GTSoundEntries.COOLING)
 
     fun init() {
+        PRECISION_ASSEMBLY_RECIPES.iconSupplier = Supplier { GCyMMachines.LARGE_ASSEMBLER.asStack() }
     }
 }

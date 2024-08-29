@@ -243,7 +243,9 @@ object GTNNMachines {
         REGISTRATE.multiblock("large_dehydrator") { WorkableElectricMultiblockMachine(it) }
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeTypes(GTNNRecipeTypes.DEHYDRATOR_RECIPES)
-            .recipeModifiers(GTRecipeModifiers.PARALLEL_HATCH)
+            .recipeModifiers(GTRecipeModifiers.DEFAULT_ENVIRONMENT_REQUIREMENT,
+                GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.SUBTICK_PARALLEL,
+                GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK))
             .appearanceBlock(GCyMBlocks.CASING_HIGH_TEMPERATURE_SMELTING)
             .pattern { definition ->
                 FactoryBlockPattern.start()
