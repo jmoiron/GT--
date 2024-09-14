@@ -244,7 +244,7 @@ object GTNNMachines {
             .rotationState(RotationState.NON_Y_AXIS)
             .recipeTypes(GTNNRecipeTypes.DEHYDRATOR_RECIPES)
             .recipeModifiers(GTRecipeModifiers.DEFAULT_ENVIRONMENT_REQUIREMENT,
-                GTRecipeModifiers.PARALLEL_HATCH, GTRecipeModifiers.SUBTICK_PARALLEL,
+                GTRecipeModifiers.PARALLEL_HATCH,
                 GTRecipeModifiers.ELECTRIC_OVERCLOCK.apply(OverclockingLogic.NON_PERFECT_OVERCLOCK))
             .appearanceBlock(GCyMBlocks.CASING_HIGH_TEMPERATURE_SMELTING)
             .pattern { definition ->

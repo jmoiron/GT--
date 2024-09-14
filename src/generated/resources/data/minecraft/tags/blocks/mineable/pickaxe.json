@@ -2,6 +2,6 @@
   "values": [
     "gtnn:clean_machine_casing",
     "gtnn:radiation_proof_machine_casing",
-    "gtnn:mar_casing"
+    "gtnn:field_restriction_casing"
   ]
 }

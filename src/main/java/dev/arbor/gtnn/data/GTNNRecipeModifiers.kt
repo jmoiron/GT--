@@ -15,7 +15,7 @@ import kotlin.math.min
 
 object GTNNRecipeModifiers {
     val GTNN_PARALLEL: RecipeModifier =
-        RecipeModifier { machine: MetaMachine, recipe: GTRecipe -> gtnnParallel(machine, recipe, false).first }
+        RecipeModifier { machine: MetaMachine, recipe: GTRecipe, _, _ -> gtnnParallel(machine, recipe, false).first }
 
     fun gtnnParallel(
         machine: MetaMachine, @Nonnull recipe: GTRecipe?, modifyDuration: Boolean

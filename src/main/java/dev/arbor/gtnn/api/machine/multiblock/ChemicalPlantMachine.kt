@@ -9,6 +9,8 @@ import com.gregtechceu.gtceu.api.machine.multiblock.WorkableElectricMultiblockMa
 import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine
 import com.gregtechceu.gtceu.api.recipe.GTRecipe
 import com.gregtechceu.gtceu.api.recipe.RecipeHelper
+import com.gregtechceu.gtceu.api.recipe.logic.OCParams
+import com.gregtechceu.gtceu.api.recipe.logic.OCResult
 import com.lowdragmc.lowdraglib.syncdata.annotation.DescSynced
 import com.lowdragmc.lowdraglib.syncdata.annotation.Persisted
 import com.lowdragmc.lowdraglib.syncdata.annotation.RequireRerender
@@ -96,11 +98,11 @@ class ChemicalPlantMachine(holder: IMachineBlockEntity) : WorkableElectricMultib
     //******     RECIPE LOGIC    *******//
     //////////////////////////////////////
 
-    override fun getRealRecipe(recipe: GTRecipe): GTRecipe? {
+    override fun getRealRecipe(recipe: GTRecipe, params: OCParams, result: OCResult): GTRecipe? {
         if (voltageTier < GTValues.UHV && RecipeHelper.getRecipeEUtTier(recipe) > voltageTier) {
             return null
         }
-        val modified = super.getRealRecipe(recipe)
+        val modified = super.getRealRecipe(recipe, params, result)
         if (casingTier > 0) {
             val copied = if (recipe == modified) modified.copy() else modified
             if (copied != null) {

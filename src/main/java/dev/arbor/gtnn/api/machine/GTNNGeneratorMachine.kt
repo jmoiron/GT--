@@ -5,6 +5,8 @@ import com.gregtechceu.gtceu.api.machine.MetaMachine
 import com.gregtechceu.gtceu.api.machine.SimpleGeneratorMachine
 import com.gregtechceu.gtceu.api.recipe.GTRecipe
 import com.gregtechceu.gtceu.api.recipe.RecipeHelper
+import com.gregtechceu.gtceu.api.recipe.logic.OCParams
+import com.gregtechceu.gtceu.api.recipe.logic.OCResult
 import it.unimi.dsi.fastutil.ints.Int2LongFunction
 
 class GTNNGeneratorMachine(
@@ -21,7 +23,7 @@ class GTNNGeneratorMachine(
             }
         }
 
-        fun nonParallel(machine: MetaMachine, recipe: GTRecipe): GTRecipe? {
+        fun nonParallel(machine: MetaMachine, recipe: GTRecipe, ocParams: OCParams, ocResult: OCResult): GTRecipe? {
             if (machine is GTNNGeneratorMachine) {
                 val eut = RecipeHelper.getOutputEUt(recipe)
                 val recipeModified = recipe.copy()
@@ -33,9 +35,9 @@ class GTNNGeneratorMachine(
             return null
         }
 
-        fun parallel(machine: MetaMachine, recipe: GTRecipe): GTRecipe? {
-            val recipeModifier = nonParallel(machine, recipe)
-            return recipeModifier?.let { recipeModifier(machine, it) }
+        fun parallel(machine: MetaMachine, recipe: GTRecipe, ocParams: OCParams, ocResult: OCResult): GTRecipe? {
+            val recipeModifier = nonParallel(machine, recipe, ocParams, ocResult)
+            return recipeModifier?.let { recipeModifier(machine, it, ocParams, ocResult) }
         }
     }
 

@@ -10,6 +10,8 @@ import com.gregtechceu.gtceu.api.machine.multiblock.WorkableMultiblockMachine
 import com.gregtechceu.gtceu.api.recipe.GTRecipe
 import com.gregtechceu.gtceu.api.recipe.RecipeHelper
 import com.gregtechceu.gtceu.api.recipe.content.Content
+import com.gregtechceu.gtceu.api.recipe.logic.OCParams
+import com.gregtechceu.gtceu.api.recipe.logic.OCResult
 import com.gregtechceu.gtceu.common.data.GTMaterials
 import com.gregtechceu.gtceu.common.machine.multiblock.part.FluidHatchPartMachine
 import com.lowdragmc.lowdraglib.side.fluid.FluidStack
@@ -176,7 +178,7 @@ class LargeNaquadahReactorMachine(holder: IMachineBlockEntity) : WorkableElectri
         private val MANAGED_FIELD_HOLDER =
             ManagedFieldHolder(LargeNaquadahReactorMachine::class.java, WorkableMultiblockMachine.MANAGED_FIELD_HOLDER)
 
-        fun modifyRecipe(machine: MetaMachine, recipe: GTRecipe): GTRecipe? {
+        fun modifyRecipe(machine: MetaMachine, recipe: GTRecipe, ocParams: OCParams, ocResult: OCResult): GTRecipe? {
             if (recipe.recipeType != GTNNRecipeTypes.LARGE_NAQUADAH_REACTOR_RECIPES) return null
             if (machine is LargeNaquadahReactorMachine) {
                 val duration = recipe.duration

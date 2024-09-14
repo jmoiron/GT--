@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "gtnn:mar_casing"
+          "name": "gtnn:field_restriction_casing"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "gtnn:blocks/mar_casing"
+  "random_sequence": "gtnn:blocks/field_restriction_casing"
 }
