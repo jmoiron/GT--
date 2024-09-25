@@ -28,7 +28,7 @@ object GTNNRegistries {
     }
 
     @JvmStatic
-    fun registerMachine(event: GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition>) {
+    fun registerMachines(event: GTCEuAPI.RegisterEvent<ResourceLocation, MachineDefinition>) {
         GTNNMachines.init()
         GTNN.LOGGER.info("register GTNN Machines")
     }

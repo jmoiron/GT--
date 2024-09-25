@@ -4,24 +4,24 @@ import com.google.gson.JsonObject;
 import com.gregtechceu.gtceu.api.machine.trait.RecipeLogic;
 import com.gregtechceu.gtceu.api.recipe.GTRecipe;
 import com.gregtechceu.gtceu.api.recipe.RecipeCondition;
+import com.gregtechceu.gtceu.api.recipe.condition.RecipeConditionType;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.arbor.gtnn.api.machine.multiblock.ChemicalPlantMachine;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import net.minecraft.MethodsReturnNonnullByDefault;
+import dev.arbor.gtnn.data.GTNNRecipeConditions;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Map;
 
-@Getter
-@NoArgsConstructor
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class PlantCasingCondition extends RecipeCondition {
+    public static final Codec<PlantCasingCondition> CODEC =
+            RecordCodecBuilder.create(instance -> RecipeCondition.isReverse(instance).and(
+                    Codec.INT.fieldOf("plantCasing").forGetter(it -> it.tier)).apply(instance, PlantCasingCondition::new));
+
     public static final int BRONZE = 1;
     public static final int STEEL = 2;
     public static final int ALUMINIUM = 3;
@@ -42,13 +42,20 @@ public class PlantCasingCondition extends RecipeCondition {
 
     private int tier = 0;
 
+    public PlantCasingCondition() {}
+
     public PlantCasingCondition(int tier) {
         this.tier = Mth.clamp(tier, 1, 6);
     }
 
+    public PlantCasingCondition(Boolean isReverse, int tier) {
+        super(isReverse);
+        this.tier = Mth.clamp(tier, 1, 6);
+    }
+
     @Override
-    public String getType() {
-        return "chemical_plant_casing_condition";
+    public RecipeConditionType<?> getType() {
+        return GTNNRecipeConditions.getPLANT_CASING();
     }
 
     @Override
@@ -73,16 +80,16 @@ public class PlantCasingCondition extends RecipeCondition {
     }
 
     @Override
-    public JsonObject serialize() {
+    public @NotNull JsonObject serialize() {
         JsonObject value = super.serialize();
-        value.addProperty("CPTier", tier);
+        value.addProperty("plantCasing", tier);
         return value;
     }
 
     @Override
-    public RecipeCondition deserialize(JsonObject config) {
+    public RecipeCondition deserialize(@NotNull JsonObject config) {
         super.deserialize(config);
-        this.tier = GsonHelper.getAsInt(config, "CPTier", 0);
+        this.tier = GsonHelper.getAsInt(config, "plantCasing", 0);
         return this;
     }
 

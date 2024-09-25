@@ -33,7 +33,7 @@ object GTNN {
     @JvmStatic
     fun genericListener(modBus: IEventBus) {
         modBus.addListener(GTNNRegistries::onCommonSetup)
-        modBus.addGenericListener(MachineDefinition::class.java, GTNNRegistries::registerMachine)
+        modBus.addGenericListener(MachineDefinition::class.java, GTNNRegistries::registerMachines)
     }
 
     @JvmStatic

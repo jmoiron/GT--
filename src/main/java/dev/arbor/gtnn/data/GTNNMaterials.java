@@ -75,7 +75,7 @@ public class GTNNMaterials extends Material {
     public static Material PalladiumRichAmmonia;
     public static Material RutheniumTetroxideLQ;
     public static Material SodiumFormate;
-    public static Material FormicAcid;
+    // public static Material FormicAcid;
     public static Material RhodiumSulfateGas;
     public static Material AcidicIridium;
     public static Material RutheniumTetroxideHot;
@@ -148,7 +148,9 @@ public class GTNNMaterials extends Material {
     }
 
     public static void addDust(Material material) {
-        material.setProperty(PropertyKey.DUST, new DustProperty());
+        if (!material.hasProperty(PropertyKey.DUST)){
+            material.setProperty(PropertyKey.DUST, new DustProperty());
+        }
     }
 
     public static void addFluid(Material material){

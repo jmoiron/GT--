@@ -4,7 +4,6 @@ import com.gregtechceu.gtceu.api.data.chemical.material.info.MaterialFlags.*
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.BlastProperty
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.OreProperty
 import com.gregtechceu.gtceu.api.data.chemical.material.properties.PropertyKey
-import com.gregtechceu.gtceu.api.data.chemical.material.properties.WireProperties
 import com.gregtechceu.gtceu.common.data.GTMaterials.*
 import dev.arbor.gtnn.GTNN.getServerConfig
 import dev.arbor.gtnn.data.GTNNMaterials.*
@@ -24,7 +23,7 @@ object AdjustGTMaterials {
         Lanthanum.addFlags(GENERATE_DENSE)
         Iridium.addFlags(GENERATE_DENSE)
         Lead.addFlags(GENERATE_DENSE)
-        IronMagnetic.addFlags(GENERATE_PLATE)
+        // IronMagnetic.addFlags(GENERATE_PLATE)
         SteelMagnetic.addFlags(GENERATE_PLATE)
         NeodymiumMagnetic.addFlags(GENERATE_PLATE)
         SamariumMagnetic.addFlags(GENERATE_PLATE)
@@ -34,10 +33,7 @@ object AdjustGTMaterials {
         Nichrome.addFlags(GENERATE_GEAR)
         Zeron100.addFlags(GENERATE_GEAR)
         Aluminium.addFlags(GENERATE_ROTOR)
-        EnrichedNaquadahTriniumEuropiumDuranide.setProperty(
-            PropertyKey.WIRE,
-            WireProperties(524288, 3, 2, false)
-        )
+        // EnrichedNaquadahTriniumEuropiumDuranide.setProperty(PropertyKey.WIRE, WireProperties(524288, 3, 2, false))
         addGas(Oganesson)
         addGas(Calcium)
         addFluid(Californium)

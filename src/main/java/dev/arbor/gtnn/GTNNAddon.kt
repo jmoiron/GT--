@@ -4,10 +4,7 @@ import com.gregtechceu.gtceu.api.addon.GTAddon
 import com.gregtechceu.gtceu.api.addon.IGTAddon
 import com.gregtechceu.gtceu.api.addon.events.KJSRecipeKeyEvent
 import com.gregtechceu.gtceu.api.addon.events.MaterialCasingCollectionEvent
-import com.gregtechceu.gtceu.api.registry.GTRegistries
 import com.gregtechceu.gtceu.api.registry.registrate.GTRegistrate
-import dev.arbor.gtnn.api.recipe.NeutronActivatorCondition
-import dev.arbor.gtnn.api.recipe.PlantCasingCondition
 import dev.arbor.gtnn.data.*
 import dev.arbor.gtnn.data.recipes.AdAstraRecipes
 import dev.arbor.gtnn.data.recipes.DefaultRecipes
@@ -48,11 +45,6 @@ class GTNNAddon : IGTAddon {
 
     override fun registerOreVeins() {
         GTNNOres.init()
-    }
-
-    override fun registerRecipeConditions() {
-        GTRegistries.RECIPE_CONDITIONS.register(PlantCasingCondition.INSTANCE.type, PlantCasingCondition::class.java)
-        GTRegistries.RECIPE_CONDITIONS.register(NeutronActivatorCondition.INSTANCE.type, NeutronActivatorCondition::class.java)
     }
 
     override fun registerWorldgenLayers() {

@@ -81,8 +81,8 @@ object PlatinumLineMaterials {
         SodiumFormate =
             Builder("sodium_formate").fluid().color(0xf1939c).iconSet(ROUGH).buildAndRegister()
 
-        FormicAcid =
-            Builder("formic_acid").fluid().color(0xf8c387).iconSet(ROUGH).buildAndRegister()
+        // FormicAcid =
+        //    Builder("formic_acid").fluid().color(0xf8c387).iconSet(ROUGH).buildAndRegister()
 
         RhodiumSulfateGas =
             Builder("rhodium_sulfate_gas").gas().color(0xBD8743).iconSet(ROUGH).buildAndRegister()

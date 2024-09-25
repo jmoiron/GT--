@@ -10,9 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 import static com.gregtechceu.gtceu.api.data.tag.TagPrefix.dust;
-import static com.gregtechceu.gtceu.common.data.GTMaterials.*;
 import static dev.arbor.gtnn.api.recipe.OresHelper.ORE_REPLACEMENTS;
-import static dev.arbor.gtnn.data.GTNNMaterials.*;
 
 @Mixin(OreRecipeHandler.class)
 public class OreRecipeHandlerMixin {

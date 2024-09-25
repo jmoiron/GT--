@@ -75,7 +75,7 @@ object MaterialLang {
         translateMaterial(PlatinumMetal, "铂金属")
         translateMaterial(PotassiumPyrosulfate, "焦硫酸钾")
         translateMaterial(SodiumFormate, "甲酸钠")
-        translateMaterial(FormicAcid, "甲酸")
+        // translateMaterial(FormicAcid, "甲酸")
         translateMaterial(SodiumSulfate, "硫酸钠")
         translateMaterial(SodiumNitrate, "硝酸钠")
         translateMaterial(ZincSulfate, "硫酸锌")
