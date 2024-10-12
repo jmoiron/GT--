@@ -124,7 +124,6 @@ object RocketFuel {
             .inputItems(ChemicalHelper.get(TagPrefix.dust, GTMaterials.Vanadium, 1))
             .inputItems(ChemicalHelper.get(TagPrefix.dust, GTMaterials.Palladium, 1))
             .outputItems(ChemicalHelper.get(TagPrefix.dust, GTNNMaterials.OrangeMetalCatalyst, 64))
-            .outputItems(ChemicalHelper.get(TagPrefix.dust, GTNNMaterials.OrangeMetalCatalyst, 32))
             .circuitMeta(32)
             .duration(GTNNRecipes.dur(8.0)).EUt(GTValues.VA[GTValues.HV].toLong()).save(provider)
 
